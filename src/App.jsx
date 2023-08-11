@@ -4,7 +4,6 @@ import Hero from "./components/hero/Hero";
 import Navbar from "./components/navbar/Navbar";
 import Recommend from "./components/recommend/Recommend";
 import ScrollToTop from "./components/scrollToTop/ScrollToTop";
-import Services from "./components/services/Services";
 import Testimonials from "./components/testimonials/Testimonials";
 import scrollreveal from "scrollreveal";
 export default function App() {
@@ -35,9 +34,8 @@ export default function App() {
             <ScrollToTop />
             <Navbar />
             <Hero />
-            <Services />
-            <Recommend />
             <Testimonials />
+            <Recommend />
             <Footer />
         </div>
     );
