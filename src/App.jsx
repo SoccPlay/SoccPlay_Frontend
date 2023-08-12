@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/homepage/Home";
 import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
+import List from "./pages/list/List";
 export default function App() {
     useEffect(() => {
         const sr = scrollreveal({
@@ -34,6 +35,7 @@ export default function App() {
                 <Route path="/" element={<Homepage />}></Route>
                 <Route exact path="signin" element={<SignIn />} />
                 <Route exact path="signup" element={<SignUp />} />
+                <Route exact path="search" element={<List />} />
             </Routes>
         </div>
     );

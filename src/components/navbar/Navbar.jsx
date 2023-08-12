@@ -31,13 +31,13 @@ export default function Navbar() {
 
                 <ul>
                     <li>
-                        <a href="#home">Home</a>
+                        <a href="/">Home</a>
                     </li>
                     <li>
-                        <a href="#recommend">Ground</a>
+                        <a href="/">Ground</a>
                     </li>
                     <li>
-                        <a href="#services">About</a>
+                        <a href="/">About</a>
                     </li>
                 </ul>
                 <Link to="/signin">

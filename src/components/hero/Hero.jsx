@@ -3,6 +3,7 @@ import homeImage from "../../assets/sanbong.jpg";
 import "./style.scss";
 import { Typewriter, Cursor } from "react-simple-typewriter";
 import Select from "react-select";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
     const street = [
@@ -18,6 +19,11 @@ export default function Hero() {
         { label: "Quan Go Vap", year: 1972 },
         { label: "Thu Duc", year: 1972 },
     ];
+
+    const handleSearch = () => {
+        //redirect to search page
+        window.location.href = "/search";
+    };
     return (
         <div className="Section" id="hero">
             <div className="background">
@@ -63,7 +69,9 @@ export default function Hero() {
                         <label htmlFor="">Date</label>
                         <input type="date" />
                     </div>
-                    <button>Search</button>
+                    <button onClick={handleSearch}>Search</button>
+
+                    <Link to="/search"></Link>
                 </div>
             </div>
         </div>
