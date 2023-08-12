@@ -12,3 +12,11 @@
     background-color: #1900ff39;
     padding: 1rem;
 }
+
+.scroll-element {
+    display: none;
+    }
+
+.scroll-element.active {
+    display: block;
+    }

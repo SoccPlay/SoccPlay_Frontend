@@ -2,7 +2,22 @@ import React from "react";
 import homeImage from "../../assets/sanbong.jpg";
 import "./style.scss";
 import { Typewriter, Cursor } from "react-simple-typewriter";
+import Select from "react-select";
+
 export default function Hero() {
+    const street = [
+        { label: "Quan 1", year: 1994 },
+        { label: "Quan 3", year: 1974 },
+        { label: "Quan 4", year: 2008 },
+        { label: "Quan 7", year: 1972 },
+        { label: "Quan 8", year: 1972 },
+        { label: "Quan 11", year: 1972 },
+        { label: "Quan 12", year: 1972 },
+        { label: "Quan Tan Binh", year: 1972 },
+        { label: "Quan Binh Thanh", year: 1972 },
+        { label: "Quan Go Vap", year: 1972 },
+        { label: "Thu Duc", year: 1972 },
+    ];
     return (
         <div className="Section" id="hero">
             <div className="background">
@@ -32,8 +47,17 @@ export default function Hero() {
                 </div>
                 <div className="search">
                     <div className="container">
-                        <label htmlFor="">Where you to book</label>
-                        <input type="text" placeholder="Search Your location" />
+                        <Select
+                            className="basic-single"
+                            classNamePrefix="select"
+                            name="color"
+                            options={street}
+                            placeholder="Select your district"
+                        />
+                    </div>
+                    <div className="container">
+                        <label htmlFor="">Ground name</label>
+                        <input type="text" placeholder="Search ground name" />
                     </div>
                     <div className="container">
                         <label htmlFor="">Date</label>
