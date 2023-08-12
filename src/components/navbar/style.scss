@@ -80,7 +80,6 @@
     display: flex;
     position: absolute;
     z-index: 1;
-    // top: ${({ state }) => (state ? "50px" : "-400px")};
     background-color: white;
     height: 30vh;
     width: 100%;
@@ -111,4 +110,13 @@
             }
         }
     }
+}
+
+.ResponsiveNav {
+    top: -400px;
+}
+
+.ResponsiveNav .active {
+    
+    top: 50px; 
 }

@@ -3,8 +3,11 @@ import logo from "../../assets/logo.png";
 import "./style.scss";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
     const [navbarState, setNavbarState] = useState(false);
+
     return (
         <>
             <div className="Nav">
@@ -31,18 +34,17 @@ export default function Navbar() {
                         <a href="#home">Home</a>
                     </li>
                     <li>
+                        <a href="#recommend">Ground</a>
+                    </li>
+                    <li>
                         <a href="#services">About</a>
                     </li>
-                    <li>
-                        <a href="#recommend">Places</a>
-                    </li>
-                    <li>
-                        <a href="#testimonials">Testimonials</a>
-                    </li>
                 </ul>
-                <button>Login</button>
+                <Link to="/signin">
+                    <button>Login</button>
+                </Link>
             </div>
-            <div className="ResponsiveNav" state={navbarState}>
+            <div className={`ResponsiveNav ${navbarState ? "active" : ""}`}>
                 <ul>
                     <li>
                         <a href="#home" onClick={() => setNavbarState(false)}>

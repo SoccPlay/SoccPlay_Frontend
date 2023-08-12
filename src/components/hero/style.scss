@@ -42,7 +42,10 @@
             background-color: #ffffffce;
             padding: 0.5rem;
             border-radius: 0.5rem;
-            height: 90px;
+            height: 100px;
+            .basic-single {
+                width: 13.5rem;
+            }
             .container {
                 display: flex;
                 align-items: center;
@@ -50,7 +53,7 @@
                 flex-direction: column;
                 padding: 0 1.5rem;
                 label {
-                    font-size: 1.1rem;
+                    font-size: 1.2rem;
                     color: #03045e;
                 }
                 input {
