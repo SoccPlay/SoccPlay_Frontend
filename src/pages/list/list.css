@@ -1,0 +1,42 @@
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+
+.main {
+    margin: 100px 0px 100px 0px;
+}
+
+
+.title-left {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.coll {
+    margin-top: 20px;
+}
+
+.checkbox {
+    margin-left: 20px;
+}
+
+.groud-name {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.groud-desc {
+    color: rgb(30, 30, 30);
+    border-bottom: 0.5px solid rgb(30, 30, 30);
+    margin-bottom: 0.6rem;
+    width: 250px;
+}
+
+.column-left {
+    margin-left: 50px;
+    border-right: 3px solid rgb(30, 30, 30);
+    margin-right: 5rem;
+}

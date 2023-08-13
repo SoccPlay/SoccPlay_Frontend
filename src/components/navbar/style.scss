@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 100px;
     .brand {
         .container {
             cursor: pointer;
@@ -27,11 +28,12 @@
         li {
             a {
                 text-decoration: none;
-                color: #0077b6;
+                color: #1c72e2;
                 font-size: 1.2rem;
                 transition: 0.1s ease-in-out;
                 &:hover {
-                    color: #023e8a;
+                    color: #0077b6;
+                    
                 }
             }
             // &:first-of-type {
@@ -44,19 +46,48 @@
     }
     
     button {
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        border-radius: 1rem;
-        border: none;
-        color: white;
-        background-color: #48cae4;
-        font-size: 1.1rem;
-        letter-spacing: 0.1rem;
-        text-transform: uppercase;
-        transition: 0.3s ease-in-out;
-        &:hover {
-            background-color: #023e8a;
-        }
+        align-items: center;
+    background-clip: padding-box;
+    background-color: #1c72e2;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+    &:hover,
+    &:focus {
+    background-color: #3f78c3;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+    &:hover {
+    transform: translateY(-1px);
+    }
+
+    &:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+    }
+
     }
     @media screen and (min-width: 280px) and (max-width: 1080px) {
         .brand {

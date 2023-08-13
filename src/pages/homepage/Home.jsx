@@ -5,6 +5,7 @@ import Hero from "../../components/hero/Hero";
 import Recommend from "../../components/recommend/Recommend";
 import Testimonials from "../../components/testimonials/Testimonials";
 import Footer from "../../components/footer/Footer";
+import SearchItem from "../../components/searchItem/SearchItem";
 const Homepage = () => {
     return (
         <div>

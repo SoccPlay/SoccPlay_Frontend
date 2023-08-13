@@ -9,29 +9,32 @@ const SearchItem = () => {
                 className="siImg"
             />
             <div className="siDesc">
-                <h1 className="siTitle">Tower Street Apartments</h1>
+                <h1 className="siTitle">Tên Sân</h1>
                 <span className="siDistance">500m from center</span>
-                <span className="siTaxiOp">Free airport taxi</span>
-                <span className="siSubtitle">
-                    Studio Apartment with Air conditioning
-                </span>
-                <span className="siFeatures">
-                    Entire studio • 1 bathroom • 21m² 1 full bed
-                </span>
-                <span className="siCancelOp">Free cancellation </span>
+                <span className="siTaxiOp">Policty</span>
+                <span className="siSubtitle">Những loại sân hiện có</span>
+                <span className="siFeatures">Sân 5, Sân 7</span>
+                <span className="siCancelOp">Hủy vé miễn phí </span>
                 <span className="siCancelOpSubtitle">
-                    You can cancel later, so lock in this great price today!
+                    Bạn có thể hủy vé sau khi đặt, đặt ngay để được giá tốt
                 </span>
             </div>
             <div className="siDetails">
                 <div className="siRating">
-                    <span>Excellent</span>
+                    <span>Rating points</span>
                     <button>8.9</button>
                 </div>
                 <div className="siDetailTexts">
                     <span className="siPrice">$112</span>
-                    <span className="siTaxOp">Includes taxes and fees</span>
-                    <button className="siCheckButton">See availability</button>
+                    <div class="container">
+                        <a href="detail" class="button">
+                            <div class="button__line"></div>
+                            <div class="button__line"></div>
+                            <span class="button__text">Detail</span>
+                            <div class="button__drow1"></div>
+                            <div class="button__drow2"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
