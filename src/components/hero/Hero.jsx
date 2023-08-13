@@ -81,7 +81,7 @@ export default function Hero() {
           <div className="container">
             <label htmlFor="">Date</label>
             <input
-              type="date"
+              type="datetime-local"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
             />

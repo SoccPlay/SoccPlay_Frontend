@@ -39,22 +39,22 @@
   border-radius: 5px;
 }
 
-.siSubtitle{
+.siSubtitle {
   font-size: 12px;
   font-weight: bold;
 }
 
-.siFeatures{
+.siFeatures {
   font-size: 12px;
 }
 
-.siCancelOp{
+.siCancelOp {
   font-size: 12px;
   color: #008009;
   font-weight: bold;
 }
 
-.siCancelOpSubtitle{
+.siCancelOpSubtitle {
   font-size: 12px;
   color: #008009;
 }
@@ -63,292 +63,315 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
-.siRating{
+.siRating {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
-.siRating>span{
+.siRating > span {
   font-weight: 500;
 }
-.siRating>button{
- background-color: #008009;
- color: white;
- padding: 5px;
- font-weight: bold;
- border: none;
+.siRating > button {
+  background-color: #008009;
+  color: white;
+  padding: 5px;
+  font-weight: bold;
+  border: none;
 }
 
-.siDetailTexts{
+.siDetailTexts {
   text-align: right;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.siPrice{
+.siPrice {
   /* margin-top: 12px; */
   font-size: 28px;
   font-weight: 500;
 }
 
-.siTaxOp{
+.siTaxOp {
   font-size: 12px;
   color: gray;
 }
 button {
-  --c:  #229091; /* the color*/
-  
-  box-shadow: 0 0 0 .1em inset var(--c); 
+  --c: #229091; /* the color*/
+
+  box-shadow: 0 0 0 0.1em inset var(--c);
   --_g: linear-gradient(var(--c) 0 0) no-repeat;
-  background: 
-    var(--_g) calc(var(--_p,0%) - 100%) 0%,
-    var(--_g) calc(200% - var(--_p,0%)) 0%,
-    var(--_g) calc(var(--_p,0%) - 100%) 100%,
-    var(--_g) calc(200% - var(--_p,0%)) 100%;
-  background-size: 50.5% calc(var(--_p,0%)/2 + .5%);
-  outline-offset: .1em;
-  transition: background-size .4s, background-position 0s .4s;
+  background: var(--_g) calc(var(--_p, 0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p, 0%)) 0%,
+    var(--_g) calc(var(--_p, 0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p, 0%)) 100%;
+  background-size: 50.5% calc(var(--_p, 0%) / 2 + 0.5%);
+  outline-offset: 0.1em;
+  transition: background-size 0.4s, background-position 0s 0.4s;
 }
 button:hover {
   --_p: 100%;
-  transition: background-position .4s, background-size 0s;
+  transition: background-position 0.4s, background-size 0s;
 }
 button:active {
-  box-shadow: 0 0 9e9q inset #0009; 
+  box-shadow: 0 0 9e9Q inset #0009;
   background-color: var(--c);
   color: #fff;
 }
 
-
-:root{
+:root {
   /* color type A */
   /* --line_color : #555555 ;
   --back_color : #FFECF6  ; */
 
   /* color type B */
-  --line_color : #1b1919 ;
-  --back_color : #cfe7d1  ;
+  --line_color: #1b1919;
+  --back_color: #cfe7d1;
 
   /* color type C */
   /* --line_color : #00135C ;
   --back_color : #bce8bf  ; */
 }
 
-.button{
-  position : relative ;
-  z-index : 0 ;
-  width : 240px ;
-  height : 56px ;
-  text-decoration : none ;
-  font-size : 14px ; 
-  font-weight : bold ;
-  color : var(--line_color) ;
-  letter-spacing : 2px ;
-  transition : all .3s ease ;
+.button {
+  position: relative;
+  z-index: 0;
+  width: 240px;
+  height: 56px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--line_color);
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
 }
-.button__text{
-  display : flex ;
-  justify-content : center ;
-  align-items : center ;
-  width : 100% ;
-  height : 100% ;
+.button__text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 .button::before,
 .button::after,
 .button__text::before,
-.button__text::after{
-  content : '' ;
-  position : absolute ;
-  height : 3px ;
-  border-radius : 2px ;
-  background : var(--line_color) ;
-  transition : all .5s ease ;
+.button__text::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line_color);
+  transition: all 0.5s ease;
 }
-.button::before{
-  top : 0 ;
-  left : 54px ;
-  width : calc( 100% - 56px * 2 - 16px ) ;
+.button::before {
+  top: 0;
+  left: 54px;
+  width: calc(100% - 56px * 2 - 16px);
 }
-.button::after{
-  top : 0 ;
-  right : 54px ;
-  width : 8px ;
+.button::after {
+  top: 0;
+  right: 54px;
+  width: 8px;
 }
-.button__text::before{
-  bottom : 0 ;
-  right : 54px ;
-  width : calc( 100% - 56px * 2 - 16px ) ;
+.button__text::before {
+  bottom: 0;
+  right: 54px;
+  width: calc(100% - 56px * 2 - 16px);
 }
-.button__text::after{
-  bottom : 0 ;
-  left : 54px ;
-  width : 8px ;
+.button__text::after {
+  bottom: 0;
+  left: 54px;
+  width: 8px;
 }
-.button__line{
-  position : absolute ;
-  top : 0 ;
-  width : 56px ;
-  height : 100% ;
-  overflow : hidden ;
+.button__line {
+  position: absolute;
+  top: 0;
+  width: 56px;
+  height: 100%;
+  overflow: hidden;
 }
-.button__line::before{
-  content : '' ;
-  position : absolute ;
-  top : 0 ;
-  width : 150% ;
-  height : 100% ;
-  box-sizing : border-box ;
-  border-radius : 300px ;
-  border : solid 3px var(--line_color) ;
+.button__line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 300px;
+  border: solid 3px var(--line_color);
 }
 .button__line:nth-child(1),
-.button__line:nth-child(1)::before{
-  left : 0 ;
+.button__line:nth-child(1)::before {
+  left: 0;
 }
 .button__line:nth-child(2),
-.button__line:nth-child(2)::before{
-  right : 0 ;
+.button__line:nth-child(2)::before {
+  right: 0;
 }
-.button:hover{
-  letter-spacing : 6px ;
+.button:hover {
+  letter-spacing: 6px;
 }
 .button:hover::before,
-.button:hover .button__text::before{
-  width : 8px ;
+.button:hover .button__text::before {
+  width: 8px;
 }
 .button:hover::after,
-.button:hover .button__text::after{
-  width : calc( 100% - 56px * 2 - 16px ) ;
+.button:hover .button__text::after {
+  width: calc(100% - 56px * 2 - 16px);
 }
 .button__drow1,
-.button__drow2{
-  position : absolute ;
-  z-index : -1 ;
-  border-radius : 16px ;
-  transform-origin : 16px 16px ;
+.button__drow2 {
+  position: absolute;
+  z-index: -1;
+  border-radius: 16px;
+  transform-origin: 16px 16px;
 }
-.button__drow1{
-  top : -16px ;
-  left : 40px ;
-  width : 32px ;
-  height : 0;
-  transform : rotate( 30deg ) ;
+.button__drow1 {
+  top: -16px;
+  left: 40px;
+  width: 32px;
+  height: 0;
+  transform: rotate(30deg);
 }
-.button__drow2{
-  top : 44px ;
-  left : 77px ;
-  width : 32px ;
-  height : 0 ;
-  transform : rotate(-127deg ) ;
+.button__drow2 {
+  top: 44px;
+  left: 77px;
+  width: 32px;
+  height: 0;
+  transform: rotate(-127deg);
 }
 .button__drow1::before,
 .button__drow1::after,
 .button__drow2::before,
-.button__drow2::after{
-  content : '' ;
-  position : absolute ;
+.button__drow2::after {
+  content: "";
+  position: absolute;
 }
-.button__drow1::before{
-  bottom : 0 ;
-  left : 0 ;
-  width : 0 ;
-  height : 32px ;
-  border-radius : 16px ;
-  transform-origin : 16px 16px ;
-  transform : rotate( -60deg ) ;
+.button__drow1::before {
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 32px;
+  border-radius: 16px;
+  transform-origin: 16px 16px;
+  transform: rotate(-60deg);
 }
-.button__drow1::after{
-  top : -10px ;
-  left : 45px ;
-  width : 0 ;
-  height : 32px ;
-  border-radius : 16px ;
-  transform-origin : 16px 16px ;
-  transform : rotate( 69deg ) ;
+.button__drow1::after {
+  top: -10px;
+  left: 45px;
+  width: 0;
+  height: 32px;
+  border-radius: 16px;
+  transform-origin: 16px 16px;
+  transform: rotate(69deg);
 }
-.button__drow2::before{
-  bottom : 0 ;
-  left : 0 ;
-  width : 0 ;
-  height : 32px ;
-  border-radius : 16px ;
-  transform-origin : 16px 16px ;
-  transform : rotate( -146deg ) ;
+.button__drow2::before {
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 32px;
+  border-radius: 16px;
+  transform-origin: 16px 16px;
+  transform: rotate(-146deg);
 }
-.button__drow2::after{
-  bottom : 26px ;
-  left : -40px ;
-  width : 0 ;
-  height : 32px ;
-  border-radius : 16px ;
-  transform-origin : 16px 16px ;
-  transform : rotate( -262deg ) ;
+.button__drow2::after {
+  bottom: 26px;
+  left: -40px;
+  width: 0;
+  height: 32px;
+  border-radius: 16px;
+  transform-origin: 16px 16px;
+  transform: rotate(-262deg);
 }
 .button__drow1,
 .button__drow1::before,
 .button__drow1::after,
 .button__drow2,
 .button__drow2::before,
-.button__drow2::after{
-  background : var( --back_color ) ;
+.button__drow2::after {
+  background: var(--back_color);
 }
-.button:hover .button__drow1{
-  animation : drow1 ease-in .06s ;
-  animation-fill-mode : forwards ;
+.button:hover .button__drow1 {
+  animation: drow1 ease-in 0.06s;
+  animation-fill-mode: forwards;
 }
-.button:hover .button__drow1::before{
-  animation : drow2 linear .08s .06s ;
-  animation-fill-mode : forwards ;
+.button:hover .button__drow1::before {
+  animation: drow2 linear 0.08s 0.06s;
+  animation-fill-mode: forwards;
 }
-.button:hover .button__drow1::after{
-  animation : drow3 linear .03s .14s ;
-  animation-fill-mode : forwards ;
+.button:hover .button__drow1::after {
+  animation: drow3 linear 0.03s 0.14s;
+  animation-fill-mode: forwards;
 }
-.button:hover .button__drow2{
-  animation : drow4 linear .06s .2s ;
-  animation-fill-mode : forwards ;
+.button:hover .button__drow2 {
+  animation: drow4 linear 0.06s 0.2s;
+  animation-fill-mode: forwards;
 }
-.button:hover .button__drow2::before{
-  animation : drow3 linear .03s .26s ;
-  animation-fill-mode : forwards ;
+.button:hover .button__drow2::before {
+  animation: drow3 linear 0.03s 0.26s;
+  animation-fill-mode: forwards;
 }
-.button:hover .button__drow2::after{
-  animation : drow5 linear .06s .32s ;
-  animation-fill-mode : forwards ;
+.button:hover .button__drow2::after {
+  animation: drow5 linear 0.06s 0.32s;
+  animation-fill-mode: forwards;
 }
-@keyframes drow1{
-  0%   { height : 0 ; }
-  100% { height : 100px ; }
+@keyframes drow1 {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100px;
+  }
 }
-@keyframes drow2{
-  0%   { width : 0 ; opacity : 0 ;}
-  10%  { opacity : 0 ;}
-  11%  { opacity : 1 ;}
-  100% { width : 120px ; }
+@keyframes drow2 {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0;
+  }
+  11% {
+    opacity: 1;
+  }
+  100% {
+    width: 120px;
+  }
 }
-@keyframes drow3{
-  0%   { width : 0 ; }
-  100% { width : 80px ; }
+@keyframes drow3 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 80px;
+  }
 }
-@keyframes drow4{
-  0%   { height : 0 ; }
-  100% { height : 120px ; }
+@keyframes drow4 {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 120px;
+  }
 }
-@keyframes drow5{
-  0%   { width : 0 ; }
-  100% { width : 124px ; }
+@keyframes drow5 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 124px;
+  }
 }
 
 /* 本体には関係ないスタイル */
-.container{
-  width : 100% ;
-  height : 50px ;
-  display : flex ;
-  flex-direction : column ;
-  justify-content : center ;
-  align-items : center ;
+.container {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
