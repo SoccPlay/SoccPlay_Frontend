@@ -229,7 +229,7 @@ export default function SignUp() {
               <Typography
                 variant="body"
                 color="red"
-                style={{ marginBottom: "10px" }}
+                style={{ marginTop: "10px", textAlign: "center" }}
               >
                 {error}
               </Typography>

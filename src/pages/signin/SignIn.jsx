@@ -167,7 +167,7 @@ export default function SignIn() {
                 variant="body"
                 color="red" // Change to your success color
                 style={{
-                  marginBottom: "10px",
+                  marginTop: "10px",
                   textAlign: "center", // Align the text to the center
                 }}
               >
@@ -178,7 +178,7 @@ export default function SignIn() {
               type="submit"
               variant="contained"
               color="primary"
-              style={{ marginTop: "20px" }}
+              style={{ marginTop: "10px" }}
             >
               Login
             </Button>
@@ -186,7 +186,7 @@ export default function SignIn() {
               <Typography
                 variant="body"
                 color="red"
-                style={{ marginBottom: "10px" }}
+                style={{ marginTop: "10px", textAlign: "center" }}
               >
                 {error}
               </Typography>
