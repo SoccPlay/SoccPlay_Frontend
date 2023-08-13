@@ -1,31 +1,41 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthenApi from "../../components/Axios/AuthenApi";
+import {
+  Typography,
+  Grid,
+  CssBaseline,
+  Container,
+  createTheme,
+  ThemeProvider,
+  Link,
+  TextField,
+  Button,
+} from "@mui/material";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#45f3ff",
+    },
+    secondary: {
+      main: "#8f8f8f",
+    },
+  },
+});
 function Copyright(props) {
-    return (
-        <Typography
-            variant="body2"
-            color="text.secondary"
-            align="center"
-            {...props}
-        >
-            {"Copyright © "}
-            SWP391 {new Date().getFullYear()}
-            {"."}
-        </Typography>
-    );
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      SWP391 {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
 }
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -33,113 +43,200 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get("email"),
-            password: data.get("password"),
-        });
-    };
+  const [error, setError] = useState(); // Initialize with null
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    fullName: "",
+    phone: "",
+    address: "",
+    email: "",
+  });
+  const navigateWithDelay = (path, delay) => {
+    setTimeout(() => {
+      navigate(path);
+    }, delay);
+  };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+  const navigate = useNavigate();
+  const [success, setSussess] = useState();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    try {
+      const response = await AuthenApi.Register(formData);
+      if (response.status === 200) {
+        console.log("Registration successful!");
+        setSussess("Registration successful!");
+        navigateWithDelay("/signin", 3000);
+      } else {
+        setError(response.message);
+        console.log(response.message);
+      }
+    } catch (error) {
+      console.error("Registration error:", error.response.data.Messages);
+      setError(error.response.data.Messages);
+    }
+  };
 
-    return (
-        <ThemeProvider theme={defaultTheme}>
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        marginTop: 8,
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
-                    <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
-                    <Box
-                        component="form"
-                        noValidate
-                        onSubmit={handleSubmit}
-                        sx={{ mt: 3 }}
-                    >
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                />
-                            </Grid>
-                            <Grid item xs={12} sm={6}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            value="allowExtraEmails"
-                                            color="primary"
-                                        />
-                                    }
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
-                                />
-                            </Grid>
-                        </Grid>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Sign Up
-                        </Button>
-                        <Grid container justifyContent="flex-end">
-                            <Grid item>
-                                <Link href="/signin" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
-                <Copyright sx={{ mt: 5 }} />
-            </Container>
-        </ThemeProvider>
-    );
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container
+        maxWidth="100%"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "100vh",
+          background: "#48cae4",
+        }}
+      >
+        <div
+          className="box"
+          style={{
+            position: "relative",
+            width: "580px",
+            height: "600px",
+            backgroundColor: "#fefefe",
+            borderRadius: "8px",
+            overflow: "hidden",
+          }}
+        >
+          {/* Add animations here if desired */}
+          <form
+            style={{
+              position: "absolute",
+              inset: "2px",
+              borderRadius: "8px",
+              background: "#f7f7f7",
+              zIndex: 10,
+              padding: "50px 40px",
+              display: "flex",
+              flexDirection: "column",
+            }}
+            onSubmit={handleSubmit}
+          >
+            <h2
+              style={{
+                color: "#030304",
+                fontWeight: 500,
+                textAlign: "center",
+                letterSpacing: "0.1em",
+              }}
+            >
+              Sign Up
+            </h2>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Username"
+                  variant="outlined"
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  style={{ marginTop: "20px" }}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  label="Password"
+                  variant="outlined"
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  style={{ marginTop: "20px" }}
+                  fullWidth
+                  required
+                />
+              </Grid>
+            </Grid>
+            <TextField
+              label="FullName"
+              variant="outlined"
+              type="text"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              style={{ marginTop: "20px" }}
+              fullWidth
+              required
+            />
+            <TextField
+              label="Phone"
+              variant="outlined"
+              type="text"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              style={{ marginTop: "20px" }}
+              fullWidth
+              required
+            />
+            <TextField
+              label="Email"
+              variant="outlined"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              style={{ marginTop: "20px" }}
+              fullWidth
+              required
+            />
+            <TextField
+              label="Address"
+              variant="outlined"
+              type="text"
+              name="address"
+              value={formData.address}
+              onChange={handleInputChange}
+              style={{ marginTop: "20px" }}
+              fullWidth
+              required
+            />
+            {success && (
+              <Typography
+                variant="body"
+                color="red" // Change to your success color
+                style={{
+                  marginBottom: "10px",
+                  textAlign: "center", // Align the text to the center
+                }}
+              >
+                {success}
+              </Typography>
+            )}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "20px" }}
+            >
+              Register
+            </Button>
+            {error && (
+              <Typography
+                variant="body"
+                color="red"
+                style={{ marginBottom: "10px" }}
+              >
+                {error}
+              </Typography>
+            )}
+          </form>
+        </div>
+      </Container>
+    </ThemeProvider>
+  );
 }
