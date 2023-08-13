@@ -79,6 +79,144 @@ export default function List() {
           </div>
         </div>
       </div>
+      <div className="detail-flex">
+        <Card />
+        {/* <!-- Right Column --> */}
+        <div className="right-column">
+          {/* <!-- Product Description --> */}
+          <div className="product-description">
+            <span>Ground</span>
+            <h1>A28</h1>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis facere, vel unde consectetur eaque omnis alias
+              tenetur? Aliquid expedita at alias similique quod voluptates
+              eligendi recusandae molestiae! Ullam, sint provident?
+            </p>
+          </div>
+          <h4 className="sizeName">
+            {sizes.map((size) => (
+              <span className="size">{size.id}</span>
+            ))}
+          </h4>
+          {/* <!-- Product Configuration --> */}
+          <div className="product-configuration">
+            {/* <!-- Product Color --> */}
+
+            <div className="product-color">
+              {sizes.map((size) => (
+                <div key={size.id} className="counter">
+                  <div className="counter">
+                    <button onClick={() => handleDecrease(size.id)}>-</button>
+                    <input type="text" value={size.count} readOnly />
+                    <button onClick={() => handleIncrease(size.id)}>+</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* <!-- Product Pricing --> */}
+          <div class="product-price">
+            <span>148$</span>
+            <a href="#" class="cart-btn">
+              Booking
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className="detail-flex">
+        <Card />
+        {/* <!-- Right Column --> */}
+        <div className="right-column">
+          {/* <!-- Product Description --> */}
+          <div className="product-description">
+            <span>Ground</span>
+            <h1>A28</h1>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis facere, vel unde consectetur eaque omnis alias
+              tenetur? Aliquid expedita at alias similique quod voluptates
+              eligendi recusandae molestiae! Ullam, sint provident?
+            </p>
+          </div>
+          <h4 className="sizeName">
+            {sizes.map((size) => (
+              <span className="size">{size.id}</span>
+            ))}
+          </h4>
+          {/* <!-- Product Configuration --> */}
+          <div className="product-configuration">
+            {/* <!-- Product Color --> */}
+
+            <div className="product-color">
+              {sizes.map((size) => (
+                <div key={size.id} className="counter">
+                  <div className="counter">
+                    <button onClick={() => handleDecrease(size.id)}>-</button>
+                    <input type="text" value={size.count} readOnly />
+                    <button onClick={() => handleIncrease(size.id)}>+</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* <!-- Product Pricing --> */}
+          <div class="product-price">
+            <span>148$</span>
+            <a href="#" class="cart-btn">
+              Booking
+            </a>
+          </div>
+        </div>
+      </div>
+      <div className="detail-flex">
+        <Card />
+        {/* <!-- Right Column --> */}
+        <div className="right-column">
+          {/* <!-- Product Description --> */}
+          <div className="product-description">
+            <span>Ground</span>
+            <h1>A28</h1>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Perferendis facere, vel unde consectetur eaque omnis alias
+              tenetur? Aliquid expedita at alias similique quod voluptates
+              eligendi recusandae molestiae! Ullam, sint provident?
+            </p>
+          </div>
+          <h4 className="sizeName">
+            {sizes.map((size) => (
+              <span className="size">{size.id}</span>
+            ))}
+          </h4>
+          {/* <!-- Product Configuration --> */}
+          <div className="product-configuration">
+            {/* <!-- Product Color --> */}
+
+            <div className="product-color">
+              {sizes.map((size) => (
+                <div key={size.id} className="counter">
+                  <div className="counter">
+                    <button onClick={() => handleDecrease(size.id)}>-</button>
+                    <input type="text" value={size.count} readOnly />
+                    <button onClick={() => handleIncrease(size.id)}>+</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* <!-- Product Pricing --> */}
+          <div class="product-price">
+            <span>148$</span>
+            <a href="#" class="cart-btn">
+              Booking
+            </a>
+          </div>
+        </div>
+      </div>
       <div className="footer">
         <Footer />
       </div>

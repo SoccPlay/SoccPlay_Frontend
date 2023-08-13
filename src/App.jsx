@@ -6,16 +6,17 @@ import Homepage from "./pages/homepage/Home";
 import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
 import List from "./pages/list/List";
+import SearchItem from "./components/searchItem/SearchItem";
 export default function App() {
-    useEffect(() => {
-        const sr = scrollreveal({
-            origin: "top",
-            distance: "80px",
-            duration: 2000,
-            reset: true,
-        });
-        sr.reveal(
-            `
+  useEffect(() => {
+    const sr = scrollreveal({
+      origin: "top",
+      distance: "80px",
+      duration: 2000,
+      reset: true,
+    });
+    sr.reveal(
+      `
         nav,
         #hero,
         #services,
@@ -23,20 +24,21 @@ export default function App() {
         #testimonials,
         footer
         `,
-            {
-                opacity: 0,
-                interval: 300,
-            }
-        );
-    }, []);
-    return (
-        <div>
-            <Routes>
-                <Route path="/" element={<Homepage />}></Route>
-                <Route exact path="signin" element={<SignIn />} />
-                <Route exact path="signup" element={<SignUp />} />
-                <Route exact path="search" element={<List />} />
-            </Routes>
-        </div>
+      {
+        opacity: 0,
+        interval: 300,
+      }
     );
+  }, []);
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route exact path="signin" element={<SignIn />} />
+        <Route exact path="signup" element={<SignUp />} />
+        <Route exact path="search" element={<List />} />
+        <Route exact path="ground" element={<List />} />
+      </Routes>
+    </div>
+  );
 }

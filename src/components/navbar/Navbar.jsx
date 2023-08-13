@@ -62,7 +62,7 @@ export default function Navbar() {
             <a href="/">Home</a>
           </li>
           <li>
-            <a href="/search">Ground</a>
+            <a href="/ground">Ground</a>
           </li>
           <li>
             <a href="">About</a>
