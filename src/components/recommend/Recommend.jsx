@@ -11,6 +11,8 @@ import info2 from "../../assets/info2.png";
 import info3 from "../../assets/info3.png";
 import "./style.scss";
 import LandApi from "../Axios/LandApi";
+import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
+import { Rating } from "@mui/material";
 
 export default function Recommend() {
   const data = [
@@ -58,6 +60,7 @@ export default function Recommend() {
     },
   ];
   const [apiDataAvailable, setApiDataAvailable] = useState(false);
+  const [value, setValue] = React.useState(5);
 
   const [land, setLand] = useState("");
   const fetchLands = async ([]) => {
@@ -75,7 +78,8 @@ export default function Recommend() {
   };
   const sortLand = [...land]
     .sort((a, b) => b.totalPitch - a.totalPitch)
-    .slice(0, 6);
+    .slice(0, 3);
+
   useEffect(() => {
     fetchLands([]);
   }, []);
@@ -88,20 +92,30 @@ export default function Recommend() {
               <div className="destination" key={`${destination.landId}`}>
                 <img src={San5} alt="" />
                 <h1>{destination.nameLand}</h1>
-                <p>{destination.title}</p>
+                <p>
+                  {destination.title.length >= 300
+                    ? `${destination.title.substring(0, 300)}...`
+                    : destination.title}
+                </p>
+                <div className="distance">
+                  <p>ToTal Pitch: {destination.totalPitch}</p>
+                  <Rating
+                    name="read-only"
+                    value={value}
+                    readOnly
+                    size="small"
+                  />
+                </div>
+
                 <div className="info">
-                  {/* <div className="services">
-                    <img src={info1} alt="" />
-                    <img src={info2} alt="" />
-                    <img src={info3} alt="" />
-                  </div> */}
-                  Price {destination.minPrice} VND - {destination.maxPrice} VND
-                  / Trận
-                  <h4>{destination.cost}</h4>
+                  <p>Price</p>
+                  <b>
+                    {destination.minPrice} VND - {destination.maxPrice} VND /
+                    Trận
+                  </b>
                 </div>
                 <div className="distance">
                   <span>{destination.location}</span>
-                  <span>ToTal Pitch: {destination.totalPitch}</span>
                 </div>
               </div>
             );

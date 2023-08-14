@@ -59,13 +59,23 @@
                         width: 50%;
                     }
                 }
+                p{
+                    font-weight: bolder;
+                }
+                b{
+                    color: orangered;
+                }
                 display: flex;
                 justify-content: space-between;
             }
             .distance {
                 display: flex;
                 justify-content: space-between;
+                p{
+                    font-weight: bolder;
+                }
             }
+            
         }
     }
     @media screen and (min-width: 280px) and (max-width: 768px) {

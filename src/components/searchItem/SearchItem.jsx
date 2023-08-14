@@ -54,9 +54,10 @@ const SearchItem = ({ landId }) => {
                     Total Pitch: {lands.totalPitch}
                   </span>
                   {/* <span className="siFeatures">{lands.totalPitch}</span> */}
-                  <span className="siCancelOp">Hủy vé miễn phí </span>
+                  <span className="siCancelOp">Free cancellation </span>
                   <span className="siCancelOpSubtitle">
-                    Bạn có thể hủy vé sau khi đặt, đặt ngay để được giá tốt
+                    You can cancel your ticket after booking, book now to get
+                    the best price
                   </span>
                 </div>
               </div>

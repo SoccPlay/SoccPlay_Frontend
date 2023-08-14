@@ -43,7 +43,7 @@ export default function Hero() {
             Book a sports facility
             <span style={{ fontWeight: "bold", color: "red" }}>
               <Typewriter
-                words={["near you", "quality", "easy"]}
+                words={[" near you", " quality", " easy"]}
                 loop={3}
                 typeSpeed={60}
                 deleteSpeed={40}

@@ -7,16 +7,16 @@ import Testimonials from "../../components/testimonials/Testimonials";
 import Footer from "../../components/footer/Footer";
 import SearchItem from "../../components/searchItem/SearchItem";
 const Homepage = () => {
-    return (
-        <div>
-            <ScrollToTop />
-            <Navbar />
-            <Hero />
-            <Recommend />
-            <Testimonials />
-            <Footer />
-        </div>
-    );
+  return (
+    <div>
+      <ScrollToTop />
+      <Navbar />
+      <Hero />
+      <Recommend />
+      {/* <Testimonials /> */}
+      <Footer />
+    </div>
+  );
 };
 
 export default Homepage;
