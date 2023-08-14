@@ -37,7 +37,7 @@ const List = () => {
       if (response == null) {
         setApiDataAvailable(false);
       }
-      console.log("Land Response:", [response.data]);
+      console.log("Land List:", response.data);
       setLand(response.data);
       setApiDataAvailable(true);
     } catch (error) {

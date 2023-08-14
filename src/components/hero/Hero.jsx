@@ -40,10 +40,10 @@ export default function Hero() {
       <div className="content">
         <div className="title">
           <h1>
-            Book a sports facility{" "}
+            Book a sports facility
             <span style={{ fontWeight: "bold", color: "red" }}>
               <Typewriter
-                words={["near you", "quality", "eassy"]}
+                words={["near you", "quality", "easy"]}
                 loop={3}
                 typeSpeed={60}
                 deleteSpeed={40}

@@ -87,19 +87,21 @@ export default function Recommend() {
             return (
               <div className="destination" key={`${destination.landId}`}>
                 <img src={San5} alt="" />
-                <h3>{destination.title}</h3>
-                <p>{destination.subTitle}</p>
+                <h1>{destination.nameLand}</h1>
+                <p>{destination.title}</p>
                 <div className="info">
-                  <div className="services">
+                  {/* <div className="services">
                     <img src={info1} alt="" />
                     <img src={info2} alt="" />
                     <img src={info3} alt="" />
-                  </div>
+                  </div> */}
+                  Price {destination.minPrice} VND - {destination.maxPrice} VND
+                  / Trận
                   <h4>{destination.cost}</h4>
                 </div>
                 <div className="distance">
                   <span>{destination.location}</span>
-                  <span>{destination.totalPitch}</span>
+                  <span>ToTal Pitch: {destination.totalPitch}</span>
                 </div>
               </div>
             );

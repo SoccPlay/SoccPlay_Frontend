@@ -19,7 +19,7 @@ const SearchItem = ({ landId }) => {
       if (response == null) {
         setApiDataAvailable(false);
       }
-      console.log("Land Response:", [response.data]);
+      console.log("Land ID:", [response.data]);
       setLand([response.data]);
       setApiDataAvailable(true);
     } catch (error) {
@@ -50,8 +50,10 @@ const SearchItem = ({ landId }) => {
                   <h1 className="siTitle">{lands.nameLand}</h1>
                   <span className="siDistance">{lands.location}</span>
                   <span className="siTaxiOp">Policty</span>
-                  <span className="siSubtitle">Total Field Pitch</span>
-                  <span className="siFeatures">{lands.totalPitch}</span>
+                  <span className="siSubtitle">
+                    Total Pitch: {lands.totalPitch}
+                  </span>
+                  {/* <span className="siFeatures">{lands.totalPitch}</span> */}
                   <span className="siCancelOp">Hủy vé miễn phí </span>
                   <span className="siCancelOpSubtitle">
                     Bạn có thể hủy vé sau khi đặt, đặt ngay để được giá tốt
@@ -64,7 +66,9 @@ const SearchItem = ({ landId }) => {
                   <button>8.9</button>
                 </div>
                 <div className="siDetailTexts">
-                  <span className="siPrice">$112</span>
+                  <span className="siPrice">
+                    {lands.minPrice} VND - {lands.maxPrice} VND
+                  </span>
                   <div class="container">
                     <button
                       className="button"
