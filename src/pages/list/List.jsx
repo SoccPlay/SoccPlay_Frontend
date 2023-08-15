@@ -101,7 +101,7 @@ const List = () => {
             </Box>
           </div>
         </Grid>
-        <Grid xs={7}>
+        <Grid xs={8}>
           <div className="title">
             <h3 className="groud-name">All ground at 1 district</h3>
             {/* <p className="groud-desc">Get the great price today</p> */}

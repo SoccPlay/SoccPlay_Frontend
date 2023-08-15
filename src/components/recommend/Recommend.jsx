@@ -86,7 +86,7 @@ export default function Recommend() {
   if (apiDataAvailable) {
     return (
       <div className="Section" id="recommend">
-        <Typography>SHOW LIST PITCH NEAR YOU</Typography>
+        <Typography className="typography">SHOW LIST PITCH NEAR YOU</Typography>
         <div className="destinations">
           {sortLand.map((destination) => {
             return (
@@ -94,8 +94,8 @@ export default function Recommend() {
                 <img src={destination.image} alt="" />
                 <h1>{destination.nameLand}</h1>
                 <p>
-                  {destination.title.length >= 300
-                    ? `${destination.title.substring(0, 300)}...`
+                  {destination.title.length >= 150
+                    ? `${destination.title.substring(0, 150)}...`
                     : destination.title}
                 </p>
                 <div className="distance">

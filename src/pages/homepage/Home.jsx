@@ -14,6 +14,8 @@ const Homepage = () => {
       <Navbar />
       <Hero />
       <Recommend />
+      <Recommend />
+      <Recommend />
       <Footer />
     </div>
   );
