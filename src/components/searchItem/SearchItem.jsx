@@ -40,11 +40,7 @@ const SearchItem = ({ landId }) => {
         land.map((lands) => {
           return (
             <div className="searchItem" key={lands.landId}>
-              <img
-                src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
-                alt=""
-                className="siImg"
-              />
+              <img src={lands.pitchImages} alt="" className="siImg" />
               <div className="siDesc">
                 <div className="siDesc">
                   <h1 className="siTitle">{lands.nameLand}</h1>
@@ -68,7 +64,7 @@ const SearchItem = ({ landId }) => {
                 </div>
                 <div className="siDetailTexts">
                   <span className="siPrice">
-                    {lands.minPrice} VND - {lands.maxPrice} VND
+                    {lands.minPrice}-{lands.maxPrice} VND
                   </span>
                   <div class="container">
                     <button

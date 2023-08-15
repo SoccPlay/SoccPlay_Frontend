@@ -12,7 +12,7 @@ import info3 from "../../assets/info3.png";
 import "./style.scss";
 import LandApi from "../Axios/LandApi";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import { Rating } from "@mui/material";
+import { Rating, Typography } from "@mui/material";
 
 export default function Recommend() {
   const data = [
@@ -86,11 +86,12 @@ export default function Recommend() {
   if (apiDataAvailable) {
     return (
       <div className="Section" id="recommend">
+        <Typography>SHOW LIST PITCH NEAR YOU</Typography>
         <div className="destinations">
           {sortLand.map((destination) => {
             return (
               <div className="destination" key={`${destination.landId}`}>
-                <img src={San5} alt="" />
+                <img src={destination.image} alt="" />
                 <h1>{destination.nameLand}</h1>
                 <p>
                   {destination.title.length >= 300

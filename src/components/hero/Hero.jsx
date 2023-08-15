@@ -83,14 +83,14 @@ export default function Hero() {
               onChange={(e) => setGroundName(e.target.value)}
             />
           </div>
-          <div className="container">
+          {/* <div className="container">
             <label htmlFor="">Date</label>
             <input
               type="datetime-local"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
             />
-          </div>
+          </div> */}
           <button onClick={handleSearch}>Search</button>
 
           {/* <Link to="/search"></Link> */}

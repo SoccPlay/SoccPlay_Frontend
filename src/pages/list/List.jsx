@@ -49,10 +49,7 @@ const List = () => {
   const fetchLands = async ([]) => {
     try {
       console.log(`LIST SEARCH: ${street} - ${ground}`);
-      const response = await LandApi.GetLandByLocationandNameGround(
-        street,
-        ground
-      );
+      const response = await LandApi.GetAllLand();
       if (response == null) {
         setApiDataAvailable(false);
       }

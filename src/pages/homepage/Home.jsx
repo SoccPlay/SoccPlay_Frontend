@@ -8,16 +8,15 @@ import Footer from "../../components/footer/Footer";
 import SearchItem from "../../components/searchItem/SearchItem";
 import Profile from "../profile/Profile";
 const Homepage = () => {
-    return (
-        <div>
-            <ScrollToTop />
-            <Navbar />
-            <Hero />
-            <Recommend />
-            <Footer />
-            <Profile />
-        </div>
-    );
+  return (
+    <div>
+      <ScrollToTop />
+      <Navbar />
+      <Hero />
+      <Recommend />
+      <Footer />
+    </div>
+  );
 };
 
 export default Homepage;

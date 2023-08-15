@@ -11,6 +11,7 @@
 .title-left {
   font-size: 22px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
 .coll {
@@ -25,7 +26,9 @@
   font-size: 25px;
   font-weight: bold;
 }
-
+.Pagination {
+  margin-bottom: 20px;
+}
 .groud-desc {
   color: rgb(30, 30, 30);
   border-bottom: 0.5px solid rgb(30, 30, 30);
