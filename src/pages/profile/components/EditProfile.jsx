@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-export const EditProfile = () => {
+export const EditProfile = ({ onClosed }) => {
     return (
         <Grid item container xs={12} sx={{ padding: "80px 400px 0 130px" }}>
             <Grid item xs={12}>
@@ -184,6 +184,7 @@ export const EditProfile = () => {
                                 color: "#FFF",
                             },
                         }}
+                        onClick={onClosed}
                     >
                         Cancel
                     </Button>
