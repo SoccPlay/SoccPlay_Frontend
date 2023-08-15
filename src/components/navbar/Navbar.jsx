@@ -109,11 +109,13 @@ export default function Navbar() {
                                 open={open}
                                 onClose={handleClose}
                                 TransitionComponent={Transition}
+                                sx={{
+                                    ".MuiDialog-container": {
+                                        height: "unset",
+                                    },
+                                }}
                             >
-                                <AppBar sx={{ position: "relative" }}></AppBar>
-                                <List>
-                                    <Profile onClosed={handleClose} />
-                                </List>
+                                <Profile onClosed={handleClose} />
                             </Dialog>
                         )}
                         <button className="logout" onClick={handleLogout}>
