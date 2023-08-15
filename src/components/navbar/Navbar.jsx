@@ -4,13 +4,27 @@ import "./style.scss";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
 import jwt_decode from "jwt-decode";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import Profile from "../../pages/profile/Profile";
+
 export default function Navbar() {
     const [navbarState, setNavbarState] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(
         !!localStorage.getItem("localtoken")
     );
+    const [open, setOpen] = React.useState(false);
 
     const tokenlocal = localStorage.getItem("localtoken");
     const handleLogout = () => {
@@ -39,6 +53,18 @@ export default function Navbar() {
         decodeToken(tokenlocal);
         setIsLoggedIn(!!localStorage.getItem("localtoken")); // Update login status when localtoken changes
     }, []);
+
+    const Transition = React.forwardRef(function Transition(props, ref) {
+        return <Slide direction="up" ref={ref} {...props} />;
+    });
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <>
@@ -74,7 +100,20 @@ export default function Navbar() {
                 </ul>
                 {isLoggedIn ? (
                     <div>
-                        <h2> {username}</h2>
+                        <Button variant="outlined" onClick={handleClickOpen}>
+                            Edit Profile
+                        </Button>
+                        <Dialog
+                            fullScreen
+                            open={open}
+                            onClose={handleClose}
+                            TransitionComponent={Transition}
+                        >
+                            <AppBar sx={{ position: "relative" }}></AppBar>
+                            <List>
+                                <Profile />
+                            </List>
+                        </Dialog>
                         <button className="logout" onClick={handleLogout}>
                             Logout
                         </button>
