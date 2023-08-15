@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SearchItem from "../../components/searchItem/SearchItem";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 import "./list.css";
 import San1 from "../../assets/San1.jpg";
@@ -24,7 +24,9 @@ import {
   FormGroup,
 } from "@mui/material";
 const List = () => {
-  const { street, ground } = useParams();
+  const { selectedStreet, groundName } = useParams();
+  console.log("Street:", selectedStreet);
+  console.log("Ground Name:", groundName);
   const [land, setLand] = useState("");
   const [apiDataAvailable, setApiDataAvailable] = useState(false);
   const [value, setValue] = React.useState(0);
@@ -48,8 +50,11 @@ const List = () => {
 
   const fetchLands = async ([]) => {
     try {
-      console.log(`LIST SEARCH: ${street} - ${ground}`);
-      const response = await LandApi.GetAllLand();
+      console.log(`LIST SEARCH: ${selectedStreet} - ${groundName}`);
+      const response = await LandApi.GetLandByLocationandNameGround(
+        selectedStreet,
+        groundName
+      );
       if (response == null) {
         setApiDataAvailable(false);
       }

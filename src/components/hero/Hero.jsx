@@ -32,7 +32,7 @@ export default function Hero() {
       //   selectedStreet,
       //   groundName
       // );
-      nagative(`/list`);
+      nagative(`/list/${selectedStreet}/${groundName}`);
       console.log(selectedStreet, groundName, selectedDate);
       // console.log(response.data);
     }

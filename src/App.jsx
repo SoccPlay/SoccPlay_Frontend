@@ -36,7 +36,7 @@ export default function App() {
         <Route path="/" element={<Homepage />}></Route>
         <Route exact path="signin" element={<SignIn />} />
         <Route exact path="signup" element={<SignUp />} />
-        <Route path="/list/" element={<List />} />
+        <Route path="/list/:selectedStreet/:groundName" element={<List />} />
         <Route path="/detail/:landId" element={<Detail />} />
       </Routes>
     </div>
