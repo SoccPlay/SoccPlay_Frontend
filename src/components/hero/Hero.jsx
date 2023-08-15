@@ -4,20 +4,21 @@ import "./style.scss";
 import { Typewriter, Cursor } from "react-simple-typewriter";
 import Select from "react-select";
 import { Link, useNavigate } from "react-router-dom";
-
+import LandApi from "../Axios/LandApi";
 export default function Hero() {
   const street = [
-    { label: "Quan 1", year: 1994 },
-    { label: "Quan 3", year: 1974 },
-    { label: "Quan 4", year: 2008 },
-    { label: "Quan 7", year: 1972 },
-    { label: "Quan 8", year: 1972 },
-    { label: "Quan 11", year: 1972 },
-    { label: "Quan 12", year: 1972 },
-    { label: "Quan Tan Binh", year: 1972 },
-    { label: "Quan Binh Thanh", year: 1972 },
-    { label: "Quan Go Vap", year: 1972 },
+    { label: "District 1", year: 1994 },
+    { label: "District 3", year: 1974 },
+    { label: "District 4", year: 2008 },
+    { label: "District 7", year: 1972 },
+    { label: "District 8", year: 1972 },
+    { label: "District 11", year: 1972 },
+    { label: "District 12", year: 1972 },
+    { label: "District Tan Binh", year: 1972 },
+    { label: "District Binh Thanh", year: 1972 },
+    { label: "District Go Vap", year: 1972 },
     { label: "Thu Duc", year: 1972 },
+    { label: "District", year: 1972 },
   ];
 
   const [selectedStreet, setSelectedStreet] = useState(null);
@@ -25,11 +26,15 @@ export default function Hero() {
   const [selectedDate, setSelectedDate] = useState("");
   const nagative = useNavigate();
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (selectedStreet) {
-      //   history.push(`/search?street=${selectedStreet}`);
-      // nagative(`/search?street=${selectedStreet}`);
+      // const response = await LandApi.GetLandByLocationandNameGround(
+      //   selectedStreet,
+      //   groundName
+      // );
+      nagative(`/list`);
       console.log(selectedStreet, groundName, selectedDate);
+      // console.log(response.data);
     }
   };
   return (

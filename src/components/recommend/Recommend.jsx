@@ -78,7 +78,7 @@ export default function Recommend() {
   };
   const sortLand = [...land]
     .sort((a, b) => b.totalPitch - a.totalPitch)
-    .slice(0, 3);
+    .slice(0, 6);
 
   useEffect(() => {
     fetchLands([]);

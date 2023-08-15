@@ -6,8 +6,12 @@ const LandApi = {
     return axiosApi.get(url, data);
   },
   GetLandById(id) {
-    const url = `https://localhost:7186/api/Land/GetLandById?landId=${id}`;
+    const url = `Land/GetLandById?landId=${id}`;
     return axiosApi.get(url, id);
+  },
+  GetLandByLocationandNameGround(location, name) {
+    const url = `Land/SearchLand?location=${location}&landName=${name}`;
+    return axiosApi.get(url, location, name);
   },
 };
 export default LandApi;
