@@ -14,8 +14,8 @@ const Homepage = () => {
       <Navbar />
       <Hero />
       <ShowListPitchNear />
-      <ShowListPitchNear />
-      <ShowListPitchNear />
+      {/* <ShowListPitchNear />
+      <ShowListPitchNear /> */}
       <Footer />
     </div>
   );
