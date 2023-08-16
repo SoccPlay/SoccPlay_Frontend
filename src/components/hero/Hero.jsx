@@ -7,34 +7,32 @@ import { Link, useNavigate } from "react-router-dom";
 import LandApi from "../Axios/LandApi";
 export default function Hero() {
   const street = [
-    { label: "District 1", year: 1994 },
-    { label: "District 3", year: 1974 },
-    { label: "District 4", year: 2008 },
-    { label: "District 7", year: 1972 },
-    { label: "District 8", year: 1972 },
-    { label: "District 11", year: 1972 },
-    { label: "District 12", year: 1972 },
-    { label: "District Tan Binh", year: 1972 },
-    { label: "District Binh Thanh", year: 1972 },
-    { label: "District Go Vap", year: 1972 },
-    { label: "Thu Duc", year: 1972 },
-    { label: "District", year: 1972 },
+    { value: "District", label: "District" },
+    { value: "Thu Duc District", label: "Thu Duc" },
+    { value: "District 1, HCMC", label: "District 1" },
+    { value: "District 2, HCMC", label: "District 2" },
+    { value: "District 3, HCMC", label: "District 3" },
+    { value: "District 4, HCMC", label: "District 4" },
+    { value: "District 5, HCMC", label: "District 5" },
+    { value: "District 6, HCMC", label: "District 6" },
+    { value: "District 7, HCMC", label: "District 7" },
+    { value: "District 8, HCMC", label: "District 8" },
+    { value: "District 9, HCMC", label: "District 9" },
+    { value: "District 10, HCMC", label: "District 10" },
+    { value: "District 11, HCMC", label: "District 11" },
+    { value: "District 12, HCMC", label: "District 12" },
+    { value: "District Tan Binh", label: "Tan Binh" },
+    { value: "Binh Thanh District", label: "Binh Thanh" },
+    { value: "Go Vap District", label: "Go Vap" },
   ];
-
   const [selectedStreet, setSelectedStreet] = useState("District");
   const [groundName, setGroundName] = useState("Stadium");
-  const [selectedDate, setSelectedDate] = useState("");
   const nagative = useNavigate();
 
   const handleSearch = async () => {
     if (selectedStreet) {
-      // const response = await LandApi.GetLandByLocationandNameGround(
-      //   selectedStreet,
-      //   groundName
-      // );
       nagative(`/list/${selectedStreet}/${groundName}`);
-      console.log(selectedStreet, groundName, selectedDate);
-      // console.log(response.data);
+      console.log(selectedStreet, groundName);
     }
   };
   return (
@@ -48,8 +46,8 @@ export default function Hero() {
             Book a sports facility
             <span style={{ fontWeight: "bold", color: "red" }}>
               <Typewriter
-                words={[" near you", " quality", " easy"]}
-                loop={3}
+                words={[" quality", " easy"]}
+                loop={2}
                 typeSpeed={60}
                 deleteSpeed={40}
                 delaySpeed={2000}
@@ -59,7 +57,10 @@ export default function Hero() {
               <Cursor cursorStyle="<"></Cursor>
             </span>
           </h1>
-          <p>Book a sports facility near you with a single click and get</p>
+          <p>
+            Book a sports facility near you with a single click and get to
+            search
+          </p>
         </div>
         <div className="search">
           <div className="container">
@@ -70,7 +71,7 @@ export default function Hero() {
               options={street}
               placeholder="Select your district"
               onChange={(selectedOption) =>
-                setSelectedStreet(selectedOption.label)
+                setSelectedStreet(selectedOption.value)
               }
             />
           </div>
