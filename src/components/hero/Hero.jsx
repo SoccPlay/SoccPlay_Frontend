@@ -3,8 +3,7 @@ import homeImage from "../../assets/sanbong.jpg";
 import "./style.scss";
 import { Typewriter, Cursor } from "react-simple-typewriter";
 import Select from "react-select";
-import { Link, useNavigate } from "react-router-dom";
-import LandApi from "../Axios/LandApi";
+import { useNavigate } from "react-router-dom";
 export default function Hero() {
     const street = [
         { value: "District", label: "District" },
