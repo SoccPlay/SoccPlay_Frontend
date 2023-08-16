@@ -1,131 +1,39 @@
-.detail-flex {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 10px;
-  margin: 10px;
-  border-top: 3px solid #1c72e2;
-  /* width: 70em; */
+.detail-all h1 {
+  font-size: 30px;
+  font-weight: 700;
 }
 
-.footer {
-  margin-top: 100px;
+.detail-all .icon {
+  height: 30px;
+  width: 30px;
+  color: orangered;
 }
-
-.right-column {
-  width: 35%;
-  margin-top: 10px;
-}
-
-.product-description {
-  border-bottom: 1px solid #e1e8ee;
-  margin-bottom: 20px;
-}
-
-.product-description span {
-  font-size: 12px;
-  color: #358ed7;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-
-.product-description h1 {
-  font-weight: 300;
-  font-size: 52px;
-  color: #43484d;
-  letter-spacing: -2px;
-}
-.product-description p {
-  width: 400px;
-  font-size: 16px;
-  font-weight: 300;
-  color: #86939e;
-  line-height: 24px;
-}
-
-.product-color {
-  width: 400px;
-}
-
-.product-color span {
-  width: 400px;
-}
-
-/* .product-configuration {
-  
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-} */
-
-.color-choose div {
-  display: inline-block;
-}
-
-/* Product Price */
-.product-price {
+.img {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
-
-.product-price span {
-  font-size: 26px;
-  font-weight: 300;
-  color: #43474d;
-  margin-right: 20px;
+.main-image img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
 }
-
-.cart-btn {
-  display: inline-block;
-  background-color: #1c72e2;
-  border-radius: 6px;
-  font-size: 16px;
-  color: #ffffff;
-  text-decoration: none;
-  padding: 12px 30px;
-  transition: all 0.5s;
-  margin-top: 10px;
-}
-.cart-btn:hover {
-  background-color: #0077b6;
-}
-.container {
-  margin-top: 10px;
+.sub-images {
   display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
-.counter {
-  display: inline;
-  margin: 7px 5px;
-}
-
-.counter button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 2px 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
+.sub-images img {
+  width: calc(25% - 10px);
+  max-height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
-.counter button:hover {
-  background-color: #0056b3;
-}
-
-.counter input {
-  text-align: center;
-  font-size: 18px;
-  width: 100px;
-  margin: 0 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.sizeName {
-  font-size: 14px;
-}
-
-.size {
-  margin-right: 150px;
-  margin: 0px 100px 0px 45px;
+.tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
 }

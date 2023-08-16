@@ -12,9 +12,10 @@ import info3 from "../../assets/info3.png";
 import "./style.scss";
 import LandApi from "../Axios/LandApi";
 import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
-import { Rating, Typography } from "@mui/material";
+import { Button, Rating, Typography } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 
-export default function Recommend() {
+export default function ShowListPitchNear() {
   const data = [
     {
       image: San1,
@@ -61,25 +62,32 @@ export default function Recommend() {
   ];
   const [apiDataAvailable, setApiDataAvailable] = useState(false);
   const [value, setValue] = React.useState(5);
+  const [land, setLand] = useState([]);
+  const navigate = useNavigate();
 
-  const [land, setLand] = useState("");
   const fetchLands = async ([]) => {
     try {
       const response = await LandApi.GetAllLand();
-      if (response == null) {
+      if (response.data.length === 0) {
+        // Check the length of the response data array
         setApiDataAvailable(false);
+      } else {
+        console.log("Land Response:", response.data);
+        setLand(response.data);
+        setApiDataAvailable(true);
       }
-      console.log("Land Response:", [response.data]);
-      setLand(response.data);
-      setApiDataAvailable(true);
     } catch (error) {
       console.error("API Error:", error);
     }
   };
   const sortLand = [...land]
     .sort((a, b) => b.totalPitch - a.totalPitch)
-    .slice(0, 6);
+    .slice(0, 3);
 
+  const handleClick = (street, groundName) => {
+    navigate(`/list/${street}/${groundName}`);
+    console.log(street, groundName);
+  };
   useEffect(() => {
     fetchLands([]);
   }, []);
@@ -88,18 +96,22 @@ export default function Recommend() {
       <div className="Section" id="recommend">
         <Typography className="typography">SHOW LIST PITCH NEAR YOU</Typography>
         <div className="destinations">
-          {sortLand.map((destination) => {
+          {sortLand.map((lands) => {
             return (
-              <div className="destination" key={`${destination.landId}`}>
-                <img src={destination.image} alt="" />
-                <h1>{destination.nameLand}</h1>
+              <div
+                className="destination"
+                key={`${lands.landId}`}
+                onClick={() => handleClick(lands.location, lands.nameLand)}
+              >
+                <img src={lands.image} alt="" />
+                <h1>{lands.nameLand}</h1>
                 <p>
-                  {destination.title.length >= 150
-                    ? `${destination.title.substring(0, 150)}...`
-                    : destination.title}
+                  {lands.title.length >= 150
+                    ? `${lands.title.substring(0, 150)}...`
+                    : lands.title}
                 </p>
                 <div className="distance">
-                  <p>ToTal Pitch: {destination.totalPitch}</p>
+                  <p>ToTal Pitch: {lands.totalPitch}</p>
                   <Rating
                     name="read-only"
                     value={value}
@@ -111,12 +123,11 @@ export default function Recommend() {
                 <div className="info">
                   <p>Price</p>
                   <b>
-                    {destination.minPrice} VND - {destination.maxPrice} VND /
-                    Trận
+                    {lands.minPrice} VND - {lands.maxPrice} VND / Trận
                   </b>
                 </div>
                 <div className="distance">
-                  <span>{destination.location}</span>
+                  <span>{lands.location}</span>
                 </div>
               </div>
             );
@@ -128,26 +139,24 @@ export default function Recommend() {
     return (
       <div className="Section" id="recommend">
         <div className="destinations">
-          {data.map((destination) => {
-            return (
-              <div className="destination">
-                <img src={destination.image} alt="" />
-                <h3>{destination.title}</h3>
-                <p>{destination.subTitle}</p>
-                <div className="info">
-                  <div className="services">
-                    <img src={info1} alt="" />
-                    <img src={info2} alt="" />
-                    <img src={info3} alt="" />
-                  </div>
-                  <h4>{destination.cost}</h4>
+          {data.map((lands) => {
+            <div className="destination" key={lands.landId}>
+              <img src={lands.image} alt="" />
+              <h3>{lands.title}</h3>
+              <p>{lands.subTitle}</p>
+              <div className="info">
+                <div className="services">
+                  <img src={info1} alt="" />
+                  <img src={info2} alt="" />
+                  <img src={info3} alt="" />
                 </div>
-                <div className="distance">
-                  <span>1200 kms</span>
-                  <span>{destination.totalPitch}</span>
-                </div>
+                <h4>{lands.cost}</h4>
               </div>
-            );
+              <div className="distance">
+                <span>1200 kms</span>
+                <span>{lands.totalPitch}</span>
+              </div>
+            </div>;
           })}
         </div>
       </div>

@@ -21,8 +21,8 @@ export default function Hero() {
     { label: "District", year: 1972 },
   ];
 
-  const [selectedStreet, setSelectedStreet] = useState(null);
-  const [groundName, setGroundName] = useState("");
+  const [selectedStreet, setSelectedStreet] = useState("District");
+  const [groundName, setGroundName] = useState("Stadium");
   const [selectedDate, setSelectedDate] = useState("");
   const nagative = useNavigate();
 
@@ -79,7 +79,7 @@ export default function Hero() {
             <input
               type="text"
               placeholder="Search ground name"
-              value={groundName}
+              //value={groundName}
               onChange={(e) => setGroundName(e.target.value)}
             />
           </div>
