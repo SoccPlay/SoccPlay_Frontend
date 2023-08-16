@@ -39,12 +39,10 @@
 .column-left {
   margin-left: 50px;
   margin-right: 5rem;
-  border-right: 1px solid rgb(30, 30, 30);
-  line-height: 0;
 }
 
 .title-left {
-  /* border-bottom: 1px solid rgb(30, 30, 30); */
+  border-bottom: 1px solid rgb(30, 30, 30);
   width: 100%;
 }
 
