@@ -90,7 +90,6 @@ export default function Detail({ landId }) {
           <FullWidthTabs />
         </div>
       </div>
-
       <div className="footer">
         <Footer />
       </div>
