@@ -13,6 +13,9 @@ import MicrowaveIcon from "@mui/icons-material/Microwave";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import "../detail/tabs.css";
+import BookingApi from "../../components/Axios/BookingApi";
+import LandApi from "../../components/Axios/LandApi";
+import { useParams } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -47,7 +50,7 @@ function a11yProps(index) {
   };
 }
 
-export default function FullWidthTabs() {
+export default function FullWidthTabs({ landId }) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
@@ -55,9 +58,6 @@ export default function FullWidthTabs() {
     setValue(newValue);
   };
 
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
   const [size5, setSize5] = useState({ count: 1 });
   const [size7, setSize7] = useState({ count: 1 });
 
@@ -76,8 +76,70 @@ export default function FullWidthTabs() {
   const handleDecreaseSize7 = (id) => {
     setSize7({ ...size7, count: size7.count - 1 });
   };
-  const [selectedStartDate, setSelectedStartDate] = useState();
-  const [selectedEndDate, setSelectedEndDate] = useState();
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+
+  const [customerId, setCustomerId] = useState(
+    "3821B23D-0D0B-46B0-CF33-08DB9E860EBE"
+  );
+  const [sizeType5, setSizeR5] = useState([5]);
+  const [sizeType7, setSizeR7] = useState([7]);
+
+  console.log(startTime, "date", endTime, "dateend");
+
+  const [bookings, setBooking] = useState();
+  const fetchLands = async ([]) => {
+    try {
+      const response = await LandApi.GetLandById(landId);
+
+      if (response == null) {
+      }
+      console.log("Land ID:", [response.data]);
+    } catch (error) {
+      console.error("API Error:", error);
+    }
+  };
+  const handleBookingType5 = async () => {
+    const bookingData = {
+      landId: landId,
+      Note: "DUY",
+      size: sizeType5,
+      starTime: [startTime],
+      endTime: [endTime],
+      customerId: customerId,
+    };
+    const response = await BookingApi.CreateBooking(bookingData)
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Booking response:", data);
+        // You can handle the response here as needed
+      })
+      .catch((error) => {
+        console.error("Error creating booking:", error);
+      });
+  };
+  const handleBookingType7 = async () => {
+    const bookingData = {
+      landId: landId,
+      Note: "DUY",
+      size: sizeType7,
+      starTime: [startTime],
+      endTime: [endTime],
+      customerId: customerId,
+    };
+    const response = await BookingApi.CreateBooking(bookingData)
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("Booking response:", data);
+        // You can handle the response here as needed
+      })
+      .catch((error) => {
+        console.error("Error creating booking:", error);
+      });
+  };
+  useEffect(() => {
+    fetchLands([]);
+  }, []);
   return (
     <Box sx={{ bgcolor: "background.paper", width: 1200 }}>
       <AppBar position="static">
@@ -95,11 +157,6 @@ export default function FullWidthTabs() {
           <Tab label="ĐÁNH GIÁ" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
-      {/* <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      > */}
 
       <TabPanel value={value} index={0} dir={theme.direction}>
         <div className="content-center">
@@ -120,21 +177,23 @@ export default function FullWidthTabs() {
               <label htmlFor="">Start Time : </label>
               <input
                 type="datetime-local"
-                value={selectedStartDate}
-                onChange={(e) => setSelectedStartDate(e.target.value)}
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
               />
             </div>
             <div className="rightTime">
               <label htmlFor=""> End Time : </label>
               <input
                 type="datetime-local"
-                value={selectedEndDate}
-                onChange={(e) => setSelectedEndDate(e.target.value)}
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
               />
             </div>
           </div>
           <div className="button-container">
-            <Button className="button">BOOOKING</Button>
+            <Button className="button" onClick={() => handleBookingType5()}>
+              BOOKING
+            </Button>
           </div>
         </div>
       </TabPanel>
@@ -157,21 +216,26 @@ export default function FullWidthTabs() {
               <label htmlFor="">Start Time : </label>
               <input
                 type="datetime-local"
-                value={selectedStartDate}
-                onChange={(e) => setSelectedStartDate(e.target.value)}
+                value={startTime}
+                onChange={(e) => setStartTime(e.target.value)}
               />
             </div>
             <div className="rightTime">
               <label htmlFor=""> End Time : </label>
               <input
                 type="datetime-local"
-                value={selectedEndDate}
-                onChange={(e) => setSelectedEndDate(e.target.value)}
+                value={endTime}
+                onChange={(e) => setEndTime(e.target.value)}
               />
             </div>
           </div>
           <div className="button-container">
-            <Button className="button">BOOOKING</Button>
+            <Button
+              className="button"
+              onClick={() => handleBookingType7(size7)}
+            >
+              BOOKING
+            </Button>
           </div>
         </div>
       </TabPanel>

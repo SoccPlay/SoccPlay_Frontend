@@ -32,39 +32,45 @@ export default function ShowListPitchNear() {
   }, []);
   return (
     <div className="Section" id="recommend">
-      <Typography className="typography">SHOW LIST PITCH NEAR YOU</Typography>
+      <Typography className="typography">SHOW LIST PITCH NEW PITCH</Typography>
       <div className="destinations">
-        {sortLand.map((lands) => {
-          return (
-            <div
-              className="destination"
-              key={`${lands.landId}`}
-              onClick={() => handleClick(lands.location, lands.nameLand)}
-            >
-              <img src={lands.image} alt="" />
-              <h1>{lands.nameLand}</h1>
-              <p>
-                {lands.title.length >= 150
-                  ? `${lands.title.substring(0, 150)}...`
-                  : lands.title}
-              </p>
-              <div className="distance">
-                <p>ToTal Pitch: {lands.totalPitch}</p>
-                <Rating name="read-only" value={value} readOnly size="small" />
-              </div>
+        {land &&
+          land.map((lands) => {
+            return (
+              <div
+                className="destination"
+                key={`${lands.landId}`}
+                onClick={() => handleClick(lands.location, lands.nameLand)}
+              >
+                <img src={lands.image} alt="" />
+                <h1>{lands.nameLand}</h1>
+                <p>
+                  {lands.title.length >= 150
+                    ? `${lands.title.substring(0, 150)}...`
+                    : lands.title}
+                </p>
+                <div className="distance">
+                  <p>ToTal Pitch: {lands.totalPitch}</p>
+                  <Rating
+                    name="read-only"
+                    value={value}
+                    readOnly
+                    size="small"
+                  />
+                </div>
 
-              <div className="info">
-                <p>Price</p>
-                <b>
-                  {lands.minPrice} VND - {lands.maxPrice} VND / Trận
-                </b>
+                <div className="info">
+                  <p>Price</p>
+                  <b>
+                    {lands.minPrice} VND - {lands.maxPrice} VND / Trận
+                  </b>
+                </div>
+                <div className="distance">
+                  <span>{lands.location}</span>
+                </div>
               </div>
-              <div className="distance">
-                <span>{lands.location}</span>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import ScrollToTop from "../../components/scrollToTop/ScrollToTop";
 import Hero from "../../components/hero/Hero";
 import ShowListPitchNear from "../../components/recommend/ShowListPitchNear";
 import Footer from "../../components/footer/Footer";
+import ShowListNewPitch from "../../components/recommend/ShowListNewPitch";
 
 const Homepage = () => {
   return (
@@ -12,8 +13,7 @@ const Homepage = () => {
       <Navbar />
       <Hero />
       <ShowListPitchNear />
-      {/* <ShowListPitchNear />
-      <ShowListPitchNear /> */}
+      <ShowListNewPitch/>
       <Footer />
     </div>
   );
