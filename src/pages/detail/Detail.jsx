@@ -16,9 +16,7 @@ export default function Detail() {
     console.log(selectedStartDate, selectedEndDate);
   };
   const [land, setLand] = useState();
-  const [selectedImage, setSelectedImage] = useState(
-    "https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong_1675817495.jpg"
-  );
+  const [selectedImage, setSelectedImage] = useState("");
   const fetchLands = async ([]) => {
     try {
       const response = await LandApi.GetLandById(landId);
@@ -26,6 +24,7 @@ export default function Detail() {
       }
       console.log("Land ID:", [response.data]);
       setLand([response.data]);
+      setSelectedImage(response.data.image);
     } catch (error) {
       console.error("API Error:", error);
     }
@@ -42,63 +41,24 @@ export default function Detail() {
             <div className="detail-all" key={lands.landId}>
               <h1>{lands.nameLand}</h1>
               <div className="address">
-                5
+                {lands.averageRate}
                 <Icon className="icon">
                   <StarIcon />
                 </Icon>
-                (1 đánh giá) - {lands.location}
+                ({lands.totalPitch} đánh giá) - {lands.location}
               </div>
-
               <div className="img">
                 <div className="main-image">
-                  <img src={selectedImage} alt="Sân bóng Tiến Trường - TPHCM" />
+                  <img src={selectedImage} alt={lands.nameLand} />
                 </div>
                 <div className="sub-images">
-                  <img
-                    src="https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-3_1675817810.jpg"
-                    alt="Sân bóng Tiến Trường - TPHCM"
-                    onClick={() =>
-                      setSelectedImage(
-                        "https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-3_1675817810.jpg"
-                      )
-                    }
-                  />
-                  <img
-                    src="https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong_1675817495.jpg"
-                    alt="Sân bóng Tiến Trường - TPHCM"
-                    onClick={() =>
-                      setSelectedImage(
-                        "https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong_1675817495.jpg"
-                      )
-                    }
-                  />
-                  <img
-                    src="https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-9_1675817811.jpg"
-                    alt="Sân bóng Tiến Trường - TPHCM"
-                    onClick={() =>
-                      setSelectedImage(
-                        "https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-9_1675817811.jpg"
-                      )
-                    }
-                  />
-                  <img
-                    src="https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-10_1675817811.jpg"
-                    alt="Sân bóng Tiến Trường - TPHCM"
-                    onClick={() =>
-                      setSelectedImage(
-                        "https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-10_1675817811.jpg"
-                      )
-                    }
-                  />
-                  <img
-                    src="https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-4_1675817812.jpg"
-                    alt="Sân bóng Tiến Trường - TPHCM"
-                    onClick={() =>
-                      setSelectedImage(
-                        "https://thegioithethao.vn/images/products_soccer/2023/02/08/large/san-bong-tien-truong-4_1675817812.jpg"
-                      )
-                    }
-                  />
+                  {lands.pitchImages.map((pitch) => (
+                    <img
+                      src={pitch}
+                      alt={lands.nameLand}
+                      onClick={() => setSelectedImage(pitch)}
+                    />
+                  ))}
                 </div>
               </div>
               <div className="tab">

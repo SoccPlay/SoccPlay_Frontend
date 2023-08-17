@@ -5,8 +5,8 @@ import { Rating, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 
 export default function ShowListPitchNear() {
-  const [value, setValue] = React.useState(5);
-  const [land, setLand] = useState("");
+  const [value, setValue] = useState(5);
+  const [land, setLand] = useState([]);
   const fetchLands = async ([]) => {
     try {
       const response = await LandApi.GetAllLand();
@@ -32,10 +32,12 @@ export default function ShowListPitchNear() {
   }, []);
   return (
     <div className="Section" id="recommend">
-      <Typography className="typography">SHOW LIST PITCH NEW PITCH</Typography>
+      <Typography className="typography">
+        SHOW LIST THE MOST TOTAL PITCH
+      </Typography>
       <div className="destinations">
-        {land &&
-          land.map((lands) => {
+        {sortLand &&
+          sortLand.map((lands) => {
             return (
               <div
                 className="destination"
@@ -53,7 +55,7 @@ export default function ShowListPitchNear() {
                   <p>ToTal Pitch: {lands.totalPitch}</p>
                   <Rating
                     name="read-only"
-                    value={value}
+                    value={lands.averageRate}
                     readOnly
                     size="small"
                   />

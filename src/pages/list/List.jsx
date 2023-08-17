@@ -40,9 +40,6 @@ const List = () => {
   const sortLand = [...land].sort((a, b) => b.totalPitch - a.totalPitch);
   const _Data = sortLand.slice((page - 1) * PER_PAGE, page * PER_PAGE);
   const [range, setRange] = useState([0, 100]);
-  const handlePrice = (price) => {
-    return () => price * 300;
-  };
 
   const formatPrice = (price) => {
     price = price * 3000;
@@ -139,7 +136,7 @@ const List = () => {
         </Grid>
         <Grid xs={8}>
           <div className="title">
-            <h3 className="groud-name">All ground</h3>
+            <h3 className="groud-name">List Pitch Search {}</h3>
             {/* <p className="groud-desc">Get the great price today</p> */}
           </div>
           <div className="list">

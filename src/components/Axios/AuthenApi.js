@@ -6,8 +6,12 @@ const AuthenApi = {
     return axiosApi.post(url, data);
   },
   Register(data) {
-    const url = "/Admins/PostAdmin";
+    const url = "/Register/PostCustomer";
     return axiosApi.post(url, data);
+  },
+  GetCustomerByAccountId(data) {
+    const url = `Accounts/GetCustomerByAccountId?id=${data}`;
+    return axiosApi.get(url, data);
   },
 };
 export default AuthenApi;

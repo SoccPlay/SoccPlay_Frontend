@@ -53,11 +53,11 @@ function a11yProps(index) {
 export default function FullWidthTabs({ landId }) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
-
+  const [customerId, setCustomerId] = useState();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const [error, setError] = useState();
   const [size5, setSize5] = useState({ count: 1 });
   const [size7, setSize7] = useState({ count: 1 });
 
@@ -78,36 +78,34 @@ export default function FullWidthTabs({ landId }) {
   };
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-
-  const [customerId, setCustomerId] = useState(
-    "3821B23D-0D0B-46B0-CF33-08DB9E860EBE"
-  );
   const [sizeType5, setSizeR5] = useState([5]);
   const [sizeType7, setSizeR7] = useState([7]);
-
   console.log(startTime, "date", endTime, "dateend");
-
   const [bookings, setBooking] = useState();
-  const fetchLands = async ([]) => {
+  const fetchLands = async () => {
+    setError(null);
     try {
       const response = await LandApi.GetLandById(landId);
-
+      setCustomerId(localStorage.getItem("CUSTOMERID"));
       if (response == null) {
       }
       console.log("Land ID:", [response.data]);
     } catch (error) {
       console.error("API Error:", error);
+      setError(error.response);
     }
   };
-  const handleBookingType5 = async () => {
+  const handleBookingType5 = async (customerId) => {
     const bookingData = {
       landId: landId,
-      Note: "DUY",
+      note: "DUY",
       size: sizeType5,
       starTime: [startTime],
       endTime: [endTime],
       customerId: customerId,
     };
+    setError(null);
+
     const response = await BookingApi.CreateBooking(bookingData)
       .then((response) => response.text())
       .then((data) => {
@@ -115,31 +113,36 @@ export default function FullWidthTabs({ landId }) {
         // You can handle the response here as needed
       })
       .catch((error) => {
-        console.error("Error creating booking:", error);
+        console.error("Error creating booking:", error.response.data);
+        setError(error.response.data.Messages);
       });
   };
-  const handleBookingType7 = async () => {
+  const handleBookingType7 = async (customerId) => {
     const bookingData = {
       landId: landId,
-      Note: "DUY",
+      note: "DUY",
       size: sizeType7,
       starTime: [startTime],
       endTime: [endTime],
       customerId: customerId,
     };
+    setError(null);
     const response = await BookingApi.CreateBooking(bookingData)
       .then((response) => response.text())
       .then((data) => {
         console.log("Booking response:", data);
         // You can handle the response here as needed
+        setBooking("BOOKING SUSSESSFULL");
       })
       .catch((error) => {
-        console.error("Error creating booking:", error);
+        console.error("Error creating booking:", error.response.data);
+        setError(error.response.data.Messages);
       });
   };
   useEffect(() => {
-    fetchLands([]);
-  }, []);
+    console.log(customerId);
+    fetchLands();
+  }, [customerId]);
   return (
     <Box sx={{ bgcolor: "background.paper", width: 1200 }}>
       <AppBar position="static">
@@ -190,6 +193,30 @@ export default function FullWidthTabs({ landId }) {
               />
             </div>
           </div>
+          {bookings && (
+            <Typography
+              variant="body1"
+              style={{
+                marginTop: "10px",
+                textAlign: "center",
+                color: "red",
+              }}
+            >
+              {bookings}
+            </Typography>
+          )}
+          {error && (
+            <Typography
+              variant="body1"
+              style={{
+                marginTop: "10px",
+                textAlign: "center",
+                color: "red",
+              }}
+            >
+              {error}
+            </Typography>
+          )}
           <div className="button-container">
             <Button className="button" onClick={() => handleBookingType5()}>
               BOOKING
@@ -204,9 +231,9 @@ export default function FullWidthTabs({ landId }) {
             <div className="product-color">
               <div key={size7} className="counter">
                 <div className="counter">
-                  <button onClick={() => handleDecreaseSize7(size7)}>-</button>
+                  <button onClick={() => handleDecreaseSize7(size5)}>-</button>
                   <input type="text" value={size7.count} readOnly />
-                  <button onClick={() => handleIncreaseSize7(size7)}>+</button>
+                  <button onClick={() => handleIncreaseSize7(size5)}>+</button>
                 </div>
               </div>
             </div>
@@ -229,11 +256,32 @@ export default function FullWidthTabs({ landId }) {
               />
             </div>
           </div>
-          <div className="button-container">
-            <Button
-              className="button"
-              onClick={() => handleBookingType7(size7)}
+          {bookings && (
+            <Typography
+              variant="body1"
+              style={{
+                marginTop: "10px",
+                textAlign: "center",
+                color: "red",
+              }}
             >
+              {bookings}
+            </Typography>
+          )}
+          {error && (
+            <Typography
+              variant="body1"
+              style={{
+                marginTop: "10px",
+                textAlign: "center",
+                color: "red",
+              }}
+            >
+              {error}
+            </Typography>
+          )}
+          <div className="button-container">
+            <Button className="button" onClick={() => handleBookingType7()}>
               BOOKING
             </Button>
           </div>

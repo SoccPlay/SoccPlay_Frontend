@@ -13,5 +13,9 @@ const LandApi = {
     const url = `Land/SearchLand?location=${location}&landName=${name}`;
     return axiosApi.get(url, location, name);
   },
+  GetLandByLocation(location) {
+    const url = `Land/SearchLandByLocation?location=${location}`;
+    return axiosApi.get(url, location);
+  },
 };
 export default LandApi;

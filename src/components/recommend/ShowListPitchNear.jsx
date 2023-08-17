@@ -11,7 +11,6 @@ import info2 from "../../assets/info2.png";
 import info3 from "../../assets/info3.png";
 import "./style.scss";
 import LandApi from "../Axios/LandApi";
-import CardGiftcardIcon from "@mui/icons-material/CardGiftcard";
 import { Button, Rating, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 
@@ -61,13 +60,13 @@ export default function ShowListPitchNear() {
     },
   ];
   const [apiDataAvailable, setApiDataAvailable] = useState(false);
-  const [value, setValue] = React.useState(5);
+  const [value, setValue] = useState(5);
   const [land, setLand] = useState([]);
   const navigate = useNavigate();
-
+  const [location, setLocation] = useState("Thu Duc District");
   const fetchLands = async ([]) => {
     try {
-      const response = await LandApi.GetAllLand();
+      const response = await LandApi.GetLandByLocation(location);
       if (response.data.length === 0) {
         // Check the length of the response data array
         setApiDataAvailable(false);
@@ -80,9 +79,6 @@ export default function ShowListPitchNear() {
       console.error("API Error:", error);
     }
   };
-  const sortLand = [...land]
-    .sort((a, b) => b.totalPitch - a.totalPitch)
-    .slice(0, 3);
 
   const handleClick = (street, groundName) => {
     navigate(`/list/${street}/${groundName}`);
@@ -95,45 +91,46 @@ export default function ShowListPitchNear() {
     return (
       <div className="Section" id="recommend">
         <Typography className="typography">
-          SHOW LIST PITCH NEAR YOU {"< 10 KM"}
+          SHOW LIST PITCH THU DUC DISTRICT
         </Typography>
         <div className="destinations">
-          {sortLand.map((lands) => {
-            return (
-              <div
-                className="destination"
-                key={`${lands.landId}`}
-                onClick={() => handleClick(lands.location, lands.nameLand)}
-              >
-                <img src={lands.image} alt="" />
-                <h1>{lands.nameLand}</h1>
-                <p>
-                  {lands.title.length >= 150
-                    ? `${lands.title.substring(0, 150)}...`
-                    : lands.title}
-                </p>
-                <div className="distance">
-                  <p>ToTal Pitch: {lands.totalPitch}</p>
-                  <Rating
-                    name="read-only"
-                    value={value}
-                    readOnly
-                    size="small"
-                  />
-                </div>
+          {land.slice(0, 6) &&
+            land.slice(0, 6).map((lands) => {
+              return (
+                <div
+                  className="destination"
+                  key={`${lands.landId}`}
+                  onClick={() => handleClick(lands.location, lands.nameLand)}
+                >
+                  <img src={lands.image} alt="" />
+                  <h1>{lands.nameLand}</h1>
+                  <p>
+                    {lands.title.length >= 150
+                      ? `${lands.title.substring(0, 150)}...`
+                      : lands.title}
+                  </p>
+                  <div className="distance">
+                    <p>ToTal Pitch: {lands.totalPitch}</p>
+                    <Rating
+                      name="read-only"
+                      value={value}
+                      readOnly
+                      size="small"
+                    />
+                  </div>
 
-                <div className="info">
-                  <p>Price</p>
-                  <b>
-                    {lands.minPrice} VND - {lands.maxPrice} VND / Trận
-                  </b>
+                  <div className="info">
+                    <p>Price</p>
+                    <b>
+                      {lands.minPrice} VND - {lands.maxPrice} VND / Trận
+                    </b>
+                  </div>
+                  <div className="distance">
+                    <span>{lands.location}</span>
+                  </div>
                 </div>
-                <div className="distance">
-                  <span>{lands.location}</span>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     );

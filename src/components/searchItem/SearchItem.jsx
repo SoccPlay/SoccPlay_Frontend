@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./searchItem.css";
 import LandApi from "../Axios/LandApi";
-import San1 from "../../assets/San1.jpg";
-import San2 from "../../assets/San2.jpg";
-import San3 from "../../assets/San3.jpg";
-import San4 from "../../assets/San4.jpg";
-import San5 from "../../assets/San5.jpg";
-import San6 from "../../assets/San6.jpg";
 import { useNavigate } from "react-router-dom";
 
 const SearchItem = ({ landId }) => {
@@ -61,11 +55,11 @@ const SearchItem = ({ landId }) => {
               <div className="siDetails">
                 <div className="siRating">
                   <span>Distance</span>
-                  <button>1,3km</button>
+                  <button>1.3km{lands.km}</button>
                 </div>
                 <div className="siRating">
                   <span>Rating</span>
-                  <button>4.7</button>
+                  <button>{lands.averageRate}</button>
                 </div>
                 <div className="siDetailTexts">
                   <span className="siPrice">

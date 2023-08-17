@@ -14,7 +14,7 @@
   align-items: center;
 }
 .main-image img {
-  width: 100%;
+  width: 711.11px;
   max-height: 400px;
   object-fit: cover;
   border-radius: 10px;
@@ -23,12 +23,14 @@
   display: flex;
   gap: 10px;
   margin-top: 10px;
+  justify-content: center; /* Đây là phần thêm vào để căn giữa */
 }
 .sub-images img {
   width: calc(25% - 10px);
   max-height: 120px;
   object-fit: cover;
   border-radius: 8px;
+  justify-content: center; /* Đây là phần thêm vào để căn giữa */
 }
 
 .tab {
