@@ -5,18 +5,19 @@ import Hero from "../../components/hero/Hero";
 import ShowListPitchNear from "../../components/recommend/ShowListPitchNear";
 import Footer from "../../components/footer/Footer";
 import ShowListNewPitch from "../../components/recommend/ShowListNewPitch";
+import Scheduler from "../../components/scheduler/Scheduler";
 
 const Homepage = () => {
-  return (
-    <div>
-      <ScrollToTop />
-      <Navbar />
-      <Hero />
-      <ShowListPitchNear />
-      <ShowListNewPitch/>
-      <Footer />
-    </div>
-  );
+    return (
+        <div>
+            <ScrollToTop />
+            <Navbar />
+            <Hero />
+            <ShowListPitchNear />
+            <ShowListNewPitch />
+            <Footer />
+        </div>
+    );
 };
 
 export default Homepage;

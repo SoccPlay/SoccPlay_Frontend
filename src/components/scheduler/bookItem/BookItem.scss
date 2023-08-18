@@ -1,0 +1,39 @@
+.scheduler {
+    background-color: rgb(255, 255, 255);
+    padding: 50px 20px;
+    border-radius: 20px;
+    position: relative;
+    border: 2px dotted black;
+    .item {
+        font-size: medium;
+        font-weight: bold;
+        padding:0px 10px;
+    }
+    .arrow  {
+        width: 18%;
+        
+    }
+    
+    .confirm {
+        position: absolute;
+        left: 35%;
+        top: 65%;
+        transform: translateY(-50%);
+        width: 30%;
+    }
+    .desc {
+        font-size: 14px;
+        
+        position: absolute;
+        left: 12%;
+        top: 40%;
+        transform: translateY(-50%);
+    }
+    
+}
+
+
+
+
+
+
