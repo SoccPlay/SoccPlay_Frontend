@@ -15,7 +15,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import "../detail/tabs.css";
 import BookingApi from "../../components/Axios/BookingApi";
 import LandApi from "../../components/Axios/LandApi";
-import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -60,7 +60,7 @@ export default function FullWidthTabs({ landId }) {
   const [error, setError] = useState();
   const [size5, setSize5] = useState({ count: 1 });
   const [size7, setSize7] = useState({ count: 1 });
-
+  const navigate = useNavigate();
   const handleIncreaseSize5 = (id) => {
     setSize5({ ...size5, count: size5.count + 1 });
   };
@@ -96,6 +96,10 @@ export default function FullWidthTabs({ landId }) {
     }
   };
   const handleBookingType5 = async (customerId) => {
+    if (!customerId) {
+      navigate("/signin");
+      return;
+    }
     const bookingData = {
       landId: landId,
       note: "DUY",
@@ -118,6 +122,10 @@ export default function FullWidthTabs({ landId }) {
       });
   };
   const handleBookingType7 = async (customerId) => {
+    if (!customerId) {
+      navigate("/signin");
+      return;
+    }
     const bookingData = {
       landId: landId,
       note: "DUY",

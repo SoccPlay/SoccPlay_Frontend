@@ -9,12 +9,7 @@ import { Icon } from "@mui/material";
 import FullWidthTabs from "./Tabs";
 import LandApi from "../../components/Axios/LandApi";
 export default function Detail() {
-  const [selectedStartDate, setSelectedStartDate] = useState();
-  const [selectedEndDate, setSelectedEndDate] = useState();
   const { landId } = useParams();
-  const handleSearch = () => {
-    console.log(selectedStartDate, selectedEndDate);
-  };
   const [land, setLand] = useState();
   const [selectedImage, setSelectedImage] = useState("");
   const fetchLands = async ([]) => {
