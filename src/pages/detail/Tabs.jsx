@@ -118,7 +118,7 @@ export default function FullWidthTabs({ landId }) {
   //   console.log("StartTime:", time[selectedHours.hourFrom]);
   //   console.log("EndTime:", time[selectedHours.hourTo]);
 
-  const [bookings, setBooking] = useState([]);
+  const [sussess, setSussess] = useState([]);
   const fetchLands = async () => {
     setError(null);
     try {
@@ -157,7 +157,7 @@ export default function FullWidthTabs({ landId }) {
     try {
       const response = await BookingApi.CreateBooking(bookingData);
       console.log("Booking response:", response);
-      setBooking("BOOKING SUSSESSFULL");
+      setSussess("BOOKING SUSSESSFULL");
     } catch (error) {
       console.error("Error creating booking:", error.response.data.Messages);
       setError(error.response.data.Messages);
@@ -300,7 +300,7 @@ export default function FullWidthTabs({ landId }) {
               </div>
             </div>
           </div>
-          {bookings && (
+          {sussess && (
             <Typography
               variant="body1"
               style={{
@@ -309,7 +309,7 @@ export default function FullWidthTabs({ landId }) {
                 color: "red",
               }}
             >
-              {bookings}
+              {sussess}
             </Typography>
           )}
           {error && (

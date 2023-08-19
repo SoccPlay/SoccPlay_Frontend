@@ -9,7 +9,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import BookItem from "./bookItem/BookItem";
 import * as SchedulerApi from "../Axios/Scheduler";
-
 function createData(hour, size1, size2, size3) {
   return { hour, size1, size2, size3 };
 }
@@ -49,6 +48,10 @@ const TIME = [
 ];
 const boldTextStyle = {
   fontWeight: "bold",
+  background: "rgb(145 254 159 / 47%)",
+  color: "green",
+  padding: "8px",
+  borderRadius: "9px",
 };
 const rows = [createData(TIME[0], <BookItem />, <BookItem />, <BookItem />)];
 
@@ -104,12 +107,17 @@ export default function Scheduler({ data }) {
                       }}
                     >
                       <TableCell component="th" scope="row">
-                        {/* {row.starTime} */}
-                        Đã Booking
-                      </TableCell>
-                      <TableCell component="th" scope="row">
                         <TableRow align="center">{row.starTime}</TableRow>
                         <TableRow align="center">{row.endTime}</TableRow>
+                      </TableCell>
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        style={boldTextStyle}
+                        className="status"
+                      >
+                        {/* {row.starTime} */}
+                        Đã Booking
                       </TableCell>
                     </TableRow>
                   ))}
