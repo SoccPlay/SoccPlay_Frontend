@@ -7,7 +7,6 @@ const SearchItem = ({ landId }) => {
   const [land, setLand] = useState();
   const [apiDataAvailable, setApiDataAvailable] = useState(false);
 
-  console.log(land);
   const fetchLands = async ([]) => {
     try {
       const response = await LandApi.GetLandById(landId);
