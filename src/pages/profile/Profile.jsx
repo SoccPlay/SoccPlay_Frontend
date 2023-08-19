@@ -84,10 +84,10 @@ export default function Profile({ onClosed }) {
                             </ContentContainer>
                         </TabPanel>
                         <TabPanel value={1} sx={{ padding: "0px 20px 0 50px" }}>
-                            <CustomizedTables />
+                            <CustomizedTables onClosed={onClosed} />
                         </TabPanel>
                         <TabPanel value={2} sx={{ padding: "0px 20px 0 50px" }}>
-                            <ChangePassword />
+                            <ChangePassword onClosed={onClosed} />
                         </TabPanel>
                     </Tabs>
                 </Grid>

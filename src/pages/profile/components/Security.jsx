@@ -9,7 +9,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Button from "@mui/material/Button";
 import { Container, Typography } from "@mui/material";
 
-export default function ChangePassword() {
+export default function ChangePassword({ onClosed }) {
     const [showPassword, setShowPassword] = useState(false);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -129,6 +129,22 @@ export default function ChangePassword() {
                 sx={{ mt: 2 }}
             >
                 Save
+            </Button>
+            <Button
+                variant="contained"
+                sx={{
+                    background: "transparent",
+                    color: "#1976d2",
+                    border: "1px solid #1976d2",
+                    "&:hover": {
+                        color: "#FFF",
+                    },
+                    marginTop: "19px",
+                    marginLeft: "20px",
+                }}
+                onClick={onClosed}
+            >
+                Đóng
             </Button>
         </Container>
     );
