@@ -10,61 +10,64 @@ import Paper from "@mui/material/Paper";
 import BookItem from "./bookItem/BookItem";
 import * as SchedulerApi from "../Axios/Scheduler";
 
-function createData(hour, size1, size2, size3) {
-    return { hour, size1, size2, size3 };
+function createData(hour, dataArr) {
+    return { hour, data: dataArr };
 }
 
 const TIME = [
-    "7:00",
-    "7:30",
-    "8:00",
-    "8:30",
-    "9:00",
-    "9:30",
-    "10:00",
-    "10:30",
-    "11:00",
-    "11:30",
-    "12:00",
-    "12:30",
-    "13:00",
-    "13:30",
-    "14:00",
-    "14:30",
-    "15:00",
-    "15:30",
-    "16:00",
-    "16:30",
-    "17:00",
-    "17:30",
-    "18:00",
-    "18:30",
-    "19:00",
-    "19:30",
-    "20:00",
-    "20:30",
-    "21:00",
-    "21:30",
-    "22:00",
+    "07:00:00",
+    "07:30:00",
+    "08:00:00",
+    "08:30:00",
+    "09:00:00",
+    "09:30:00",
+    "10:00:00",
+    "10:30:00",
+    "11:00:00",
+    "11:30:00",
+    "12:00:00",
+    "12:30:00",
+    "13:00:00",
+    "13:30:00",
+    "14:00:00",
+    "14:30:00",
+    "15:00:00",
+    "15:30:00",
+    "16:00:00",
+    "16:30:00",
+    "17:00:00",
+    "17:30:00",
+    "18:00:00",
+    "18:30:00",
+    "19:00:00",
+    "19:30:00",
+    "20:00:00",
+    "20:30:00",
+    "21:00:00",
+    "21:30:00",
+    "22:00:00",
 ];
-
-const rows = [createData(TIME[0], <BookItem />, <BookItem />, <BookItem />)];
 
 export default function Scheduler({ data }) {
     const [schedule, setSchedule] = useState([]);
+    const renderScheduler = (TIME) => {
+        const result = [];
+        for (let i = 0; i < TIME.length; i++) {
+            const dataArr = [];
+            for (let j = 0; j < schedule.length; j++) {
+                const schedules = schedule[j].schedules;
 
-    const pushRowsData = (data) => {
-        //get array schedules
-        const arraySchedule = schedule.map((item) => item.schedules);
-        //if array schedules have the same starTime, return array time
-        const arrayStartTime = arraySchedule.filter((item) => item.starTime);
-        //if array schedules have the same endTime, return array time
-        const arrayEndTime = arraySchedule.filter((item) => item.endTime);
-        //if array schedules have the same pitchId, return array time
-        const arrayPitchId = arraySchedule.filter((item) => item.pitchId);
-        
+                if (schedules.starTime === TIME[i]) {
+                    dataArr.push(schedule[j]);
+                }
+            }
+            result.push(createData(TIME[i], dataArr));
+        }
+        return result;
     };
 
+    const result = renderScheduler(TIME);
+    console.log("result", schedule);
     useEffect(() => {
         const fetchSchedule = async () => {
             const response = await SchedulerApi.getScheduler(
@@ -76,7 +79,6 @@ export default function Scheduler({ data }) {
         };
         fetchSchedule();
     }, [data]);
-    console.log(schedule);
 
     return (
         <TableContainer component={Paper}>
@@ -94,9 +96,9 @@ export default function Scheduler({ data }) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {rows.map((row) => (
+                                    {result.map((result) => (
                                         <TableRow
-                                            key={row.name}
+                                            key={result.name}
                                             sx={{
                                                 "&:last-child td, &:last-child th":
                                                     {
@@ -108,16 +110,14 @@ export default function Scheduler({ data }) {
                                                 component="th"
                                                 scope="row"
                                             >
-                                                {row.hour}
+                                                {result.hour.slice(0, 5)}
                                             </TableCell>
                                             <TableCell align="center">
-                                                {row.size1}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                {row.size2}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                {row.size3}
+                                                {result.data.length > 0 ? (
+                                                    <BookItem />
+                                                ) : (
+                                                    <p>chưa ai đặt</p>
+                                                )}
                                             </TableCell>
                                         </TableRow>
                                     ))}
