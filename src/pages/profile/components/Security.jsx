@@ -30,12 +30,13 @@ export default function ChangePassword() {
     };
 
     return (
-        <Container sx={{ width: 400 }}>
+        <Container sx={{ width: 400, height: 750 }}>
             <Typography
                 fontSize={"30px"}
                 fontWeight={"bold"}
                 color={"black"}
                 left={10}
+                marginTop={2.5}
             >
                 Thay đổi mật khẩu
             </Typography>
