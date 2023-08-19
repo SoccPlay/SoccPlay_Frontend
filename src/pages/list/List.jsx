@@ -40,7 +40,23 @@ const List = () => {
     const sortLand = [...land].sort((a, b) => b.totalPitch - a.totalPitch);
     const _Data = sortLand.slice((page - 1) * PER_PAGE, page * PER_PAGE);
     const [range, setRange] = useState([0, 100]);
-
+    const [district, setDistrict] = useState("");
+    const districtArr = [
+        "Thủ Đức",
+        "quận 1",
+        "quận 3",
+        "quận 4",
+        "quận 5",
+        "quận 6",
+        "quận 7",
+        "quận 8",
+        "quận 10",
+        "quận 11",
+        "quận 12",
+        "quận Tân Bình",
+        "quận Bình Thạnh",
+        "quận Gò Vấp",
+    ];
     const formatPrice = (price) => {
         price = price * 3000;
         return price.toLocaleString("it-IT", {
@@ -77,10 +93,19 @@ const List = () => {
         setPage(newPage);
     };
 
+    const handleDistrictChange = (event) => {
+        setDistrict(event.target.value);
+    };
+
     return (
         <div>
             <Navbar />
-            <Grid className="main" container spacing={2}>
+            <Grid
+                className="main"
+                style={{ paddingBottom: "70px" }}
+                container
+                spacing={2}
+            >
                 <Grid className="column-left" xs={2.5}>
                     <h1 className="title-left">Filters</h1>
                     <div className="ground-type">
@@ -92,14 +117,17 @@ const List = () => {
                                 Location
                             </InputLabel>
                             <NativeSelect
-                                defaultValue={10}
+                                aria-label="Select quận"
                                 inputProps={{
                                     name: "age",
                                     id: "uncontrolled-native",
                                 }}
                                 sx={{ width: 250 }}
+                                onChange={handleDistrictChange}
                             >
-                                <option value={1}>district 1</option>
+                                {districtArr.map((district) => (
+                                    <option value={district}>{district}</option>
+                                ))}
                             </NativeSelect>
                         </FormControl>
                         <h1 className="coll text">

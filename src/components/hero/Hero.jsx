@@ -6,7 +6,6 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 export default function Hero() {
     const street = [
-        { value: "District", label: "District" },
         { value: "Thu Duc District", label: "Thu Duc" },
         { value: "District 1, HCMC", label: "District 1" },
         { value: "District 2, HCMC", label: "District 2" },
@@ -31,7 +30,6 @@ export default function Hero() {
     const handleSearch = async () => {
         if (selectedStreet) {
             nagative(`/list/${selectedStreet}/${groundName}`);
-            console.log(selectedStreet, groundName);
         }
     };
     return (

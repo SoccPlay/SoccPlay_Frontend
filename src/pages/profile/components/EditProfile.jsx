@@ -11,10 +11,15 @@ import React from "react";
 
 export const EditProfile = ({ onClosed }) => {
     return (
-        <Grid item container xs={12} sx={{ padding: "80px 400px 0 130px" }}>
+        <Grid
+            item
+            container
+            xs={12}
+            sx={{ padding: "0px 20px 0 50px", width: 1000 }}
+        >
             <Grid item xs={12}>
                 <Typography
-                    fontSize={"45px"}
+                    fontSize={"30px"}
                     fontWeight={"bold"}
                     color={"black"}
                 >
@@ -30,7 +35,7 @@ export const EditProfile = ({ onClosed }) => {
             >
                 <Grid item xs={5.5}>
                     <Grid item xs={12} mb={"8px"}>
-                        <TitleTextField fontSize={"26px"}>
+                        <TitleTextField fontSize={"23px"}>
                             First Name
                         </TitleTextField>
                     </Grid>
@@ -45,7 +50,7 @@ export const EditProfile = ({ onClosed }) => {
                 </Grid>
                 <Grid item xs={5.5}>
                     <Grid item xs={12} mb={"8px"}>
-                        <TitleTextField fontSize={"26px"}>
+                        <TitleTextField fontSize={"23px"}>
                             Last Name
                         </TitleTextField>
                     </Grid>
@@ -68,7 +73,7 @@ export const EditProfile = ({ onClosed }) => {
             >
                 <Grid item xs={12}>
                     <Grid item xs={12} mb={"8px"}>
-                        <TitleTextField fontSize={"26px"}>Email</TitleTextField>
+                        <TitleTextField fontSize={"23px"}>Email</TitleTextField>
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
@@ -89,7 +94,7 @@ export const EditProfile = ({ onClosed }) => {
             >
                 <Grid item xs={12}>
                     <Grid item xs={12} mb={"8px"}>
-                        <TitleTextField fontSize={"26px"}>
+                        <TitleTextField fontSize={"23px"}>
                             Address
                         </TitleTextField>
                     </Grid>
@@ -112,7 +117,7 @@ export const EditProfile = ({ onClosed }) => {
             >
                 <Grid item xs={12}>
                     <Grid item xs={12} mb={"8px"}>
-                        <TitleTextField fontSize={"26px"}>
+                        <TitleTextField fontSize={"23px"}>
                             Contact Number
                         </TitleTextField>
                     </Grid>
@@ -135,7 +140,7 @@ export const EditProfile = ({ onClosed }) => {
             >
                 <Grid item xs={5.5}>
                     <Grid item xs={12} mb={"8px"}>
-                        <TitleTextField fontSize={"26px"}>City</TitleTextField>
+                        <TitleTextField fontSize={"23px"}>City</TitleTextField>
                     </Grid>
                     <Grid item xs={12}>
                         <Select
@@ -154,7 +159,7 @@ export const EditProfile = ({ onClosed }) => {
                 </Grid>
                 <Grid item xs={5.5}>
                     <Grid item xs={12} mb={"8px"}>
-                        <TitleTextField fontSize={"26px"}>State</TitleTextField>
+                        <TitleTextField fontSize={"23px"}>State</TitleTextField>
                     </Grid>
                     <Grid item xs={12}>
                         <Select

@@ -75,5 +75,5 @@ export const SideBar = () => {
 
 const Container = styled(Grid)({
     background: "#1976d2",
-    height: "115vh",
+    height: "auto",
 });
