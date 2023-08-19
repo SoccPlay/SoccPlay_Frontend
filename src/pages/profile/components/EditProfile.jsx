@@ -11,16 +11,21 @@ import React from "react";
 
 export const EditProfile = ({ onClosed }) => {
   return (
-    <Grid item container xs={12} sx={{ padding: "80px 400px 0 130px" }}>
+    <Grid
+      item
+      container
+      xs={12}
+      sx={{ padding: "0px 20px 0 50px", width: 1000 }}
+    >
       <Grid item xs={12}>
-        <Typography fontSize={"45px"} fontWeight={"bold"} color={"black"}>
+        <Typography fontSize={"30px"} fontWeight={"bold"} color={"black"}>
           Edit Profile
         </Typography>
       </Grid>
       <Grid item container justifyContent={"space-between"} xs={12} mt={"40px"}>
         <Grid item xs={5.5}>
           <Grid item xs={12} mb={"8px"}>
-            <TitleTextField fontSize={"26px"}>First Name</TitleTextField>
+            <TitleTextField fontSize={"23px"}>First Name</TitleTextField>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -33,7 +38,7 @@ export const EditProfile = ({ onClosed }) => {
         </Grid>
         <Grid item xs={5.5}>
           <Grid item xs={12} mb={"8px"}>
-            <TitleTextField fontSize={"26px"}>Last Name</TitleTextField>
+            <TitleTextField fontSize={"23px"}>Last Name</TitleTextField>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -48,7 +53,7 @@ export const EditProfile = ({ onClosed }) => {
       <Grid item container justifyContent={"space-between"} xs={12} mt={"10px"}>
         <Grid item xs={12}>
           <Grid item xs={12} mb={"8px"}>
-            <TitleTextField fontSize={"26px"}>Email</TitleTextField>
+            <TitleTextField fontSize={"23px"}>Email</TitleTextField>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -63,7 +68,7 @@ export const EditProfile = ({ onClosed }) => {
       <Grid item container justifyContent={"space-between"} xs={12} mt={"10px"}>
         <Grid item xs={12}>
           <Grid item xs={12} mb={"8px"}>
-            <TitleTextField fontSize={"26px"}>Address</TitleTextField>
+            <TitleTextField fontSize={"23px"}>Address</TitleTextField>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -78,7 +83,7 @@ export const EditProfile = ({ onClosed }) => {
       <Grid item container justifyContent={"space-between"} xs={12} mt={"10px"}>
         <Grid item xs={12}>
           <Grid item xs={12} mb={"8px"}>
-            <TitleTextField fontSize={"26px"}>Contact Number</TitleTextField>
+            <TitleTextField fontSize={"23px"}>Contact Number</TitleTextField>
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -93,7 +98,7 @@ export const EditProfile = ({ onClosed }) => {
       <Grid item container justifyContent={"space-between"} xs={12} mt={"10px"}>
         <Grid item xs={5.5}>
           <Grid item xs={12} mb={"8px"}>
-            <TitleTextField fontSize={"26px"}>City</TitleTextField>
+            <TitleTextField fontSize={"23px"}>City</TitleTextField>
           </Grid>
           <Grid item xs={12}>
             <Select fullWidth name="city" type="select" value={"default"}>
@@ -105,7 +110,7 @@ export const EditProfile = ({ onClosed }) => {
         </Grid>
         <Grid item xs={5.5}>
           <Grid item xs={12} mb={"8px"}>
-            <TitleTextField fontSize={"26px"}>State</TitleTextField>
+            <TitleTextField fontSize={"23px"}>State</TitleTextField>
           </Grid>
           <Grid item xs={12}>
             <Select fullWidth name="state" type="select" value={"default"}>
