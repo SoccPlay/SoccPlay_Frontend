@@ -8,14 +8,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import WifiIcon from "@mui/icons-material/Wifi";
-import {
-  Icon,
-  Button,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
+import { Icon, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import MicrowaveIcon from "@mui/icons-material/Microwave";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
@@ -154,15 +147,15 @@ export default function FullWidthTabs({ landId }) {
 
     const bookingData = {
       landId: landId,
-      note: "DUY",
-      size: size,
+      Note: "DUY",
+      Size: size,
       starTime: start,
       endTime: end,
       customerId: customerId,
     };
     setError(null);
     try {
-      const response = await BookingApi.CreateBooking({ bookingData });
+      const response = await BookingApi.CreateBooking(bookingData);
       console.log("Booking response:", response);
       setBooking("BOOKING SUSSESSFULL");
     } catch (error) {
