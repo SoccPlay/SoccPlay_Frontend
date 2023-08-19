@@ -15,7 +15,6 @@ const Homepage = () => {
             <ScrollToTop />
             <Navbar />
             <Hero />
-            <ShowListPitchNear />
             <ShowListNewPitch />
             <Footer />
         </div>

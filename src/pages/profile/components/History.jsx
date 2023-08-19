@@ -43,7 +43,7 @@ const rows = [
 
 export default function CustomizedTables() {
     return (
-        <TableContainer component={Paper}>
+        <TableContainer style={{ height: "100vh" }} component={Paper}>
             <Typography
                 fontSize={"30px"}
                 fontWeight={"bold"}
