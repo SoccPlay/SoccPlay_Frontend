@@ -36,6 +36,7 @@ export default function ChangePassword() {
                 fontWeight={"bold"}
                 color={"black"}
                 left={10}
+                marginTop={2.5}
             >
                 Thay đổi mật khẩu
             </Typography>

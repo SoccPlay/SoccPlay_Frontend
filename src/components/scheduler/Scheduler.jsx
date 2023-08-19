@@ -23,12 +23,6 @@ const TIME = [
     "09:30:00",
     "10:00:00",
     "10:30:00",
-    "11:00:00",
-    "11:30:00",
-    "12:00:00",
-    "12:30:00",
-    "13:00:00",
-    "13:30:00",
     "14:00:00",
     "14:30:00",
     "15:00:00",
@@ -50,6 +44,7 @@ const TIME = [
 
 export default function Scheduler({ data }) {
     const [schedules, setSchedule] = useState([]);
+
     useEffect(() => {
         const fetchSchedule = async () => {
             const response = await SchedulerApi.getScheduler(
@@ -76,20 +71,39 @@ export default function Scheduler({ data }) {
                             ))}
                     </TableRow>
                 </TableHead>
-
                 {TIME.map((time) => (
                     <TableRow key={time}>
                         <TableCell>{time}</TableCell>
                         {schedules &&
                             schedules.map((item) => {
-                                const schedule = item.schedules.find(
-                                    (schedule) => schedule.starTime === time
-                                );
+                                // const schedule = item.schedules.find(
+                                //   (schedule) => schedule.starTime === time
+                                // );
+                                // return (
+                                // <TableCell key={item.pitchId}>
+                                //   {schedule
+                                //     ? `${schedule.starTime} - ${schedule.endTime}`
+                                //     : "-"}
+                                // </TableCell>
+                                // );
+                                let isBooked = false;
+
+                                item.schedules.forEach((schedule) => {
+                                    const startTime = schedule.starTime;
+                                    const endTime = schedule.endTime;
+                                    if (time >= startTime && time <= endTime) {
+                                        isBooked = true;
+                                    }
+                                });
                                 return (
                                     <TableCell key={item.pitchId}>
-                                        {schedule
-                                            ? `${schedule.starTime} - ${schedule.endTime}`
-                                            : "-"}
+                                        {isBooked ? (
+                                            <span style={{ color: "red" }}>
+                                                {BookItem()}
+                                            </span>
+                                        ) : (
+                                            "-"
+                                        )}
                                     </TableCell>
                                 );
                             })}

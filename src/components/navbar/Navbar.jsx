@@ -94,7 +94,7 @@ export default function Navbar() {
                         </a>
                     </li>
                     <li>
-                        <a href="/" className="largeText">
+                        <a href="/#" className="largeText">
                             About
                         </a>
                     </li>

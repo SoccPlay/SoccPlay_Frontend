@@ -7,11 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#1976d2",
         color: theme.palette.common.white,
     },
     [`&.${tableCellClasses.body}`]: {
@@ -49,6 +49,7 @@ export default function CustomizedTables() {
                 fontWeight={"bold"}
                 color={"black"}
                 marginLeft={2.5}
+                marginTop={2.5}
             >
                 Lịch sử đặt sân
             </Typography>
@@ -62,7 +63,7 @@ export default function CustomizedTables() {
                         <StyledTableCell align="right">Date</StyledTableCell>
                         <StyledTableCell align="right">Size</StyledTableCell>
                         <StyledTableCell align="right">Price</StyledTableCell>
-                        <StyledTableCell align="right">Total</StyledTableCell>
+                        <StyledTableCell align="right">Cancel</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -81,7 +82,9 @@ export default function CustomizedTables() {
                                 {row.carbs}
                             </StyledTableCell>
                             <StyledTableCell align="right">
-                                {row.protein}
+                                <Button variant="outlined" color="error">
+                                    Cancel
+                                </Button>
                             </StyledTableCell>
                         </StyledTableRow>
                     ))}
