@@ -57,6 +57,8 @@ export default function Scheduler({ data }) {
         fetchSchedule();
     }, [data]);
 
+    console.log(schedules);
+
     return (
         <TableContainer component={Paper}>
             <Table>

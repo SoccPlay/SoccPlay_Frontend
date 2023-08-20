@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 // import SwipeableViews from "react-swipeable-views";
 import { useTheme } from "@mui/material/styles";
@@ -8,7 +8,14 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import WifiIcon from "@mui/icons-material/Wifi";
-import { Icon, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+    Icon,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
+    Snackbar,
+} from "@mui/material";
 import MicrowaveIcon from "@mui/icons-material/Microwave";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
@@ -23,6 +30,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { time } from "./TimeConstant";
 import dayjs from "dayjs";
 import Popup from "./Popup";
+import { styled } from "styled-components";
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -47,6 +55,20 @@ TabPanel.propTypes = {
     index: PropTypes.number.isRequired,
     value: PropTypes.number.isRequired,
 };
+
+const CustomSnackbarSuccess = styled(Snackbar)(({ theme }) => ({
+    "& .MuiSnackbarContent-root": {
+        backgroundColor: "#4CAF50",
+        color: "white",
+    },
+}));
+
+const CustomSnackbarError = styled(Snackbar)(({ theme }) => ({
+    "& .MuiSnackbarContent-root": {
+        backgroundColor: "#F44336",
+        color: "white",
+    },
+}));
 
 function a11yProps(index) {
     return {
@@ -122,6 +144,8 @@ export default function FullWidthTabs({ landId }) {
     //   console.log("EndTime:", time[selectedHours.hourTo]);
 
     const [sussess, setSussess] = useState([]);
+    const [successSnackbarOpen, setSuccessSnackbarOpen] = useState(false);
+    const [errorSnackbarOpen, setErrorSnackbarOpen] = useState(false);
     const fetchLands = async () => {
         setError(null);
         try {
@@ -160,14 +184,19 @@ export default function FullWidthTabs({ landId }) {
         try {
             const response = await BookingApi.CreateBooking(bookingData);
             console.log("Booking response:", response);
-            setSussess("BOOKING SUSSESSFULL");
+            setSuccessSnackbarOpen(true);
         } catch (error) {
             console.error(
                 "Error creating booking:",
                 error.response.data.Messages
             );
-            setError(error.response.data.Messages);
+            setErrorSnackbarOpen(true);
         }
+    };
+
+    const handleCloseSnackbar = () => {
+        setSuccessSnackbarOpen(false);
+        setErrorSnackbarOpen(false);
     };
 
     useEffect(() => {
@@ -323,29 +352,29 @@ export default function FullWidthTabs({ landId }) {
                             </div>
                         </div>
                     </div>
-                    {sussess && (
-                        <Typography
-                            variant="body1"
-                            style={{
-                                marginTop: "10px",
-                                textAlign: "center",
-                                color: "red",
+                    {successSnackbarOpen && (
+                        <CustomSnackbarSuccess
+                            open={successSnackbarOpen}
+                            autoHideDuration={3000}
+                            onClose={handleCloseSnackbar}
+                            message="Đặt sân thành công!"
+                            anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
                             }}
-                        >
-                            {sussess}
-                        </Typography>
+                        />
                     )}
-                    {error && (
-                        <Typography
-                            variant="body1"
-                            style={{
-                                marginTop: "10px",
-                                textAlign: "center",
-                                color: "red",
+                    {errorSnackbarOpen && (
+                        <CustomSnackbarError
+                            open={errorSnackbarOpen}
+                            autoHideDuration={3000}
+                            onClose={handleCloseSnackbar}
+                            message="Sân đã được đặt, vui lòng đặt lại."
+                            anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
                             }}
-                        >
-                            {error}
-                        </Typography>
+                        />
                     )}
                     <div className="button-booking">
                         <button

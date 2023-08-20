@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import SearchItem from "../../components/searchItem/SearchItem";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { useLocation, useParams } from "react-router-dom";
 
 import "./list.css";
-import San1 from "../../assets/San1.jpg";
-import San2 from "../../assets/San2.jpg";
-import San3 from "../../assets/San3.jpg";
-import San4 from "../../assets/San4.jpg";
-import San5 from "../../assets/San5.jpg";
-import San6 from "../../assets/San6.jpg";
 import LandApi from "../../components/Axios/LandApi";
 import usePagination from "../../Pagination/Pagination";
 import {
@@ -40,6 +34,7 @@ const List = () => {
     const sortLand = [...land].sort((a, b) => b.totalPitch - a.totalPitch);
     const _Data = sortLand.slice((page - 1) * PER_PAGE, page * PER_PAGE);
     const [range, setRange] = useState([0, 100]);
+    const [size, setSize] = useState([]);
 
     const formatPrice = (price) => {
         price = price * 3000;
@@ -50,6 +45,7 @@ const List = () => {
     };
     function handleChanges(event, newValue) {
         setRange(newValue);
+        console.log(range);
     }
     useEffect(() => {
         fetchLands([]);
@@ -73,9 +69,7 @@ const List = () => {
         }
     };
 
-    const handlePageChange = (event, newPage) => {
-        setPage(newPage);
-    };
+    // /api/Land/Filter
 
     return (
         <div>
@@ -92,7 +86,7 @@ const List = () => {
                                 Location
                             </InputLabel>
                             <NativeSelect
-                                defaultValue={10}
+                                defaultValue={1}
                                 inputProps={{
                                     name: "age",
                                     id: "uncontrolled-native",
@@ -100,6 +94,7 @@ const List = () => {
                                 sx={{ width: 250 }}
                             >
                                 <option value={1}>district 1</option>
+                                <option value={2}>district 2</option>
                             </NativeSelect>
                         </FormControl>
                         <h1 className="coll text">
@@ -120,6 +115,7 @@ const List = () => {
                                     type="checkbox"
                                     id="checkbox-size-5"
                                     name="check"
+                                    value={5}
                                 />
                                 <label for="checkbox-size-5">Size 5</label>
                             </div>
@@ -130,6 +126,7 @@ const List = () => {
                                     type="checkbox"
                                     id="checkbox-size-7"
                                     name="check"
+                                    value={7}
                                 />
                                 <label for="checkbox-size-7">Size 7</label>
                             </div>

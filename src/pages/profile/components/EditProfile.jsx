@@ -1,7 +1,43 @@
 import { Grid, TextField, Typography, Button, styled } from "@mui/material";
-import React from "react";
+import { useEffect, useState } from "react";
+import * as CustomerApi from "../../../components/Axios/CustomerApi";
 
 export const EditProfile = ({ onClosed }) => {
+    const [profile, setProfile] = useState([]);
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        address: "",
+        phone: "",
+    });
+
+    const { fullName, email, address, phone } = formData;
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        await CustomerApi.updateProfile(
+            localStorage.getItem("ACCOUNTID"),
+            fullName,
+            email,
+            address,
+            phone
+        );
+    };
+
+    useEffect(() => {
+        const fetchProfile = async () => {
+            const response = await CustomerApi.getProfile(
+                localStorage.getItem("ACCOUNTID")
+            );
+            setProfile(response);
+        };
+        fetchProfile();
+    }, []);
+
     return (
         <Grid
             item
@@ -15,7 +51,7 @@ export const EditProfile = ({ onClosed }) => {
                     fontWeight={"bold"}
                     color={"black"}
                 >
-                    Edit Profile
+                    Cập nhật thông tin cá nhân
                 </Typography>
             </Grid>
             <Grid
@@ -32,7 +68,13 @@ export const EditProfile = ({ onClosed }) => {
                         </TitleTextField>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField fullWidth name="first_name" type="text" />
+                        <TextField
+                            defaultValue={profile.fullName}
+                            fullWidth
+                            name="fullName"
+                            type="text"
+                            onChange={(e) => handleChange(e)}
+                        />
                     </Grid>
                 </Grid>
             </Grid>
@@ -49,10 +91,12 @@ export const EditProfile = ({ onClosed }) => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            value={profile.email}
                             fullWidth
                             name="email"
                             type="email"
                             placeholder="example@gmail.com"
+                            onChange={(e) => handleChange(e)}
                         />
                     </Grid>
                 </Grid>
@@ -72,10 +116,12 @@ export const EditProfile = ({ onClosed }) => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            defaultValue={profile.address}
                             fullWidth
                             name="address"
                             type="text"
-                            placeholder="123/44 Điện Biên Phủ, Bình Thạnh, HCM"
+                            placeholder="Số nhà, đường, phường, quận, thành phố"
+                            onChange={(e) => handleChange(e)}
                         />
                     </Grid>
                 </Grid>
@@ -95,10 +141,12 @@ export const EditProfile = ({ onClosed }) => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
+                            defaultValue={profile.phone}
                             fullWidth
-                            name="contact_number"
+                            name="phone"
                             type="text"
                             placeholder="0123-456-789"
+                            onChange={(e) => handleChange(e)}
                         />
                     </Grid>
                 </Grid>
@@ -134,6 +182,7 @@ export const EditProfile = ({ onClosed }) => {
                             border: "2px solid #1976d2",
                             marginBottom: "40px",
                         }}
+                        onClick={(e) => handleUpdate(e)}
                     >
                         Save
                     </Button>

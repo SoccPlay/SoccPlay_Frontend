@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import Tabs from "@mui/joy/Tabs";
 import TabList from "@mui/joy/TabList";
 import Tab from "@mui/joy/Tab";
@@ -38,7 +38,7 @@ export default function Profile({ onClosed }) {
                                     fontWeight={"bold"}
                                     color={"#FFF"}
                                 >
-                                    Edit profile
+                                    Thông tin cá nhân
                                 </Typography>
                             </Tab>
                             <Tab
