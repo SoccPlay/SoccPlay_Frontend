@@ -1,12 +1,4 @@
-import {
-  Grid,
-  TextField,
-  MenuItem,
-  Typography,
-  Select,
-  Button,
-  styled,
-} from "@mui/material";
+import { Grid, TextField, Typography, Button, styled } from "@mui/material";
 import React from "react";
 
 export const EditProfile = ({ onClosed }) => {

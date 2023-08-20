@@ -20,4 +20,12 @@ export const getAllBooking = async (customerId) => {
   }
 };
 
+export const deleteBooking = async (id) => {
+  try {
+    await axiosApi.delete(`/Booking/CancelBooking?id=${id}`);
+  } catch (error) {
+    console.log("Failed to fetch schedule: ", error);
+  }
+};
+
 export default BookingApi;
