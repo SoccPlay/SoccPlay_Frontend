@@ -7,6 +7,8 @@ import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
 import List from "./pages/list/List";
 import Detail from "./pages/detail/Detail";
+// import Profile from "./pages/profile/Profile";
+import SideBar from "./pages/profile/components/SideBar";
 import Profile from "./pages/profile/Profile";
 export default function App() {
   return (

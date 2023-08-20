@@ -1,24 +1,17 @@
 import axiosApi from "./AxiosApi";
 
-export const updateProfile = async (form) => {
-    try {
-        const response = await axiosApi.put(
-            "/Accounts/UpdateProfileOfCustomer",
-            form
-        );
-        return response.data;
-    } catch (error) {
-        console.log("Failed to fetch schedule: ", error);
-    }
+const CustomerApi = {
+  getProfile: async (id) => {
+    const url = `Accounts/GetCustomerByAccountId?id=${id}`;
+    return axiosApi.get(url, id);
+  },
+  updateProfile: async (form) => {
+    const url = "/Accounts/UpdateProfileOfCustomer";
+    const headers = {
+      accept: "text/plain",
+      "Content-Type": "application/json",
+    };
+    return axiosApi.put(url, form, { headers: headers });
+  },
 };
-
-export const getProfile = async (id) => {
-    try {
-        const response = await axiosApi.get(
-            `Accounts/GetCustomerByAccountId?id=${id}`
-        );
-        return response.data;
-    } catch (error) {
-        console.log("Failed to fetch schedule: ", error);
-    }
-};
+export default CustomerApi;

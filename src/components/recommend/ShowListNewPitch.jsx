@@ -32,7 +32,7 @@ export default function ShowListPitchNear() {
   return (
     <div className="Section" id="recommend">
       <Typography className="typography" style={{ fontSize: 28 }}>
-        LIST THE MOST TOTAL PITCH
+        Danh Sách Nhiều Sân Bóng Nhất
       </Typography>
       <div className="destinations">
         {sortLand &&
@@ -51,7 +51,7 @@ export default function ShowListPitchNear() {
                     : lands.title}
                 </p>
                 <div className="distance">
-                  <p>ToTal Pitch: {lands.totalPitch}</p>
+                  <p>Tổng Sân: {lands.totalPitch}</p>
                   <Rating
                     name="read-only"
                     value={lands.averageRate}
@@ -61,7 +61,7 @@ export default function ShowListPitchNear() {
                 </div>
 
                 <div className="info">
-                  <p>Price</p>
+                  <p>Giá</p>
                   <b>
                     {lands.minPrice} VND - {lands.maxPrice} VND / Trận
                   </b>

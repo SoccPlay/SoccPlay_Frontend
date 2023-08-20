@@ -6,25 +6,26 @@ import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 export default function Hero() {
   const street = [
-    { value: "Thu Duc District", label: "Thu Duc" },
-    { value: "District 1, HCMC", label: "District 1" },
-    { value: "District 2, HCMC", label: "District 2" },
-    { value: "District 3, HCMC", label: "District 3" },
-    { value: "District 4, HCMC", label: "District 4" },
-    { value: "District 5, HCMC", label: "District 5" },
-    { value: "District 6, HCMC", label: "District 6" },
-    { value: "District 7, HCMC", label: "District 7" },
-    { value: "District 8, HCMC", label: "District 8" },
-    { value: "District 9, HCMC", label: "District 9" },
-    { value: "District 10, HCMC", label: "District 10" },
-    { value: "District 11, HCMC", label: "District 11" },
-    { value: "District 12, HCMC", label: "District 12" },
-    { value: "District Tan Binh", label: "Tan Binh" },
-    { value: "Binh Thanh District", label: "Binh Thanh" },
-    { value: "Go Vap District", label: "Go Vap" },
+    { value: "Thủ Đức", label: "Thủ Đức" },
+    {
+      value: "Quận 2",
+      label: "Quận 2",
+    },
+    { value: "Quận 3", label: "Quận 3" },
+    { value: "Quận 4", label: "Quận 4" },
+    { value: "Quận 5", label: "Quận 5" },
+    { value: "Quận 6", label: "Quận 6" },
+    { value: "Quận 7", label: "Quận 7" },
+    { value: "Quận 8", label: "Quận 8" },
+    { value: "Quận 9", label: "Quận 9" },
+    { value: "Quận 10", label: "Quận 10" },
+    { value: "Quận 11", label: "Quận 11" },
+    { value: "Quận 12", label: "Quận 12" },
+    { value: "Tân Bình", label: "Tân Bình" },
+    { value: "Gò Vấp", label: "Gò Vấp" },
   ];
-  const [selectedStreet, setSelectedStreet] = useState("district");
-  const [groundName, setGroundName] = useState("stadium");
+  const [selectedStreet, setSelectedStreet] = useState("Quận");
+  const [groundName, setGroundName] = useState("Sân Bóng");
   const nagative = useNavigate();
 
   const handleSearch = async () => {
@@ -40,10 +41,10 @@ export default function Hero() {
       <div className="content">
         <div className="title">
           <h1>
-            Book a sports facility
+            Đặt một nơi đá bóng
             <span style={{ fontWeight: "bold", color: "red" }}>
               <Typewriter
-                words={[" quality", " easy"]}
+                words={["chất lượng", "dễ dàng"]}
                 loop={2}
                 typeSpeed={60}
                 deleteSpeed={40}
@@ -55,7 +56,7 @@ export default function Hero() {
             </span>
           </h1>
           <p>
-            Book a sports facility near you with a single click and get to
+            Đặt một nơi sân đá bóng gần bạn chỉ cần ấn chuột vào dưới đây để
             search
           </p>
         </div>
@@ -66,7 +67,7 @@ export default function Hero() {
               classNamePrefix="select"
               name="color"
               options={street}
-              placeholder="Select your district"
+              placeholder="Tìm nơi"
               onChange={(selectedOption) =>
                 setSelectedStreet(selectedOption.value)
               }

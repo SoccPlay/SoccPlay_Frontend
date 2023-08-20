@@ -1,69 +1,117 @@
-import { Grid, Typography, styled } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ModeIcon from "@mui/icons-material/Mode";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import { UilSignOutAlt } from "@iconscout/react-unicons";
+import { SidebarDataAdmin } from "../../../Pagination/Data";
+import { SidebarDataCompany } from "../../../Pagination/Data";
+import { UilBars } from "@iconscout/react-unicons";
+// import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import "../components/sideBar.css";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import Destination1 from "../../../assets/Destination1.png";
+import { EditProfile } from "./EditProfile";
+import CustomizedTable from "./Security";
+import CustomizedTables from "./History";
+const Sidebar = () => {
+  const [selected, setSelected] = useState(0);
+  const [showRightSide, setShowRightSide] = useState(false);
+  const [userRole, setUserRole] = useState(localStorage.getItem("ROLE"));
+  const [user, setUsername] = useState(localStorage.getItem("USERNAME"));
+  const navigate = useNavigate();
 
-export const SideBar = () => {
+  const [expanded, setExpaned] = useState(true);
+
+  const sidebarVariants = {
+    true: {
+      left: "0",
+    },
+    false: {
+      left: "-60%",
+    },
+  };
+  console.log(userRole);
+  const [id, setId] = useState("");
+  const currentSidebarData =
+    userRole === "CUSTOMER" ? SidebarDataAdmin : SidebarDataCompany;
+  const sidebarComponentsAdmin = [
+    // <CustomizedTable />,
+    <CustomizedTables />,
+    <EditProfile />,
+  ];
+  const sidebarComponentsCompany = [<CustomizedTables />];
+  const renderRightSide = () => {
+    if (userRole === "CUSTOMER") {
+      return selected < 6;
+    } else if (userRole === "COMPANY") {
+      return selected === 1;
+    } else {
+      return null;
+    }
+  };
+  useEffect(() => {}, [selected, userRole]);
+
+  const handleSidebarItemClick = (index) => {
+    // console.log(token);
+    setSelected(index);
+  };
+
+  const handleSubmitLogOut = (e) => {
+    e.preventDefault();
+    // localStorage.clear(); // Removes all data from localStorage
+    // sessionStorage.clear();
+    navigate("/");
+  };
+  const ADMIN = "CUSTOMER";
+  const COMPANY = "Company";
+  console.log(window.innerWidth);
   return (
-    <Container item xs={2} height={1}>
-      <Grid
-        item
-        xs={12}
-        sx={{
-          padding: "40px",
-        }}
+    <>
+      {/* <div
+        className="bars"
+        style={expanded ? { left: "60%" } : { left: "5%" }}
+        onClick={() => setExpaned(!expanded)}
       >
-        <Grid
-          item
-          container
-          alignItems={"center"}
-          justifyContent={"center"}
-          xs={12}
-        >
-          <Typography fontSize={"32px"} fontWeight={"bold"} color={"#FFF"}>
-            settings
-          </Typography>
-          <ExpandMoreIcon sx={{ color: "#FFF" }} />
-        </Grid>
-        <Grid item container rowGap={"40px"} mt={"60px"}>
-          <Grid item container alignItems={"center"} xs={12} color={"#FFF"}>
-            <ModeIcon sx={{ mr: "20px" }} />
-            <Typography fontSize={"28px"} fontWeight={"bold"}>
-              Edit profile
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            container
-            alignItems={"center"}
-            xs={12}
-            color={`rgba(234, 234, 234, .8)`}
-          >
-            <NotificationsNoneIcon sx={{ mr: "20px" }} />
-            <Typography fontSize={"28px"} fontWeight={"bold"}>
-              History
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            container
-            alignItems={"center"}
-            xs={12}
-            color={`rgba(234, 234, 234, .8)`}
-          >
-            <VpnKeyIcon sx={{ mr: "20px" }} />
-            <Typography fontSize={"28px"} fontWeight={"bold"}>
-              Security
-            </Typography>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Container>
+        <UilBars />
+      </div> */}
+      <Box
+        className="sidebar"
+        variants={sidebarVariants}
+        animate={window.innerWidth <= 768 ? `${expanded}` : ""}
+      ></Box>
+
+      <div className="menu">
+        <div className="logo">
+          {/* <img src={Destination1} alt="logo" /> */}
+          <span>
+            {userRole === "CUSTOMER" ? (
+              <span className="admin">{user}</span>
+            ) : (
+              <span className="company">{COMPANY}</span>
+            )}
+          </span>
+        </div>
+        {currentSidebarData.map((item, index) => {
+          return (
+            <div
+              className={selected === index ? "menuItem active" : "menuItem"}
+              key={index}
+              onClick={() => handleSidebarItemClick(index)} // Call the click handler with the index of the clicked item
+            >
+              <item.icon />
+              <span>{item.heading}</span>
+            </div>
+          );
+        })}
+        <div className="menuItem">
+          <UilSignOutAlt onClick={handleSubmitLogOut}></UilSignOutAlt>
+        </div>
+      </div>
+      {userRole === "CUSTOMER"
+        ? sidebarComponentsAdmin[selected]
+        : sidebarComponentsCompany[selected]}
+      {renderRightSide()}
+    </>
   );
 };
 
-const Container = styled(Grid)({
-  background: "#1976d2",
-  height: "200vh",
-});
+export default Sidebar;

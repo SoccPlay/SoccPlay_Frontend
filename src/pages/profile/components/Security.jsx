@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import * as BookingApi from "../../../components/Axios/BookingApi";
+import BookingApi from "../../../components/Axios/BookingApi";
 import { Button, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
@@ -30,8 +30,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
-
-export default function CustomizedTables({ onClosed }) {
+const CustomizedTable = ({ onClosed }) => {
   const [data, setData] = React.useState([]);
 
   const [customer, setCustomer] = React.useState(
@@ -58,7 +57,7 @@ export default function CustomizedTables({ onClosed }) {
     fetchBooking();
   }, [customer]);
   return (
-    <TableContainer style={{ height: "100vh" }} component={Paper}>
+    <TableContainer className="full-screen" component={Paper}>
       <Typography
         fontSize={"30px"}
         fontWeight={"bold"}
@@ -68,7 +67,10 @@ export default function CustomizedTables({ onClosed }) {
       >
         Lịch sử đặt sân
       </Typography>
-      <Table sx={{ margin: "20px", width: 1000 }} aria-label="customized table">
+      <Table
+        sx={{ width: "100%", minWidth: 800 }}
+        aria-label="customized table"
+      >
         <TableHead>
           <TableRow>
             <StyledTableCell>Tên sân</StyledTableCell>
@@ -129,8 +131,8 @@ export default function CustomizedTables({ onClosed }) {
           "&:hover": {
             color: "#FFF",
           },
-          marginLeft: "50%",
-          marginTop: "20px",
+          margin: "0 auto", // Thay marginLeft và marginTop
+          display: "block", // Thêm để căn giữa
         }}
         onClick={onClosed}
       >
@@ -138,4 +140,5 @@ export default function CustomizedTables({ onClosed }) {
       </Button>
     </TableContainer>
   );
-}
+};
+export default CustomizedTable;
