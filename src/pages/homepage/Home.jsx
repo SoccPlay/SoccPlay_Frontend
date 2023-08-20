@@ -10,15 +10,16 @@ import { EditProfile } from "../profile/components/EditProfile";
 import Profile from "../profile/Profile";
 
 const Homepage = () => {
-    return (
-        <div>
-            <ScrollToTop />
-            <Navbar />
-            <Hero />
-            <ShowListNewPitch />
-            <Footer />
-        </div>
-    );
+  return (
+    <div>
+      <ScrollToTop />
+      <Navbar />
+      <Hero />
+      <ShowListPitchNear />
+      <ShowListNewPitch />
+      <Footer />
+    </div>
+  );
 };
 
 export default Homepage;

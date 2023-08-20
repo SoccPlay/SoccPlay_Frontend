@@ -5,9 +5,7 @@ import arrow from "../../../assets/arrowRight.png";
 import confirm from "../../../assets/confirm.png";
 const BookItem = () => {
   return (
-    <div
-    // style={{ backgroundColor: "red" }}
-    >
+    <div>
       <img
         className="confirm"
         src={confirm}
