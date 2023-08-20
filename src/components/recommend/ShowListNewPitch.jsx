@@ -32,7 +32,7 @@ export default function ShowListPitchNear() {
   return (
     <div className="Section" id="recommend">
       <Typography className="typography" style={{ fontSize: 28 }}>
-        SHOW LIST THE MOST TOTAL PITCH
+        LIST THE MOST TOTAL PITCH
       </Typography>
       <div className="destinations">
         {sortLand &&

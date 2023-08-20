@@ -92,7 +92,7 @@ export default function ShowListPitchNear() {
   if (apiDataAvailable) {
     return (
       <div className="Section" id="recommend">
-        <Typography className="typography">SHOW LIST PITCH NEAR YOU</Typography>
+        <Typography className="typography">LIST PITCH MOST RATING</Typography>
         <div className="destinations">
           {sortLand.map((lands) => {
             return (

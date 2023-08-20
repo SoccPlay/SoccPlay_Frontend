@@ -91,7 +91,7 @@ export default function ShowListPitchNear() {
     return (
       <div className="Section" id="recommend">
         <Typography className="typography">
-          SHOW LIST PITCH THU DUC DISTRICT
+          LIST PITCH THU DUC DISTRICT
         </Typography>
         <div className="destinations">
           {land.slice(0, 6) &&
