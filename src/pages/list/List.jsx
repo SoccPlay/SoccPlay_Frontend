@@ -163,7 +163,6 @@ const List = () => {
                         count={count}
                         size="large"
                         page={page}
-                        onChange={handlePageChange}
                     />
                 </Grid>
             </Grid>
