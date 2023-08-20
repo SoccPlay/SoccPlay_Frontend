@@ -1,42 +1,66 @@
 import { Grid, TextField, Typography, Button, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import * as CustomerApi from "../../../components/Axios/CustomerApi";
-
+import * as Yup from "yup";
+import { useFormik } from "formik";
 export const EditProfile = ({ onClosed }) => {
     const [profile, setProfile] = useState([]);
-    const [formData, setFormData] = useState({
-        fullName: "",
-        email: "",
-        address: "",
-        phone: "",
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string()
+            .email("Email không hợp lệ")
+            .required("Vui lòng nhập email"),
+        phone: Yup.string()
+            .matches(
+                /^(\+?84|0)(3[2-9]|5[6|8|9]|7[0|6|7|8|9]|8[1-9]|9[0-9])(\d{7})$/,
+                "Số điện thoại không hợp lệ"
+            )
+            .required("Vui lòng nhập số điện thoại"),
     });
-
-    const { fullName, email, address, phone } = formData;
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
-
-    const handleUpdate = async (e) => {
-        e.preventDefault();
-        await CustomerApi.updateProfile(
-            localStorage.getItem("ACCOUNTID"),
-            fullName,
-            email,
-            address,
-            phone
-        );
-    };
 
     useEffect(() => {
         const fetchProfile = async () => {
             const response = await CustomerApi.getProfile(
                 localStorage.getItem("ACCOUNTID")
             );
-            setProfile(response);
+            setProfile(response); // Cập nhật profile từ API
+
+            // Sau khi cập nhật profile, hãy cập nhật giá trị khởi tạo của formik
+            formik.setValues({
+                fullName: response.fullName,
+                email: response.email,
+                address: response.address,
+                phone: response.phone,
+            });
         };
         fetchProfile();
     }, []);
+
+    const formik = useFormik({
+        initialValues: {
+            fullName: "",
+            email: "",
+            address: "",
+            phone: "",
+        },
+        validationSchema: validationSchema,
+        onSubmit: async (values) => {
+            const response = await CustomerApi.updateProfile(
+                localStorage.getItem("ACCOUNTID"),
+                values.fullName,
+                values.email,
+                values.address,
+                values.phone
+            );
+            try {
+                if (response.status === 200) {
+                    setProfile(true);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+    });
 
     return (
         <Grid
@@ -69,11 +93,12 @@ export const EditProfile = ({ onClosed }) => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            defaultValue={profile.fullName}
+                            value={formik.values.fullName}
                             fullWidth
                             name="fullName"
                             type="text"
-                            onChange={(e) => handleChange(e)}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                     </Grid>
                 </Grid>
@@ -91,13 +116,18 @@ export const EditProfile = ({ onClosed }) => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            value={profile.email}
+                            value={formik.values.email}
                             fullWidth
                             name="email"
                             type="email"
-                            placeholder="example@gmail.com"
-                            onChange={(e) => handleChange(e)}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
+                        {formik.touched.email && formik.errors.email ? (
+                            <div style={{ color: "red" }}>
+                                {formik.errors.email}
+                            </div>
+                        ) : null}
                     </Grid>
                 </Grid>
             </Grid>
@@ -116,12 +146,13 @@ export const EditProfile = ({ onClosed }) => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            defaultValue={profile.address}
+                            value={formik.values.address}
                             fullWidth
                             name="address"
                             type="text"
                             placeholder="Số nhà, đường, phường, quận, thành phố"
-                            onChange={(e) => handleChange(e)}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
                     </Grid>
                 </Grid>
@@ -141,13 +172,19 @@ export const EditProfile = ({ onClosed }) => {
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
-                            defaultValue={profile.phone}
+                            value={formik.values.phone}
                             fullWidth
                             name="phone"
                             type="text"
                             placeholder="0123-456-789"
-                            onChange={(e) => handleChange(e)}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
                         />
+                        {formik.touched.phone && formik.errors.phone ? (
+                            <div style={{ color: "red" }}>
+                                {formik.errors.phone}
+                            </div>
+                        ) : null}
                     </Grid>
                 </Grid>
             </Grid>
@@ -182,7 +219,8 @@ export const EditProfile = ({ onClosed }) => {
                             border: "2px solid #1976d2",
                             marginBottom: "40px",
                         }}
-                        onClick={(e) => handleUpdate(e)}
+                        onClick={formik.handleSubmit}
+                        disabled={formik.isSubmitting}
                     >
                         Save
                     </Button>

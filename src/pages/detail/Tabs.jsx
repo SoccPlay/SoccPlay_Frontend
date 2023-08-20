@@ -190,6 +190,7 @@ export default function FullWidthTabs({ landId }) {
                 "Error creating booking:",
                 error.response.data.Messages
             );
+            setError(error.response.data.Messages);
             setErrorSnackbarOpen(true);
         }
     };
@@ -369,7 +370,7 @@ export default function FullWidthTabs({ landId }) {
                             open={errorSnackbarOpen}
                             autoHideDuration={3000}
                             onClose={handleCloseSnackbar}
-                            message="Sân đã được đặt, vui lòng đặt lại."
+                            message={error}
                             anchorOrigin={{
                                 vertical: "top",
                                 horizontal: "right",

@@ -122,7 +122,7 @@ export default function CustomizedTables({ onClosed }) {
                             <StyledTableCell width={200}>
                                 Địa chỉ
                             </StyledTableCell>
-                            <StyledTableCell align="right">
+                            <StyledTableCell width={200} align="right">
                                 Ngày đặt sân
                             </StyledTableCell>
                             <StyledTableCell align="right">
@@ -170,10 +170,12 @@ export default function CustomizedTables({ onClosed }) {
                                         {dayjs(row.dateBooking).format(
                                             "DD-MM-YYYY"
                                         )}
-                                        {" : "}
-                                        {dayjs(row.startTime).format("HH:MM")}
+                                        {":"}
+                                        {row.startTime
+                                            .split("T")[1]
+                                            .slice(0, 5)}
                                         {"->"}
-                                        {dayjs(row.endTime).format("HH:MM")}
+                                        {row.endTime.split("T")[1].slice(0, 5)}
                                     </StyledTableCell>
                                     <StyledTableCell align="right">
                                         {row.size}
