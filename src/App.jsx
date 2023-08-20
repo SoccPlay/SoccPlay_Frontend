@@ -9,19 +9,16 @@ import List from "./pages/list/List";
 import Detail from "./pages/detail/Detail";
 import Profile from "./pages/profile/Profile";
 export default function App() {
-    return (
-        <div>
-            <Routes>
-                <Route path="/" element={<Homepage />}></Route>
-                <Route exact path="signin" element={<SignIn />} />
-                <Route exact path="signup" element={<SignUp />} />
-                <Route
-                    path="/list/:selectedStreet/:groundName"
-                    element={<List />}
-                />
-                <Route path="/detail/:landId" element={<Detail />} />
-                <Route path="/profile" element={<Profile />} />
-            </Routes>
-        </div>
-    );
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route exact path="signin" element={<SignIn />} />
+        <Route exact path="signup" element={<SignUp />} />
+        <Route path="/list/:selectedStreet/:groundName" element={<List />} />
+        <Route path="/detail/:landId" element={<Detail />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </div>
+  );
 }
