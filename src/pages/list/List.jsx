@@ -6,21 +6,16 @@ import { useLocation, useParams } from "react-router-dom";
 
 import "./list.css";
 import LandApi from "../../components/Axios/LandApi";
-import usePagination from "../../Pagination/Pagination";
 import {
     Pagination,
     Slider,
-    Typography,
-    Box,
     Grid,
-    Checkbox,
-    FormControlLabel,
-    FormGroup,
     FormControl,
     InputLabel,
     NativeSelect,
     Stack,
     Rating,
+    Button,
 } from "@mui/material";
 import { Margin } from "@mui/icons-material";
 const List = () => {
@@ -28,13 +23,27 @@ const List = () => {
     let [page, setPage] = useState(1);
     const [land, setLand] = useState("");
     const [apiDataAvailable, setApiDataAvailable] = useState(false);
-    const [value, setValue] = useState(0);
     const PER_PAGE = 3;
     const count = Math.ceil(land.length / PER_PAGE);
     const sortLand = [...land].sort((a, b) => b.totalPitch - a.totalPitch);
     const _Data = sortLand.slice((page - 1) * PER_PAGE, page * PER_PAGE);
     const [range, setRange] = useState([0, 100]);
-    const [size, setSize] = useState([]);
+
+    const [location, setLocation] = useState("");
+    const [size, setSize] = useState("");
+    const [minPrice, setMinPrice] = useState("");
+    const [maxPrice, setMaxPrice] = useState("");
+    const [rating, setRating] = useState("");
+
+    const handleLocation = useCallback((event) => {
+        console.log(event.target.value);
+        setLocation(event.target.value);
+    }, []);
+
+    const handleRating = useCallback((event) => {
+        console.log(event.target.value);
+        setRating(event.target.value);
+    }, []);
 
     const formatPrice = (price) => {
         price = price * 3000;
@@ -45,11 +54,26 @@ const List = () => {
     };
     function handleChanges(event, newValue) {
         setRange(newValue);
-        console.log(range);
+        setMinPrice(newValue[0] * 3000);
+        setMaxPrice(newValue[1] * 3000);
     }
-    useEffect(() => {
-        fetchLands([]);
-    }, []);
+
+    //check if size 5 && size 7 is checked then set size = null
+    // else if size 5 is checked then set size = 5
+    // else if size 7 is checked then set size = 7
+    // else set size = null
+    const handleCheckboxChange = (event) => {
+        const checkboxValue = event.target.value;
+
+        if (checkboxValue === "5" && size !== "7") {
+            setSize("5");
+        } else if (checkboxValue === "7" && size !== "5") {
+            setSize("7");
+        } else {
+            setSize("");
+        }
+    };
+    console.log("size", size);
 
     const fetchLands = async ([]) => {
         try {
@@ -69,7 +93,9 @@ const List = () => {
         }
     };
 
-    // /api/Land/Filter
+    useEffect(() => {
+        fetchLands([]);
+    }, []);
 
     return (
         <div>
@@ -86,12 +112,14 @@ const List = () => {
                                 Location
                             </InputLabel>
                             <NativeSelect
+                                name="location"
                                 defaultValue={selectedStreet}
                                 inputProps={{
                                     name: "age",
                                     id: "uncontrolled-native",
                                 }}
                                 sx={{ width: 250 }}
+                                onChange={handleLocation}
                             >
                                 <option aria-label="None" value="" />
                                 <option value={1}>district 1</option>
@@ -115,8 +143,9 @@ const List = () => {
                                 <input
                                     type="checkbox"
                                     id="checkbox-size-5"
-                                    name="check"
+                                    name="size"
                                     value={5}
+                                    onChange={handleCheckboxChange}
                                 />
                                 <label for="checkbox-size-5">Size 5</label>
                             </div>
@@ -126,8 +155,9 @@ const List = () => {
                                 <input
                                     type="checkbox"
                                     id="checkbox-size-7"
-                                    name="check"
+                                    name="size"
                                     value={7}
+                                    onChange={handleCheckboxChange}
                                 />
                                 <label for="checkbox-size-7">Size 7</label>
                             </div>
@@ -139,13 +169,16 @@ const List = () => {
                             name="half-rating"
                             defaultValue={5}
                             precision={1}
+                            onChange={handleRating}
                         />
                     </Stack>
+                    <Button sx={{ marginTop: 2 }} variant="contained">
+                        Search
+                    </Button>
                 </Grid>
                 <Grid xs={8}>
                     <div className="title">
                         <h3 className="groud-name">List Pitch Search {}</h3>
-                        {/* <p className="groud-desc">Get the great price today</p> */}
                     </div>
                     <div className="list">
                         {apiDataAvailable &&
