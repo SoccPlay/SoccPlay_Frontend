@@ -86,13 +86,14 @@ const List = () => {
                                 Location
                             </InputLabel>
                             <NativeSelect
-                                defaultValue={1}
+                                defaultValue={selectedStreet}
                                 inputProps={{
                                     name: "age",
                                     id: "uncontrolled-native",
                                 }}
                                 sx={{ width: 250 }}
                             >
+                                <option aria-label="None" value="" />
                                 <option value={1}>district 1</option>
                                 <option value={2}>district 2</option>
                             </NativeSelect>
@@ -136,7 +137,7 @@ const List = () => {
                     <Stack spacing={1}>
                         <Rating
                             name="half-rating"
-                            defaultValue={4}
+                            defaultValue={5}
                             precision={1}
                         />
                     </Stack>
