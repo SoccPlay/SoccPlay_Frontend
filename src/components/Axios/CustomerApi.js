@@ -5,13 +5,11 @@ const CustomerApi = {
         const url = `Accounts/GetCustomerByAccountId?id=${id}`;
         return axiosApi.get(url, id);
     },
-    updateProfile: async (form) => {
+    updateProfile: async (values) => {
         const url = "/Accounts/UpdateProfileOfCustomer";
-        const headers = {
-            accept: "text/plain",
-            "Content-Type": "multipart/form-data",
-        };
-        return axiosApi.put(url, form, { headers: headers });
+        return axiosApi.put(url, {
+            ...values,
+        });
     },
 };
 export default CustomerApi;
