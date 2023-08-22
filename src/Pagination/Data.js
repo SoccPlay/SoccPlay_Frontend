@@ -19,54 +19,29 @@ import {
 export const SidebarDataAdmin = [
   {
     icon: UilSchedule,
-    heading: "History",
+    heading: "Lịch Sử Đặt",
   },
   {
     icon: UilUser,
-    heading: "Profile",
+    heading: "Thông Tin Cá Nhân",
   },
   {
     icon: UilReceipt,
-    heading: "Change Password",
+    heading: "Đổi Passwords",
   },
-  // {
-  //   icon: UilSchedule,
-  //   heading: "Apply",
-  // },
-
-  // {
-  //   icon: UilPackage,
-  //   heading: "Analytics",
-  // },
-  // {
-  //   icon: UilChart,
-  //   heading: "Analytics",
-  // },
 ];
 export const SidebarDataCompany = [
   {
-    icon: UilEstate,
-    heading: "Dashboard",
-  },
-  {
-    icon: UilLocationPoint,
-    heading: "Position",
+    icon: UilReceipt,
+    heading: "Sân Lớn",
   },
   {
     icon: UilClipboardAlt,
-    heading: "Jobs",
+    heading: "Sân Nhỏ",
   },
   {
-    icon: UilReceipt,
-    heading: "Posts",
-  },
-  {
-    icon: UilSchedule,
-    heading: "Apply",
-  },
-  {
-    icon: UilUser,
-    heading: "Profile",
+    icon: UilPackage,
+    heading: "Giá Sân",
   },
 ];
 export const TableStaff = [

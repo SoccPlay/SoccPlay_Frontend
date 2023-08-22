@@ -63,7 +63,7 @@ export default function ShowListPitchNear() {
   const [value, setValue] = useState(5);
   const [land, setLand] = useState([]);
   const navigate = useNavigate();
-  const [location, setLocation] = useState("Thu Duc District");
+  const [location, setLocation] = useState("Thủ Đức");
   const fetchLands = async ([]) => {
     try {
       const response = await LandApi.GetLandByLocation(location);
@@ -90,6 +90,7 @@ export default function ShowListPitchNear() {
   if (apiDataAvailable) {
     return (
       <div className="Section" id="recommend">
+        {/* <Typography className="typography" style={{ fontSize: 28 }}> */}
         <Typography className="typography">
           Danh Sách Sân Bóng Tp Thủ Đức
         </Typography>

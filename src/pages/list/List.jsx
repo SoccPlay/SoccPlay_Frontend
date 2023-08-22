@@ -3,6 +3,7 @@ import SearchItem from "../../components/searchItem/SearchItem";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import { useLocation, useParams } from "react-router-dom";
+import axios from "axios";
 
 import "./list.css";
 import LandApi from "../../components/Axios/LandApi";

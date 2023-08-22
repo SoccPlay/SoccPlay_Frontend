@@ -36,11 +36,19 @@ export default function Navbar() {
             localStorage.setItem("ACCOUNTID", decodedData.sub);
             setUsername(username);
             localStorage.setItem("ROLE", role);
-            const customerId = await AuthenApi.GetCustomerByAccountId(
-                decodedData.sub
-            );
-            console.log("Customer ID:", customerId.data.customerId);
-            localStorage.setItem("CUSTOMERID", customerId.data.customerId);
+            if (role === "OWNER") {
+                const ownerId = await AuthenApi.GetOwnerByAccountId(
+                    decodedData.sub
+                );
+                console.log("Owner ID:", ownerId.data.ownerId);
+                localStorage.setItem("OWNERID", ownerId.data.ownerId);
+            } else if (role === "CUSTOMER") {
+                const customerId = await AuthenApi.GetCustomerByAccountId(
+                    decodedData.sub
+                );
+                console.log("Customer ID:", customerId.data.customerId);
+                localStorage.setItem("CUSTOMERID", customerId.data.customerId);
+            }
             return decodedData;
         } catch (error) {
             console.error("Error decoding token:", error);

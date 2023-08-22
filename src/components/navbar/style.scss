@@ -31,11 +31,17 @@
         color: #1c72e2;
         font-size: 1.2rem;
         transition: 0.1s ease-in-out;
+        font-weight: 900;
         &:hover {
           color: #0077b6;
         }
       }
-      
+      // &:first-of-type {
+      //   a {
+      //     color: #023e8a;
+      //     font-weight: 900;
+      //   }
+      // }
     }
   }
 
