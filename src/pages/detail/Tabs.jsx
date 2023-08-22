@@ -164,7 +164,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
     };
     try {
       const response = await BookingApi.CreateBooking(bookingData);
-      console.log("Booking response:", response);
+      console.log("Booking response:", response.data);
       snackbarShowMessage("Đặt sân thành công", "success");
     } catch (error) {
       console.error("Error creating booking:", error.response.data.Messages);
@@ -190,7 +190,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
     };
     try {
       const response = await BookingApi.Calculator(bookingData);
-      console.log("Booking response:", response.data);
+      console.log("Giá Tiền:", response.data);
       snackbarShowMessage("Xem Giá Thành Công", "success");
       setPriceText(response.data);
       setShowBookingButton(true);

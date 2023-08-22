@@ -38,7 +38,11 @@ const Sidebar = () => {
     <CustomizedTables />,
     <EditProfile />,
   ];
-  const sidebarComponentsCompany = [<Lands />, <Pitch />, <Prices />];
+  const sidebarComponentsCompany = [
+    <Lands />,
+    // <Pitch />,
+    <Prices />,
+  ];
   const renderRightSide = () => {
     if (userRole === "CUSTOMER") {
       return selected < 3;

@@ -25,5 +25,13 @@ const LandApi = {
     const url = `Land/CreateLand`;
     return axiosApi.post(url, form);
   },
+  CreatePitch: async (form) => {
+    const url = `Pitch/CreatePitch`;
+    return axiosApi.post(url, form);
+  },
+  CreatePrice: async (form) => {
+    const url = `Price/CreatePrice`;
+    return axiosApi.post(url, form);
+  },
 };
 export default LandApi;
