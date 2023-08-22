@@ -54,27 +54,29 @@ const SearchItem = ({ landId }) => {
                                     <span className="siDistance">
                                         {lands.location}
                                     </span>
-                                    <span className="siTaxiOp">Policty</span>
+                                    <span className="siTaxiOp">
+                                        {lands.description}
+                                    </span>
                                     <span className="siSubtitle">
-                                        Total Pitch: {lands.totalPitch}
+                                        Tổng sân: {lands.totalPitch}
                                     </span>
                                     {/* <span className="siFeatures">{lands.totalPitch}</span> */}
                                     <span className="siCancelOp">
-                                        Free cancellation{" "}
+                                        Hủy miễn phí{" "}
                                     </span>
                                     <span className="siCancelOpSubtitle">
-                                        You can cancel your ticket after
-                                        booking, book now to get the best price
+                                        Bạn có thể hủy sau khi đặt, đặt ngay hôm
+                                        nay để được giá tốt
                                     </span>
                                 </div>
                             </div>
                             <div className="siDetails">
                                 <div className="siRating">
-                                    <span>Distance</span>
-                                    <button>1.3km{lands.km}</button>
+                                    <span>Khoảng cách</span>
+                                    <button>1.2km{lands.km}</button>
                                 </div>
                                 <div className="siRating">
-                                    <span>Rating</span>
+                                    <span>Đánh giá</span>
                                     <button>{lands.averageRate}</button>
                                 </div>
                                 <div className="siDetailTexts">
@@ -97,7 +99,7 @@ const SearchItem = ({ landId }) => {
                                             <div className="button__line"></div>
                                             <div className="button__line"></div>
                                             <span className="button__text">
-                                                Detail
+                                                Chi tiết
                                             </span>
                                             <div className="button__drow1"></div>
                                             <div className="button__drow2"></div>

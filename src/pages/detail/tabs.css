@@ -161,9 +161,6 @@
   display: flex;
 }
 
-.css-16dalxn {
-}
-
 .priceText {
   appearance: none;
   background-color: #2ea44f;
@@ -206,4 +203,9 @@
 .detailbookingButton {
   background-color: #2ea44f;
   color: #fff;
+}
+.feedback {
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: max-content;
 }
