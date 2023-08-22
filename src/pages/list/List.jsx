@@ -7,7 +7,6 @@ import axios from "axios";
 
 import "./list.css";
 import LandApi from "../../components/Axios/LandApi";
-import usePagination from "../../Pagination/Pagination";
 import {
   Pagination,
   Slider,
@@ -209,7 +208,7 @@ const List = () => {
         </Grid>
         <Grid xs={8}>
           <div className="title">
-            <h3 className="groud-name">List Pitch Search {}</h3>
+            <h3 className="groud-name">Danh Sach Pitch</h3>
             {/* <p className="groud-desc">Get the great price today</p> */}
           </div>
           <div className="list">
