@@ -1,5 +1,6 @@
 .feedback-container {
     display: flex;
+    flex-direction: row;
     padding: 16px 20px 16px 24px;
     align-items: flex-start;
     gap: 10px;

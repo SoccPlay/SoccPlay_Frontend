@@ -209,3 +209,10 @@
   flex-wrap: wrap;
   flex-basis: max-content;
 }
+
+.column-straight {
+  width: 0.125rem;
+  height: 7.4375rem;
+  background: #000;
+  margin-right: 5.5rem;
+}
