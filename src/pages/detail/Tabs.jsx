@@ -1,30 +1,37 @@
-import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 // import SwipeableViews from "react-swipeable-views";
-import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import LiveTvIcon from "@mui/icons-material/LiveTv";
-import MicrowaveIcon from "@mui/icons-material/Microwave";
-import WifiIcon from "@mui/icons-material/Wifi";
-import { FormControl, Icon, InputLabel, MenuItem, Select } from "@mui/material";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Tab from "@mui/material/Tab";
-import Tabs from "@mui/material/Tabs";
-import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import WifiIcon from "@mui/icons-material/Wifi";
+import {
+  Icon,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Snackbar,
+  Button,
+} from "@mui/material";
+import MicrowaveIcon from "@mui/icons-material/Microwave";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
+import "../detail/tabs.css";
 import BookingApi from "../../components/Axios/BookingApi";
 import LandApi from "../../components/Axios/LandApi";
-import { withSnackbar } from "../../hook/withSnackbar";
-import "../detail/tabs.css";
-import Popup from "./Popup";
+import { useNavigate } from "react-router-dom";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { time } from "./TimeConstant";
-import Feedback from "../../components/feedback/Feedback";
+import dayjs from "dayjs";
+import Popup from "./Popup";
+import { withSnackbar } from "../../hook/withSnackbar";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -77,7 +84,6 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
     hourFrom: null,
     hourTo: null,
   });
-  const [note, setNote] = useState("");
 
   const data = {
     landId: landId,
@@ -92,10 +98,6 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
     setDateBooking(element);
 
     console.log("Element: " + element);
-  };
-
-  const handleNoteChange = (event) => {
-    setNote(event.target.value);
   };
 
   const handleHourChange = (event) => {
@@ -127,11 +129,9 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   //   console.log("Size: " + size);
   //   console.log("StartTime:", time[selectedHours.hourFrom]);
   //   console.log("EndTime:", time[selectedHours.hourTo]);
-
   const fetchLands = async () => {
     try {
       const response = await LandApi.GetLandById(landId);
-      setCustomerId(localStorage.getItem("CUSTOMERID"));
       if (response == null) {
       }
       console.log("Land ID:", [response.data]);
@@ -177,7 +177,10 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   const [priceText, setPriceText] = useState();
   const [count, setCount] = useState(0);
   const [showBookingButton, setShowBookingButton] = useState(false);
-
+  const [note, setNote] = useState("");
+  const handleNoteChange = (event) => {
+    setNote(event.target.value);
+  };
   const handlePriceChange = async () => {
     // Calculate the price difference and update the state
     const start = `${dateBooking}T${time[selectedHours.hourFrom]}:00.000Z`;
@@ -197,12 +200,26 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
       setCount(count + 1);
     } catch (error) {
       console.error("Error creating booking:", error.response.data);
+
+      //   snackbarShowMessage(error.response.data, "error");
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
     console.log("CustomerId: " + customerId);
-    fetchLands();
-  }, [customerId]);
+    setCustomerId(localStorage.getItem("CUSTOMERID"));
+    if (count > 0) {
+      handlePriceChange();
+      fetchLands(customerId);
+    }
+  }, [
+    customerId,
+    selectedHours.hourFrom,
+    selectedHours.hourTo,
+    size,
+    dateBooking,
+  ]);
   return (
     <Box sx={{ bgcolor: "background.paper", width: 1200, paddingBottom: 22 }}>
       <AppBar position="static">
@@ -267,19 +284,20 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                     </FormControl>
                   </Box>
                 </DemoContainer>
+                <textarea
+                  style={{
+                    margin: "1rem 0px 0px 5rem",
+                    width: "65%",
+                    height: "50%",
+                    border: "1px solid #ccc",
+                  }}
+                  placeholder="Ghi chú cho chủ sân"
+                  minRows={4}
+                  size="lg"
+                  onChange={handleNoteChange}
+                />
               </LocalizationProvider>
-              <textarea
-                style={{
-                  margin: "1rem 0px 0px 5rem",
-                  width: "65%",
-                  height: "50%",
-                  border: "1px solid #ccc",
-                }}
-                placeholder="Ghi chú cho chủ sân"
-                minRows={4}
-                size="lg"
-                onChange={handleNoteChange}
-              />
+
               <Popup data={data} />
             </div>
             <div className="right-column">
@@ -344,21 +362,31 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                       })}
                     </Select>
                   </FormControl>
+
+                  <div class="detailtop">
+                    <Button className="priceButton" onClick={handlePriceChange}>
+                      Xem Gia
+                    </Button>
+                    <Typography className="priceText">
+                      {priceText} VND
+                    </Typography>
+                  </div>
                 </Box>
               </div>
             </div>
           </div>
-
-          <div className="button-booking">
-            <button
-              style={{ width: "200px", margin: "30px 460px" }}
-              className="check-calender"
-              onClick={() => handleBookingType5()}
-              disabled={loading}
-            >
-              BOOKING
-            </button>
-          </div>
+          {showBookingButton && (
+            <div className="detailbooking">
+              <Button
+                style={{ width: "200px" }}
+                className="detailbookingButton"
+                onClick={() => handleBookingType5()}
+                disabled={loading}
+              >
+                BOOKING
+              </Button>
+            </div>
+          )}
         </div>
       </TabPanel>
 
@@ -391,14 +419,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
         </div>
       </TabPanel>
       <TabPanel value={value} index={2} dir={theme.direction}>
-        <div className="feedback">
-          <Feedback />
-          <div className="column-straight"></div>
-
-          <div className="form-feedback">
-            <h1>Đánh giá của bạn</h1>
-          </div>
-        </div>
+        ĐÁNH GIÁ
       </TabPanel>
       {/* </SwipeableViews> */}
     </Box>

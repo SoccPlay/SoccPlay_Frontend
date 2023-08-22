@@ -41,7 +41,10 @@ const List = () => {
     console.log(event.target.value);
     setLocation(event.target.value);
   }, []);
-
+  function handlePageChanges(event, newValue) {
+    setPage(newValue);
+    console.log(_Data);
+  }
   const handleRating = useCallback((event) => {
     console.log(event.target.value);
     setRating(event.target.value);
