@@ -5,6 +5,10 @@ const BookingApi = {
     const url = `Booking/CreateBooking_v3`;
     return axiosApi.post(url, form);
   },
+  Calculator: async (form) => {
+    // const url = `/Price/Calculator`;
+    return axiosApi.post("https://localhost:7186/api/Price/Calculator", form);
+  },
 };
 
 export const getAllBooking = async (id) => {

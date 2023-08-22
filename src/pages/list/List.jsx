@@ -26,23 +26,29 @@ import {
 import { Margin } from "@mui/icons-material";
 const List = () => {
   const { selectedStreet, groundName } = useParams();
-  let [page, setPage] = useState(1);
   const [land, setLand] = useState("");
   const [apiDataAvailable, setApiDataAvailable] = useState(false);
-  const PER_PAGE = 4;
+
+  const PER_PAGE = 3;
+  let [page, setPage] = useState(1);
   const count = Math.ceil(land.length / PER_PAGE);
   const sortLand = [...land].sort((a, b) => b.totalPitch - a.totalPitch);
   const _Data = sortLand.slice((page - 1) * PER_PAGE, page * PER_PAGE);
-  const [range, setRange] = useState([0, 100]);
+
+  const [range, setRange] = useState([0, 1000]);
   const [rating, setRating] = useState(5);
 
   const formatPrice = (price) => {
-    price = price * 3000;
+    price = price * 10000;
     return price.toLocaleString("it-IT", {
       style: "currency",
       currency: "VND",
     });
   };
+  function handlePageChanges(event, newValue) {
+    setPage(newValue);
+    console.log(_Data);
+  }
   function handleChanges(event, newValue) {
     setRange(newValue);
     console.log(range);
@@ -225,6 +231,7 @@ const List = () => {
             count={count}
             size="large"
             page={page}
+            onChange={handlePageChanges}
           />
         </Grid>
       </Grid>

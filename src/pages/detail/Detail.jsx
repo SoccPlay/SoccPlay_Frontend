@@ -35,6 +35,9 @@ export default function Detail() {
           return (
             <div className="detail-all" key={lands.landId}>
               <h1>{lands.nameLand}</h1>
+              <h1>
+                {lands.minPrice} - {lands.maxPrice}
+              </h1>
               <div className="address">
                 {lands.averageRate}
                 <Icon className="icon">
@@ -42,6 +45,7 @@ export default function Detail() {
                 </Icon>
                 ({lands.totalPitch} đánh giá) - {lands.location}
               </div>
+
               <div className="img">
                 <div className="main-image">
                   <img src={selectedImage} alt={lands.nameLand} />

@@ -1,0 +1,26 @@
+.bold-text {
+  font-weight: bold;
+}
+.bold-and-large {
+  font-weight: bold;
+  font-size: 2.2em; /* Thay đổi kích thước tùy ý */
+  color: red !important;
+}
+.topManager {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+.butonManager {
+  font-weight: bold;
+  background-color: green;
+  color: aliceblue;
+  //   border: 2px solid #000; /* Đổi màu và kích thước viền tùy ý */
+  border-radius: 10px; /* Để tạo góc cong cho khung tròn */
+}
+.butonManager:focus,
+.butonManager:active,
+.butonManager:hover {
+  background-color: green;
+  /* Các thuộc tính khác */
+}

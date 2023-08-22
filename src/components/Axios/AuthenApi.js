@@ -13,5 +13,9 @@ const AuthenApi = {
     const url = `Accounts/GetCustomerByAccountId?id=${data}`;
     return axiosApi.get(url, data);
   },
+  GetOwnerByAccountId(data) {
+    const url = `Accounts/GetOwnerByAccountId?id=${data}`;
+    return axiosApi.get(url, data);
+  },
 };
 export default AuthenApi;
