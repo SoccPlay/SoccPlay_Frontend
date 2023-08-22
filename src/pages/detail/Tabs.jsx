@@ -1,36 +1,30 @@
-import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 // import SwipeableViews from "react-swipeable-views";
-import { useTheme } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import WifiIcon from "@mui/icons-material/Wifi";
-import {
-    Icon,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,
-    Snackbar,
-} from "@mui/material";
-import MicrowaveIcon from "@mui/icons-material/Microwave";
-import LiveTvIcon from "@mui/icons-material/LiveTv";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
-import "../detail/tabs.css";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import MicrowaveIcon from "@mui/icons-material/Microwave";
+import WifiIcon from "@mui/icons-material/Wifi";
+import { FormControl, Icon, InputLabel, MenuItem, Select } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 import BookingApi from "../../components/Axios/BookingApi";
 import LandApi from "../../components/Axios/LandApi";
-import { useNavigate } from "react-router-dom";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { time } from "./TimeConstant";
-import dayjs from "dayjs";
-import Popup from "./Popup";
 import { withSnackbar } from "../../hook/withSnackbar";
+import "../detail/tabs.css";
+import Popup from "./Popup";
+import { time } from "./TimeConstant";
+import Feedback from "../../components/feedback/Feedback";
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
     return (
@@ -83,6 +77,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
         hourFrom: null,
         hourTo: null,
     });
+    const [note, setNote] = useState("");
 
     const data = {
         landId: landId,
@@ -97,6 +92,10 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
         setDateBooking(element);
 
         console.log("Element: " + element);
+    };
+
+    const handleNoteChange = (event) => {
+        setNote(event.target.value);
     };
 
     const handleHourChange = (event) => {
@@ -159,7 +158,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
 
         const bookingData = {
             landId: landId,
-            Note: "DUY",
+            Note: note,
             Size: size,
             starTime: start,
             endTime: end,
@@ -256,6 +255,18 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                                     </Box>
                                 </DemoContainer>
                             </LocalizationProvider>
+                            <textarea
+                                style={{
+                                    margin: "1rem 0px 0px 5rem",
+                                    width: "65%",
+                                    height: "50%",
+                                    border: "1px solid #ccc",
+                                }}
+                                placeholder="Ghi chú cho chủ sân"
+                                minRows={4}
+                                size="lg"
+                                onChange={handleNoteChange}
+                            />
                             <Popup data={data} />
                         </div>
                         <div className="right-column">
@@ -377,7 +388,14 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                 </div>
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-                ĐÁNH GIÁ
+                <div className="feedback">
+                    <Feedback />
+                    <div className="column-straight"></div>
+
+                    <div className="form-feedback">
+                        <h1>Đánh giá của bạn</h1>
+                    </div>
+                </div>
             </TabPanel>
             {/* </SwipeableViews> */}
         </Box>

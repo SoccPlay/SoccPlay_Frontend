@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, Fragment } from "react";
 import SearchItem from "../../components/searchItem/SearchItem";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
@@ -6,6 +6,7 @@ import { useLocation, useParams } from "react-router-dom";
 
 import "./list.css";
 import LandApi from "../../components/Axios/LandApi";
+import * as FilterApi from "../../components/Axios/FilterApi";
 import {
     Pagination,
     Slider,
@@ -17,7 +18,7 @@ import {
     Rating,
     Button,
 } from "@mui/material";
-import { Margin } from "@mui/icons-material";
+
 const List = () => {
     const { selectedStreet, groundName } = useParams();
     let [page, setPage] = useState(1);
@@ -29,11 +30,11 @@ const List = () => {
     const _Data = sortLand.slice((page - 1) * PER_PAGE, page * PER_PAGE);
     const [range, setRange] = useState([0, 100]);
 
-    const [location, setLocation] = useState("");
-    const [size, setSize] = useState("");
-    const [minPrice, setMinPrice] = useState("");
-    const [maxPrice, setMaxPrice] = useState("");
-    const [rating, setRating] = useState("");
+    const [location, setLocation] = useState();
+    const [size, setSize] = useState();
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(300000);
+    const [rating, setRating] = useState(5);
 
     const handleLocation = useCallback((event) => {
         console.log(event.target.value);
@@ -58,22 +59,41 @@ const List = () => {
         setMaxPrice(newValue[1] * 3000);
     }
 
-    //check if size 5 && size 7 is checked then set size = null
-    // else if size 5 is checked then set size = 5
-    // else if size 7 is checked then set size = 7
-    // else set size = null
     const handleCheckboxChange = (event) => {
         const checkboxValue = event.target.value;
+        const isChecked = event.target.checked;
+        setSize((pre) => {
+            return { ...pre, [checkboxValue]: isChecked };
+        });
+    };
 
-        if (checkboxValue === "5" && size !== "7") {
-            setSize("5");
-        } else if (checkboxValue === "7" && size !== "5") {
-            setSize("7");
-        } else {
-            setSize("");
+    const handleSearch = async () => {
+        let sizeSubmit =
+            size?.["5"] && size?.["7"]
+                ? undefined
+                : size?.["5"]
+                ? 5
+                : size?.["7"]
+                ? 7
+                : undefined;
+        let locationSubmit = location === "" ? undefined : location;
+        try {
+            const response = await FilterApi.search(
+                locationSubmit,
+                sizeSubmit,
+                rating,
+                minPrice,
+                maxPrice
+            );
+            if (response == null) {
+                setApiDataAvailable(false);
+            }
+            setLand(response.data);
+            setApiDataAvailable(true);
+        } catch (error) {
+            console.log("ApiError:", error);
         }
     };
-    console.log("size", size);
 
     const fetchLands = async ([]) => {
         try {
@@ -122,8 +142,20 @@ const List = () => {
                                 onChange={handleLocation}
                             >
                                 <option aria-label="None" value="" />
-                                <option value={1}>district 1</option>
-                                <option value={2}>district 2</option>
+                                <option value={"Thủ Đức"}>Thủ Đức</option>
+                                <option value={"Quận 2"}>Quận 2</option>
+                                <option value={"Quận 3"}>Quận 3</option>
+                                <option value={"Quận 4"}>Quận 4</option>
+                                <option value={"Quận 5"}>Quận 5</option>
+                                <option value={"Quận 6"}>Quận 6</option>
+                                <option value={"Quận 7"}>Quận 7</option>
+                                <option value={"Quận 8"}>Quận 8</option>
+                                <option value={"Quận 9"}>Quận 9</option>
+                                <option value={"Quận 10"}>Quận 10</option>
+                                <option value={"Quận 11"}>Quận 11</option>
+                                <option value={"Quận 12"}>Quận 12</option>
+                                <option value={"Tân Bình"}>Tân Bình</option>
+                                <option value={"Gò Vấp"}>Gò Vấp</option>
                             </NativeSelect>
                         </FormControl>
                         <h1 className="coll text">
@@ -138,30 +170,28 @@ const List = () => {
                             sx={{ width: "85%" }}
                         />
                         <h1 className="coll text">Size</h1>
-                        <div class="item">
-                            <div class="checkbox-rect">
-                                <input
-                                    type="checkbox"
-                                    id="checkbox-size-5"
-                                    name="size"
-                                    value={5}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label for="checkbox-size-5">Size 5</label>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="checkbox-rect">
-                                <input
-                                    type="checkbox"
-                                    id="checkbox-size-7"
-                                    name="size"
-                                    value={7}
-                                    onChange={handleCheckboxChange}
-                                />
-                                <label for="checkbox-size-7">Size 7</label>
-                            </div>
-                        </div>
+                        {[5, 7].map((size) => {
+                            return (
+                                <Fragment key={size}>
+                                    <div class="item">
+                                        <div class="checkbox-rect">
+                                            <input
+                                                type="checkbox"
+                                                id={`checkbox-size-${size}`}
+                                                name="size"
+                                                value={size}
+                                                onChange={handleCheckboxChange}
+                                            />
+                                            <label
+                                                for={`checkbox-size-${size}`}
+                                            >
+                                                Size{size}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </Fragment>
+                            );
+                        })}
                     </div>
                     <h1 className="coll text">Rating</h1>
                     <Stack spacing={1}>
@@ -172,7 +202,11 @@ const List = () => {
                             onChange={handleRating}
                         />
                     </Stack>
-                    <Button sx={{ marginTop: 2 }} variant="contained">
+                    <Button
+                        onClick={handleSearch}
+                        sx={{ marginTop: 2 }}
+                        variant="contained"
+                    >
                         Search
                     </Button>
                 </Grid>

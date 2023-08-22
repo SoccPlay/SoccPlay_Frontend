@@ -61,17 +61,17 @@ export default function Navbar() {
             <ul>
                 <li>
                     <a href="/" className="largeText">
-                        Home
+                        Trang chủ
                     </a>
                 </li>
                 <li>
                     <a href="/list/Quận/Sân Bóng" className="largeText">
-                        Ground
+                        Sân
                     </a>
                 </li>
                 <li>
                     <a href="/#" className="largeText">
-                        About
+                        Thông tin
                     </a>
                 </li>
             </ul>
