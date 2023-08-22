@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import LandApi from "../../../components/Axios/LandApi";
-import "./land.scss";
+import "./land.css";
 import { CheckBox } from "@mui/icons-material";
 
 const makeStyle = (status) => {
