@@ -161,9 +161,6 @@
   display: flex;
 }
 
-.css-16dalxn {
-}
-
 .priceText {
   appearance: none;
   background-color: #2ea44f;
@@ -211,5 +208,4 @@
   display: flex;
   flex-wrap: wrap;
   flex-basis: max-content;
-
-
+}
