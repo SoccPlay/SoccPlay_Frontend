@@ -31,7 +31,8 @@ export default function ShowListPitchNear() {
   }, []);
   return (
     <div className="Section" id="recommend">
-      <Typography className="typography" style={{ fontSize: 28 }}>
+      {/* <Typography className="typography" style={{ fontSize: 28 }}> */}
+      <Typography className="typography">
         Danh Sách Nhiều Sân Bóng Nhất
       </Typography>
       <div className="destinations">

@@ -74,10 +74,10 @@ export default function Hero() {
             />
           </div>
           <div className="container">
-            <label htmlFor="">Ground name</label>
+            <label htmlFor="">Sân Bóng</label>
             <input
               type="text"
-              placeholder="Search ground name"
+              placeholder="Tìm Sân Bóng"
               //value={groundName}
               onChange={(e) => setGroundName(e.target.value)}
             />
