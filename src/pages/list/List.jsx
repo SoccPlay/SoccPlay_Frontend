@@ -70,7 +70,7 @@ const List = () => {
       return { ...pre, [checkboxValue]: isChecked };
     });
   };
-
+  console.log("size: ", size);
   const handleSearch = async () => {
     let sizeSubmit =
       size?.["5"] && size?.["7"]
