@@ -14,7 +14,7 @@ import "./App.css";
 export default function App() {
     return (
         <div style={{ margin: "0px 10px 0px 10px" }}>
-            {/* <Routes>
+            <Routes>
                 <Route path="/" element={<Homepage />}></Route>
                 <Route exact path="signin" element={<SignIn />} />
                 <Route exact path="signup" element={<SignUp />} />
@@ -24,9 +24,7 @@ export default function App() {
                 />
                 <Route path="/detail/:landId" element={<Detail />} />
                 <Route path="/profile" element={<Profile />} />
-            </Routes> */}
-
-            <ResourceSwitcher />
+            </Routes>
         </div>
     );
 }
