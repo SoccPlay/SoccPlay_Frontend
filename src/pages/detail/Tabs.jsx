@@ -33,6 +33,7 @@ import { withSnackbar } from "../../hook/withSnackbar";
 import "../detail/tabs.css";
 import Popup from "./Popup";
 import { time } from "./TimeConstant";
+import ResourceSwitcher from "../../components/scheduler/ResourceSwitcher";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (

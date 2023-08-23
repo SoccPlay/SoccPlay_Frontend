@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../../components/navbar/Navbar";
-import Card from "../../components/card/Card";
-import Footer from "../../components/footer/Footer";
-import "./detail.css";
-import { useNavigate, useParams } from "react-router-dom";
 import StarIcon from "@mui/icons-material/Star";
 import { Icon } from "@mui/material";
-import FullWidthTabs from "./Tabs";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import LandApi from "../../components/Axios/LandApi";
+import Footer from "../../components/footer/Footer";
+import Navbar from "../../components/navbar/Navbar";
+import FullWidthTabs from "./Tabs";
+import "./detail.css";
 export default function Detail() {
     const { landId } = useParams();
     const [land, setLand] = useState();

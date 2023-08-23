@@ -8,6 +8,7 @@ import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
 // import Profile from "./pages/profile/Profile";
 import Profile from "./pages/profile/Profile";
+import ResourceSwitcher from "./components/scheduler/ResourceSwitcher";
 import "./App.css";
 
 export default function App() {

@@ -67,7 +67,7 @@ export default function Hero() {
               classNamePrefix="select"
               name="color"
               options={street}
-              placeholder="Tìm địa điểm"
+              placeholder="Tìm nơi"
               onChange={(selectedOption) =>
                 setSelectedStreet(selectedOption.value)
               }
