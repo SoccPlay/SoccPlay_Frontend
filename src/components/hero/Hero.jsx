@@ -40,7 +40,11 @@ export default function Hero() {
             </div>
             <div className="content">
                 <div className="title">
-                    <h1>
+                    <h1
+                        style={{
+                            fontFamily: "inherit",
+                        }}
+                    >
                         Đặt một nơi đá bóng{" "}
                         <span style={{ fontWeight: "bold", color: "red" }}>
                             <Typewriter
@@ -55,7 +59,11 @@ export default function Hero() {
                             <Cursor cursorStyle="<"></Cursor>
                         </span>
                     </h1>
-                    <p>
+                    <p
+                        style={{
+                            fontFamily: "inherit",
+                        }}
+                    >
                         Đặt một nơi sân đá bóng gần bạn chỉ cần ấn chuột vào
                         dưới đây để search
                     </p>

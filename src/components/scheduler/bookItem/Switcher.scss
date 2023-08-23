@@ -1,0 +1,26 @@
+.switcher-title{
+    display: inline;
+    color: rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin-bottom: 5px;
+}
+
+switcher-currency {
+    color: red;
+}
+
+.switcher-time {
+    background: #028730b8;
+    display: inline;
+    border-radius: 5px;
+    width: 50%;
+}
+
+.switcher-container {
+    
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+    margin: 0px 1rem;
+}
