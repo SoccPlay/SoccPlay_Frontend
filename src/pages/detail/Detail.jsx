@@ -43,7 +43,7 @@ export default function Detail() {
                         <div className="detail-all" key={lands.landId}>
                             <h1 style={{ color: "#000" }}>{lands.nameLand}</h1>
                             <h1 style={{ color: "#000" }}>
-                                {formatPrice(lands.minPrice)} -{" "}
+                                {formatPrice(lands.minPrice).split("VND")[0]} -{" "}
                                 {formatPrice(lands.maxPrice)}
                             </h1>
                             <div className="address">

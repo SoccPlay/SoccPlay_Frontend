@@ -139,7 +139,7 @@ const List = () => {
                                 variant="standard"
                                 htmlFor="uncontrolled-native"
                             >
-                                Location
+                                Địa điểm
                             </InputLabel>
                             <NativeSelect
                                 name="location"
@@ -169,7 +169,7 @@ const List = () => {
                             </NativeSelect>
                         </FormControl>
                         <h1 className="coll text">
-                            Price: {formatPrice(range[0])} -{" "}
+                            Giá tiền: {formatPrice(range[0])} -{" "}
                             {formatPrice(range[1])}
                         </h1>
 
@@ -179,7 +179,7 @@ const List = () => {
                             onChange={handleChanges}
                             sx={{ width: "85%" }}
                         />
-                        <h1 className="coll text">Size</h1>
+                        <h1 className="coll text">Cỡ sân</h1>
                         {[5, 7].map((size) => {
                             return (
                                 <Fragment key={size}>
@@ -195,7 +195,7 @@ const List = () => {
                                             <label
                                                 for={`checkbox-size-${size}`}
                                             >
-                                                Size{size}
+                                                Sân{size}
                                             </label>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@ const List = () => {
                             );
                         })}
                     </div>
-                    <h1 className="coll text">Rating</h1>
+                    <h1 className="coll text">Đánh giá</h1>
                     <Stack spacing={1}>
                         <Rating
                             name="half-rating"
@@ -217,12 +217,22 @@ const List = () => {
                         sx={{ marginTop: 2 }}
                         variant="contained"
                     >
-                        Search
+                        Tìm kiếm
                     </Button>
                 </Grid>
                 <Grid xs={8}>
                     <div className="title">
-                        <h3 className="groud-name">List Pitch Search {}</h3>
+                        <h3 className="groud-name">
+                            <h2 class="title">
+                                <span class="title-word title-word-1">
+                                    Danh{" "}
+                                </span>
+                                <span class="title-word title-word-2">
+                                    Sách{" "}
+                                </span>
+                                <span class="title-word title-word-3">Sân</span>
+                            </h2>
+                        </h3>
                     </div>
                     <div className="list">
                         {apiDataAvailable &&
