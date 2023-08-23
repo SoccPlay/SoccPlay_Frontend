@@ -10,10 +10,11 @@ switcher-currency {
 }
 
 .switcher-time {
-    background: #028730b8;
+    background: #049835b8;
     display: inline;
     border-radius: 5px;
     width: 50%;
+    
 }
 
 .switcher-container {
@@ -21,6 +22,19 @@ switcher-currency {
     display: inline-flex;
     flex-direction: column;
     flex-wrap: wrap;
-    flex-shrink: 1;
-    margin: 0px 1rem;
+    flex-shrink: 301;
+    margin: 7px 7px ;
+    height: 70px;
+    width: 157px; 
+    background-color: rgba(89, 138, 140, 0.425);
+    border-radius: 5px ;
+    padding: 5px; 
+    .switcher-con{
+        display: flex;
+        justify-content: space-between;
+        .switcher-time {
+            text-align: center;
+        }
+    }
+
 }

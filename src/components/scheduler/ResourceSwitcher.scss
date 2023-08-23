@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    background-color: #4192e7b8;
+    background-color: #b7d7f9;
 }
 
 .select-flex {
@@ -25,18 +25,35 @@
     border-right: 1px solid #ffffff;
 }
 
+
 .slot-item {
     text-align: center;
-    width: 100%;
+    width: 340px;
     color: #000000;
     font-size: 20px;
     font-weight: 300;
-    padding-right: 19rem;
     border-bottom: 1px solid #000000;
+    height: 85px;
 }
 
 .ResourceSwitcher-detail {
     display: inline-flex;
     flex-direction: row;
     margin-right: 15%;
+    width: 100%;
 }
+
+.cssTotal {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ffffff;
+    width: 1200px;
+}
+
+@media (max-width: 800px) {
+    .child {
+      width: 100%; /* Đảm bảo phần tử con chiếm hết chiều rộng của thẻ cha khi nhỏ hơn */
+      margin-top: 0; /* Loại bỏ khoảng cách trên đỉnh */
+    }
+}
+

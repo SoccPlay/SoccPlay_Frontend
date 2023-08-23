@@ -3,13 +3,49 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
-import React from "react";
+
 import "./ResourceSwitcher.scss";
 import Switcher from "./bookItem/Switcher";
+import { useState } from "react";
+
+const slot = [
+    "Slot 01, 07:00 -> 08:00, 100.000vnd",
+    "Slot 02, 08:00 -> 09:00, 100.000vnd",
+    "Slot 03, 09:00 -> 10:00, 100.000vnd",
+    "Slot 04, 15:00 -> 16:00, 100.000vnd",
+    "Slot 05, 16:00 -> 17:00, 100.000vnd",
+    "Slot 06, 17:00 -> 18:00, 100.000vnd",
+    "Slot 07, 18:00 -> 19:00, 100.000vnd",
+    "Slot 08, 19:00 -> 20:00, 100.000vnd",
+    "Slot 09, 21:00 -> 22:00, 100.000vnd",
+];
+
+const TIME = [
+    "07:00 -> 08:00",
+    "08:00 -> 09:00",
+    "09:00 -> 10:00",
+    "15:00 -> 16:00",
+    "16:00 -> 17:00",
+    "17:00 -> 18:00",
+    "18:00 -> 19:00",
+    "19:00 -> 20:00",
+    "20:00 -> 21:00",
+    "21:00 -> 22:00",
+];
+
+const NamePitch = [
+    "Sân demo 01",
+    "Sân demo 02",
+    "Sân demo 03",
+    "Sân demo 04",
+    "Sân demo 05",
+];
+
+// const handleName
 
 const ResourceSwitcher = () => {
     return (
-        <div>
+        <div className="cssTotal">
             <div className="resourceSwitcher">
                 <div className="select-flex">
                     <LocalizationProvider
@@ -65,31 +101,39 @@ const ResourceSwitcher = () => {
                         </FormControl>
                     </Box>
                 </div>
-                <div className="name-pitch">Sân demo 01</div>
-                <div className="name-pitch">Sân demo 02</div>
-                <div className="name-pitch">Sân demo 03</div>
-                <div className="name-pitch">Sân demo 04</div>
-                <div className="name-pitch">Sân demo 05</div>
+                {NamePitch.map((item) =>
+                    item ? (
+                        <div className="name-pitch">{item}</div>
+                    ) : (
+                        <div className="name-null">null</div>
+                    )
+                )}
             </div>
             <div className="ResourceSwitcher-detail">
                 <div className="slot">
-                    <div className="slot-item">Slot 01</div>
-                    <div className="slot-item">Slot 02</div>
-                    <div className="slot-item">Slot 03</div>
-                    <div className="slot-item">Slot 04</div>
-                    <div className="slot-item">Slot 05</div>
-                    <div className="slot-item">Slot 06</div>
-                    <div className="slot-item">Slot 07</div>
-                    <div className="slot-item">Slot 08</div>
-                    <div className="slot-item">Slot 09</div>
-                    <div className="slot-item">Slot 10</div>
-                    <div className="slot-item">Slot 11</div>
+                    {slot.map((item) => (
+                        <>
+                            <div className="slot-item">
+                                {item.split(",")[0]}:
+                                <span>{item.split(",")[1]}</span>
+                                <div
+                                    className="slot-price"
+                                    style={{ color: "red", fontWeight: "600" }}
+                                >
+                                    {item.split(",")[2]}
+                                </div>
+                            </div>
+                        </>
+                    ))}
                 </div>
-                <Switcher />
-                <Switcher />
-                <Switcher />
-                <Switcher />
-                <Switcher />
+                <div className="child">
+                    <Switcher />
+                    <Switcher />
+                    <Switcher />
+                    <Switcher />
+                    <Switcher />
+                    <Switcher />
+                </div>
             </div>
         </div>
     );

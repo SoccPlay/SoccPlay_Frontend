@@ -42,7 +42,7 @@ export default function Hero() {
                 <div className="title">
                     <h1
                         style={{
-                            fontFamily: "inherit",
+                            fontFamily: "Montserrat, sans-serif",
                         }}
                     >
                         Đặt một nơi đá bóng{" "}
@@ -61,7 +61,7 @@ export default function Hero() {
                     </h1>
                     <p
                         style={{
-                            fontFamily: "inherit",
+                            fontFamily: "Montserrat, sans-serif",
                         }}
                     >
                         Đặt một nơi sân đá bóng gần bạn chỉ cần ấn chuột vào
