@@ -18,6 +18,15 @@ switcher-currency {
 }
 
 .switcher-container {
+    cursor: pointer;
+    //animate
+    transition: all 0.3s ease-in-out;
+    &:hover {
+        transform: scale(1.1);
+    }
+    &:active {
+        background-color: lightblue;
+    }
     
     display: inline-flex;
     flex-direction: column;
@@ -36,5 +45,6 @@ switcher-currency {
             text-align: center;
         }
     }
-
 }
+
+
