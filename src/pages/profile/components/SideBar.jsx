@@ -5,7 +5,6 @@ import { SidebarDataCompany } from "../../../Pagination/Data";
 import React, { useState, useEffect } from "react";
 import "../components/sideBar.css";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import EditProfile from "./EditProfile";
 import CustomizedTables from "./History";
@@ -13,13 +12,15 @@ import Lands from "../../owner/components/Land";
 import Pitch from "../../owner/components/Pitch";
 import Prices from "../../owner/components/Price";
 import HistoryBooking from "../../owner/components/HistoryBook";
+import { useHistory, useLocation, useNavigate } from "react-router-dom"; // Import useHistory and useLocation
+
 const Sidebar = () => {
   const [selected, setSelected] = useState(0);
   const [showRightSide, setShowRightSide] = useState(false);
   const [userRole, setUserRole] = useState(localStorage.getItem("ROLE"));
   const [user, setUsername] = useState(localStorage.getItem("USERNAME"));
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [expanded, setExpaned] = useState(true);
 
   const sidebarVariants = {
@@ -109,6 +110,7 @@ const Sidebar = () => {
       {userRole === "CUSTOMER"
         ? sidebarComponentsAdmin[selected]
         : sidebarComponentsCompany[selected]}
+
       {renderRightSide()}
     </>
   );

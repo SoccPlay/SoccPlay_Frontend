@@ -10,21 +10,19 @@ import SignUp from "./pages/signup/SignUp";
 import Profile from "./pages/profile/Profile";
 import ResourceSwitcher from "./components/scheduler/ResourceSwitcher";
 import "./App.css";
+import HistoryBooking from "./pages/owner/components/HistoryBook";
 
 export default function App() {
-    return (
-        <div style={{ margin: "0px 10px 0px 10px" }}>
-            <Routes>
-                <Route path="/" element={<Homepage />}></Route>
-                <Route exact path="signin" element={<SignIn />} />
-                <Route exact path="signup" element={<SignUp />} />
-                <Route
-                    path="/list/:selectedStreet/:groundName"
-                    element={<List />}
-                />
-                <Route path="/detail/:landId" element={<Detail />} />
-                <Route path="/profile" element={<Profile />} />
-            </Routes>
-        </div>
-    );
+  return (
+    <div style={{ margin: "0px 10px 0px 10px" }}>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route exact path="signin" element={<SignIn />} />
+        <Route exact path="signup" element={<SignUp />} />
+        <Route path="/list/:selectedStreet/:groundName" element={<List />} />
+        <Route path="/detail/:landId" element={<Detail />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </div>
+  );
 }

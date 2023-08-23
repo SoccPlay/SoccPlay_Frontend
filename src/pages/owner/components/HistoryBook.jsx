@@ -1,5 +1,7 @@
+import React from "react";
 import {
   Button,
+  InputLabel,
   Paper,
   Table,
   TableBody,
@@ -11,6 +13,8 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import BookingApi from "../../../components/Axios/BookingApi";
+import { FormControl, MenuItem, Select } from "@mui/base";
+import { Box } from "@mui/system";
 const makeStyle = (status) => {
   if (status === "Approved") {
     return {
@@ -29,18 +33,14 @@ const makeStyle = (status) => {
     };
   }
 };
-const HistoryBooking = (landId) => {
+
+export default function HistoryBooking() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [booking, setBooking] = useState([]);
   const onwerId = localStorage.getItem("OWNERID");
-  const [currentPage, setCurrentPage] = useState(0);
 
-  const handlePageChange = (newPage) => {
-    setCurrentPage(newPage);
-  };
-
+  // console.log("LANDIDHISTORYBOOKING", landId);
   const fetchBooking = async () => {
     try {
       const response = await BookingApi.GetAllBookingByOwnerId(onwerId);
@@ -51,6 +51,7 @@ const HistoryBooking = (landId) => {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     fetchBooking();
   }, [onwerId]);
@@ -58,13 +59,13 @@ const HistoryBooking = (landId) => {
     <div
       className="Table"
       style={{
-        //   height: "100vh",
+        // height: "100vh",
         width: "100vw",
         display: "flex",
         flexDirection: "column",
         backgroundColor: "white",
-        //   justifyContent: "center",
-        //   alignItems: "center",
+        justifyContent: "left",
+        // alignItems: "center",
         paddingTop: "100px",
         paddingLeft: "20px",
         marginLeft: "50px",
@@ -74,6 +75,7 @@ const HistoryBooking = (landId) => {
       <div className="topManager">
         <Typography className="bold-and-large">Thông Tin Đặt Sân</Typography>
       </div>
+
       <TableContainer
         component={Paper}
         style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
@@ -128,5 +130,4 @@ const HistoryBooking = (landId) => {
       </TableContainer>
     </div>
   );
-};
-export default HistoryBooking;
+}

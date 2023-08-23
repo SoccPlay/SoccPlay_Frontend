@@ -25,11 +25,8 @@ import {
 import { useEffect, useState } from "react";
 import LandApi from "../../../components/Axios/LandApi";
 import "./land.scss";
-import {
-  handleOpenDialogTest,
-  handleCloseDialogTest,
-  handleInputChangeTest,
-} from "./Handler";
+import { useNavigate } from "react-router-dom"; // Import useNavigate from your router library
+
 import HistoryBooking from "./HistoryBook";
 
 const makeStyle = (status) => {
@@ -226,9 +223,7 @@ const Lands = () => {
       console.error(error.response);
     }
   };
-  const ChangePage = (landId) => {
-    <HistoryBooking landId={landId} />;
-  };
+
   //----------------------------------------------------------------
 
   const PER_PAGE = 4;
@@ -244,6 +239,7 @@ const Lands = () => {
     setPage(newValue);
     console.log(_Data);
   }
+
   console.log("Size Price:", prices.size);
   useEffect(() => {
     fetchLands();
@@ -309,9 +305,6 @@ const Lands = () => {
               <TableCell align="left" className="bold-text">
                 Thêm Giá Tiền
               </TableCell>
-              <TableCell align="left" className="bold-text">
-                Xem Lịch
-              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody style={{ color: "white" }}>
@@ -350,9 +343,6 @@ const Lands = () => {
                     >
                       Giá Tiền
                     </Button>
-                  </TableCell>
-                  <TableCell align="left" className="Details">
-                    <Button>Xem Lịch Đặt</Button>
                   </TableCell>
                 </TableRow>
               ))}
