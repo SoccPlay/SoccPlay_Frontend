@@ -242,22 +242,22 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                     <div className="table-container">
                         <h3>Đặt sân</h3>
                     </div>
-                    <ResourceSwitcher />
-                    {showBookingButton && (
-                        <div className="detailbooking">
-                            <Button
-                                style={{
-                                    width: "200px",
-                                    margin: "10px 0px 0px 300px",
-                                }}
-                                className="detailbookingButton"
-                                onClick={() => handleBookingType5()}
-                                disabled={loading}
-                            >
-                                Đặt sân
-                            </Button>
-                        </div>
-                    )}
+                    <ResourceSwitcher landId={landId} />
+                    {/* {showBookingButton && ( */}
+                    <div className="detailbooking">
+                        <Button
+                            style={{
+                                width: "200px",
+                                margin: "10px 0px 0px 300px",
+                            }}
+                            className="detailbookingButton"
+                            onClick={() => handleBookingType5()}
+                            disabled={loading}
+                        >
+                            Đặt sân
+                        </Button>
+                    </div>
+                    {/* )} */}
                 </div>
             </TabPanel>
 
