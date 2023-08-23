@@ -130,7 +130,7 @@ const List = () => {
           <div className="ground-type">
             <FormControl fullWidth>
               <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                Location
+                Địa Điểm
               </InputLabel>
               <NativeSelect
                 name="location"

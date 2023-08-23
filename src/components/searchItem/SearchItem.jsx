@@ -47,15 +47,13 @@ const SearchItem = ({ landId }) => {
         land.map((lands) => {
           return (
             <div className="searchItem" key={lands.landId}>
-              <img src={lands.pitchImages} alt="" className="siImg" />
+              <img src={lands.image} alt={lands.image} className="siImg" />
               <div className="siDesc">
                 <div className="siDesc">
                   <h1 className="siTitle">{lands.nameLand}</h1>
                   <span className="siDistance">{lands.location}</span>
-                  <span className="siTaxiOp">{lands.description}</span>
-                  <span className="siSubtitle">
-                    Tổng sân: {lands.totalPitch}
-                  </span>
+                  {/* <span className="siTaxiOp">{lands.description}</span> */}
+                  <span className="siTaxiOp">Tổng sân: {lands.totalPitch}</span>
                   {/* <span className="siFeatures">{lands.totalPitch}</span> */}
                   <span className="siCancelOp">Hủy miễn phí </span>
                   <span className="siCancelOpSubtitle">
