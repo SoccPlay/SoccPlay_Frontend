@@ -14,7 +14,7 @@ const Feedback = ({ landId }) => {
     }, []);
 
     return (
-        <div>
+        <div className="height">
             {data &&
                 data.map((item) => {
                     return (

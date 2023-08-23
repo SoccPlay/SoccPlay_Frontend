@@ -454,7 +454,9 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
                 <div className="feedback">
-                    <Feedback landId={landId} />
+                    <div className="left-feedback">
+                        <Feedback landId={landId} />
+                    </div>
                     <div className="column-straight"></div>
                     <Form landId={landId} customerId={customerId} />
                 </div>

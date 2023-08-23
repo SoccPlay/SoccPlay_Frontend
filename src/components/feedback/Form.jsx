@@ -27,10 +27,7 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
     };
     return (
         <div>
-            <h2
-                className="underlined"
-                style={{ marginTop: "30px", marginRight: "50px" }}
-            >
+            <h2 className="underlined" style={{ margin: "30px 0px 0px 0px" }}>
                 Gửi <span class="underlined underline-clip">Đánh giá</span> của
                 bạn:
             </h2>
@@ -40,8 +37,8 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
                         width: "20%",
                         height: "10%",
                         position: "absolute",
-                        top: "51.5%",
-                        left: "61.5%",
+                        bottom: "-19%",
+                        left: "50.5%",
                         margin: "20px",
                     }}
                     name="rate"
@@ -52,8 +49,8 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
                 <textarea
                     style={{
                         position: "absolute",
-                        top: "53.5%",
-                        left: "61.5%",
+                        bottom: "-22%",
+                        left: "50.5%",
                         width: "20%",
                         height: "10%",
                         border: "1px solid #ccc",
@@ -67,8 +64,8 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
                 <Button
                     sx={{
                         position: "absolute",
-                        top: "60%",
-                        left: "55%",
+                        bottom: "-27%",
+                        left: "57.5%",
                         border: "1px solid #ccc",
                     }}
                     onClick={handleSubmitForm}

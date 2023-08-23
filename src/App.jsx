@@ -1,20 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-import scrollreveal from "scrollreveal";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Detail from "./pages/detail/Detail";
 import Homepage from "./pages/homepage/Home";
+import List from "./pages/list/List";
 import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
-import List from "./pages/list/List";
-import Detail from "./pages/detail/Detail";
 // import Profile from "./pages/profile/Profile";
-import SideBar from "./pages/profile/components/SideBar";
 import Profile from "./pages/profile/Profile";
-import { withSnackbar } from "./hook/withSnackbar";
+import "./App.css";
 
 export default function App() {
     return (
-        <div>
+        <div style={{ margin: "0px 10px 0px 10px" }}>
             <Routes>
                 <Route path="/" element={<Homepage />}></Route>
                 <Route exact path="signin" element={<SignIn />} />
