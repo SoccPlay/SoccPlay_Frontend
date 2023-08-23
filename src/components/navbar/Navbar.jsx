@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
-import logo from "../../assets/logo.png";
-import "./style.scss";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { VscChromeClose } from "react-icons/vsc";
-import { Link } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import Slide from "@mui/material/Slide";
-import Profile from "../../pages/profile/Profile";
-import AuthenApi from "../Axios/AuthenApi";
+import jwt_decode from "jwt-decode";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Destination1 from "../../assets/Destination1.png";
+import logo from "../../assets/logo.png";
+import AuthenApi from "../Axios/AuthenApi";
+import Avatar from "../avatar/Avatar";
+import "./style.scss";
 export default function Navbar() {
     const [navbarState, setNavbarState] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(
@@ -58,7 +54,6 @@ export default function Navbar() {
     useEffect(() => {
         decodeToken();
     }, []);
-
     return (
         <div className="Nav">
             <div className="brand">
@@ -86,11 +81,7 @@ export default function Navbar() {
             {isLoggedIn ? (
                 <div className="user">
                     <Link to="/profile" className="avatar">
-                        <img
-                            src={Destination1}
-                            alt="avatar"
-                            className="avatar-img"
-                        />
+                        <Avatar username={username} />
                     </Link>
                     <div className="logout">
                         <Button

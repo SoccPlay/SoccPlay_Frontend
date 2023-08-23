@@ -1,0 +1,21 @@
+.container-avatar {
+    display: flex;
+    width: 3.75rem;
+    height: 3.75rem;
+    padding: 1rem 0.625rem 1rem 0rem;
+    align-items: center;
+    border-radius: 1.875rem;
+    background: #FFCB14;
+    margin-bottom: 5px;
+}
+
+.text-avatar {
+    width: 3.75rem;
+    flex-shrink: 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 1.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%; /* 1.75rem */
+}

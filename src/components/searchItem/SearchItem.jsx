@@ -6,6 +6,12 @@ import { useNavigate } from "react-router-dom";
 const SearchItem = ({ landId }) => {
   const [land, setLand] = useState();
   const [apiDataAvailable, setApiDataAvailable] = useState(false);
+  const policyArr = [
+    "Nước miễn phí, wifi miễn phí",
+    "Hỗ trợ tổ chức giải đấu",
+    "Gửi xe miễn phí",
+  ];
+  const randomElement = policyArr[Math.floor(Math.random() * policyArr.length)];
 
   const fetchLands = async ([]) => {
     try {
@@ -41,13 +47,15 @@ const SearchItem = ({ landId }) => {
         land.map((lands) => {
           return (
             <div className="searchItem" key={lands.landId}>
-              <img src={lands.image} alt="" className="siImg" />
+              <img src={lands.pitchImages} alt="" className="siImg" />
               <div className="siDesc">
                 <div className="siDesc">
                   <h1 className="siTitle">{lands.nameLand}</h1>
                   <span className="siDistance">{lands.location}</span>
-                  {/* <span className="siTaxiOp">{lands.description}</span>  */}
-                  <span className="siTaxiOp">Tổng sân: {lands.totalPitch}</span>
+                  <span className="siTaxiOp">{lands.description}</span>
+                  <span className="siSubtitle">
+                    Tổng sân: {lands.totalPitch}
+                  </span>
                   {/* <span className="siFeatures">{lands.totalPitch}</span> */}
                   <span className="siCancelOp">Hủy miễn phí </span>
                   <span className="siCancelOpSubtitle">
