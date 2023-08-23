@@ -12,6 +12,7 @@ import CustomizedTables from "./History";
 import Lands from "../../owner/components/Land";
 import Pitch from "../../owner/components/Pitch";
 import Prices from "../../owner/components/Price";
+import HistoryBooking from "../../owner/components/HistoryBook";
 const Sidebar = () => {
   const [selected, setSelected] = useState(0);
   const [showRightSide, setShowRightSide] = useState(false);
@@ -38,16 +39,12 @@ const Sidebar = () => {
     <CustomizedTables />,
     <EditProfile />,
   ];
-  const sidebarComponentsCompany = [
-    <Lands />,
-    // <Pitch />,
-    <Prices />,
-  ];
+  const sidebarComponentsCompany = [<Lands />, <Prices />, <HistoryBooking />];
   const renderRightSide = () => {
     if (userRole === "CUSTOMER") {
       return selected < 3;
     } else if (userRole === "OWNER") {
-      return selected < 3;
+      return selected < 4;
     } else {
       return null;
     }

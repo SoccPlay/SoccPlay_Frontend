@@ -152,6 +152,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   const handleBookingType5 = async () => {
     setLoading(true);
     if (!customerId) {
+      localStorage.setItem("redirectPath", window.location.pathname);
       navigate("/signin");
       return;
     }

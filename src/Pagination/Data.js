@@ -41,7 +41,7 @@ export const SidebarDataCompany = [
   },
   {
     icon: UilPackage,
-    heading: "Giá Sân",
+    heading: "Lịch Sử Đặt",
   },
 ];
 export const TableStaff = [

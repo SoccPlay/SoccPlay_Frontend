@@ -30,6 +30,8 @@ import {
   handleCloseDialogTest,
   handleInputChangeTest,
 } from "./Handler";
+import HistoryBooking from "./HistoryBook";
+
 const makeStyle = (status) => {
   if (status === "Approved") {
     return {
@@ -224,6 +226,9 @@ const Lands = () => {
       console.error(error.response);
     }
   };
+  const ChangePage = (landId) => {
+    <HistoryBooking landId={landId} />;
+  };
   //----------------------------------------------------------------
 
   const PER_PAGE = 4;
@@ -304,6 +309,9 @@ const Lands = () => {
               <TableCell align="left" className="bold-text">
                 Thêm Giá Tiền
               </TableCell>
+              <TableCell align="left" className="bold-text">
+                Xem Lịch
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody style={{ color: "white" }}>
@@ -342,6 +350,9 @@ const Lands = () => {
                     >
                       Giá Tiền
                     </Button>
+                  </TableCell>
+                  <TableCell align="left" className="Details">
+                    <Button>Xem Lịch Đặt</Button>
                   </TableCell>
                 </TableRow>
               ))}
