@@ -1,24 +1,23 @@
-import React, { useEffect, useState, useCallback, Fragment } from "react";
-import SearchItem from "../../components/searchItem/SearchItem";
-import Navbar from "../../components/navbar/Navbar";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Footer from "../../components/footer/Footer";
-import { useLocation, useParams } from "react-router-dom";
-import axios from "axios";
+import Navbar from "../../components/navbar/Navbar";
+import SearchItem from "../../components/searchItem/SearchItem";
 
-import "./list.css";
-import LandApi from "../../components/Axios/LandApi";
-import * as FilterApi from "../../components/Axios/FilterApi";
 import {
-  Pagination,
-  Slider,
-  Grid,
+  Button,
   FormControl,
+  Grid,
   InputLabel,
   NativeSelect,
-  Stack,
+  Pagination,
   Rating,
-  Button,
+  Slider,
+  Stack,
 } from "@mui/material";
+import * as FilterApi from "../../components/Axios/FilterApi";
+import LandApi from "../../components/Axios/LandApi";
+import "./list.css";
 
 const List = () => {
   const { selectedStreet, groundName } = useParams();
@@ -70,7 +69,7 @@ const List = () => {
       return { ...pre, [checkboxValue]: isChecked };
     });
   };
-  console.log("size: ", size);
+
   const handleSearch = async () => {
     let sizeSubmit =
       size?.["5"] && size?.["7"]
@@ -126,11 +125,18 @@ const List = () => {
       <Navbar />
       <Grid className="main" container spacing={2}>
         <Grid className="column-left" xs={2.5}>
-          <h1 className="title-left">Filters</h1>
+          <h1 className="title-left">
+            <h2 class="title">
+              <span class="title-word title-word-1">Fi</span>
+              <span class="title-word title-word-2">l</span>
+              <span class="title-word title-word-3">te</span>
+              <span class="title-word title-word-4">r</span>
+            </h2>
+          </h1>
           <div className="ground-type">
             <FormControl fullWidth>
               <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                Địa Điểm
+                Địa điểm
               </InputLabel>
               <NativeSelect
                 name="location"
@@ -160,7 +166,7 @@ const List = () => {
               </NativeSelect>
             </FormControl>
             <h1 className="coll text">
-              Price: {formatPrice(range[0])} - {formatPrice(range[1])}
+              Giá tiền: {formatPrice(range[0])} - {formatPrice(range[1])}
             </h1>
 
             <Slider
@@ -169,7 +175,7 @@ const List = () => {
               onChange={handleChanges}
               sx={{ width: "85%" }}
             />
-            <h1 className="coll text">Size</h1>
+            <h1 className="coll text">Cỡ sân</h1>
             {[5, 7].map((size) => {
               return (
                 <Fragment key={size}>
@@ -182,14 +188,14 @@ const List = () => {
                         value={size}
                         onChange={handleCheckboxChange}
                       />
-                      <label for={`checkbox-size-${size}`}>Size{size}</label>
+                      <label for={`checkbox-size-${size}`}>Sân{size}</label>
                     </div>
                   </div>
                 </Fragment>
               );
             })}
           </div>
-          <h1 className="coll text">Rating</h1>
+          <h1 className="coll text">Đánh giá</h1>
           <Stack spacing={1}>
             <Rating
               name="half-rating"
@@ -203,12 +209,18 @@ const List = () => {
             sx={{ marginTop: 2 }}
             variant="contained"
           >
-            Search
+            Tìm kiếm
           </Button>
         </Grid>
         <Grid xs={8}>
           <div className="title">
-            <h3 className="groud-name">List Pitch Search {}</h3>
+            <h3 className="groud-name">
+              <h2 class="title">
+                <span class="title-word title-word-1">Danh </span>
+                <span class="title-word title-word-2">Sách </span>
+                <span class="title-word title-word-3">Sân</span>
+              </h2>
+            </h3>
           </div>
           <div className="list">
             {apiDataAvailable &&
