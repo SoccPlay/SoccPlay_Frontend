@@ -7,7 +7,10 @@ const BookingApi = {
   },
   Calculator: async (form) => {
     // const url = `/Price/Calculator`;
-    return axiosApi.post("https://localhost:7186/api/Price/Calculator", form);
+    return axiosApi.post("Price/Calculator", form);
+  },
+  GetAllBookingByOwnerId: async (id) => {
+    return axiosApi.get(`Booking/GetAllBookingByOwnerId?id=${id}`);
   },
 };
 

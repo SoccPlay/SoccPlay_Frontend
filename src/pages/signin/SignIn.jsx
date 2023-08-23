@@ -68,7 +68,14 @@ export default function SignIn() {
         localStorage.setItem("localtoken", token.data.data.token);
         console.log("Login successful! Token:", token.data.data.token);
         setSussess("Login successful!");
-        navigateWithDelay("/", 3000);
+        const redirectPath = localStorage.getItem("redirectPath");
+        if (redirectPath) {
+          navigate(redirectPath);
+          localStorage.removeItem("redirectPath"); // Xóa địa chỉ đã ghi nhớ sau khi sử dụng
+        } else {
+          // Mặc định chuyển hướng đến một trang khác nếu không có địa chỉ ghi nhớ
+          navigateWithDelay("/", 3000);
+        }
       } else {
         setError(token.message);
         console.log(token.message);
