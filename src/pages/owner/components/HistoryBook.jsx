@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   InputLabel,
@@ -11,7 +11,6 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
 import BookingApi from "../../../components/Axios/BookingApi";
 import { FormControl, MenuItem, Select } from "@mui/base";
 import { Box } from "@mui/system";
@@ -40,12 +39,17 @@ export default function HistoryBooking() {
   const [booking, setBooking] = useState([]);
   const onwerId = localStorage.getItem("OWNERID");
 
-  // console.log("LANDIDHISTORYBOOKING", landId);
+  const [selectedLandId, setSelectedLandId] = useState(""); // State to store the selected landId
+
+  const handleChange = (event) => {
+    setSelectedLandId(event.target.value); // Update the selected landId when a new one is chosen
+  };
+
   const fetchBooking = async () => {
     try {
       const response = await BookingApi.GetAllBookingByOwnerId(onwerId);
       setBooking(response.data);
-      console.log("Booking:", response.data);
+      setIsLoading(false);
     } catch (error) {
       setError(error);
       setIsLoading(false);
@@ -55,8 +59,9 @@ export default function HistoryBooking() {
   useEffect(() => {
     fetchBooking();
   }, [onwerId]);
+
   return (
-    <div
+    <Box
       className="Table"
       style={{
         // height: "100vh",
@@ -114,20 +119,21 @@ export default function HistoryBooking() {
               </TableRow>
             </TableRow>
           </TableHead>
-          {booking.map((bookings) => {
-            return (
-              <TableRow>
-                <TableCell align="left" className="bold-text">
-                  {bookings.landId}
-                </TableCell>
-                <TableCell align="left" className="bold-text">
-                  {bookings.name}
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          {booking &&
+            booking.map((bookings) => {
+              return (
+                <TableRow>
+                  <TableCell align="left" className="bold-text">
+                    {bookings.landId}
+                  </TableCell>
+                  <TableCell align="left" className="bold-text">
+                    {bookings.name}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 }
