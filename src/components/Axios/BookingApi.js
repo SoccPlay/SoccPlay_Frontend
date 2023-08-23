@@ -10,7 +10,7 @@ const BookingApi = {
     return axiosApi.post("Price/Calculator", form);
   },
   GetAllBookingByOwnerId: async (id) => {
-    return axiosApi.get(`Booking/GetAllBookingByOwnerId?id=${id}`);
+    return axiosApi.get(`Booking/GetAllBookingByOwnerId_v2?id=${id}`);
   },
 };
 
