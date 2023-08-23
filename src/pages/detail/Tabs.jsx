@@ -5,35 +5,23 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import MicrowaveIcon from "@mui/icons-material/Microwave";
 import WifiIcon from "@mui/icons-material/Wifi";
-import {
-  Button,
-  FormControl,
-  Icon,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Button, Icon } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import BookingApi from "../../components/Axios/BookingApi";
 import LandApi from "../../components/Axios/LandApi";
 import Feedback from "../../components/feedback/Feedback";
 import Form from "../../components/feedback/Form";
+import ResourceSwitcher from "../../components/scheduler/ResourceSwitcher";
 import { withSnackbar } from "../../hook/withSnackbar";
 import "../detail/tabs.css";
-import Popup from "./Popup";
 import { time } from "./TimeConstant";
-import ResourceSwitcher from "../../components/scheduler/ResourceSwitcher";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -153,6 +141,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   const handleBookingType5 = async () => {
     setLoading(true);
     if (!customerId) {
+      localStorage.setItem("redirectPath", window.location.pathname);
       navigate("/signin");
       return;
     }
@@ -283,7 +272,9 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
             <Feedback landId={landId} />
           </div>
           <div className="column-straight"></div>
-          <Form landId={landId} customerId={customerId} />
+          <div>
+            <Form landId={landId} customerId={customerId} />
+          </div>
         </div>
       </TabPanel>
       {/* </SwipeableViews> */}
