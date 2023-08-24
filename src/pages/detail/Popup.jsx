@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Scheduler from "../../components/scheduler/Scheduler";
-import Invoice from "../../components/bill/Order";
+import Order from "../../components/bill/Order";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -58,6 +58,8 @@ export function Popups({ data }) {
     setOpen(false);
   };
 
+  console.log("Data của popup: ", data);
+
   return (
     <div>
       {/* <button
@@ -102,11 +104,7 @@ export function Orders({ data }) {
 
   return (
     <div>
-      <button
-        className="check-order"
-        // style={{ width: "200px" }}
-        onClick={handleClickOpen}
-      >
+      <button className="check-order" onClick={handleClickOpen}>
         Thông Tin Đã Đặt
       </button>
       <BootstrapDialog
@@ -123,7 +121,7 @@ export function Orders({ data }) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            <Invoice data={data} />
+            <Order data={data} />
           </Typography>
         </DialogContent>
       </BootstrapDialog>

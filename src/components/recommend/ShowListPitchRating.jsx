@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.scss";
 import LandApi from "../Axios/LandApi";
 import { Rating, Typography } from "@mui/material";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function ShowListPitchRating() {
   const [value, setValue] = useState(5);

@@ -19,6 +19,7 @@ import {
 import dayjs from "dayjs";
 import { withSnackbar } from "../../../hook/withSnackbar";
 import { Orders } from "../../detail/Popup";
+import { useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,19 +40,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
 }));
+export const formatPrice = (price) => {
+  price = price.toLocaleString("it-IT", {
+    style: "currency",
+    currency: "VND",
+  });
+  return price;
+};
 
 const CustomizedTables = ({ snackbarShowMessage }) => {
   const [data, setData] = useState([]);
 
   const [customer, setCustomer] = useState(localStorage.getItem("CUSTOMERID"));
-
-  const formatPrice = (price) => {
-    price = price.toLocaleString("it-IT", {
-      style: "currency",
-      currency: "VND",
-    });
-    return price;
-  };
 
   const handleDelete = async (id) => {
     try {
@@ -61,6 +61,10 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
     } catch (error) {
       snackbarShowMessage(error, "error");
     }
+  };
+  const nagative = useNavigate();
+  const handleFeedback = async (landId) => {
+    nagative(`/detail/${landId}`);
   };
 
   const fetchGetallBooking = async () => {
@@ -200,9 +204,18 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
                         Đã hủy
                       </div>
                     )}
+                    {row.status === "Done" && (
+                      <Button
+                        onClick={() => handleFeedback(row.bookingId)}
+                        variant="outlined"
+                        color="warning"
+                      >
+                        Đánh giá
+                      </Button>
+                    )}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    <Orders />
+                    <Orders data={row.bookingId} />
                   </StyledTableCell>
                 </StyledTableRow>
               ))}
