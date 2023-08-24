@@ -16,8 +16,8 @@ import "../profile/profile.css";
 const Profile = () => {
   return (
     <div className="App">
-      {<Sidebar />}
-      <div className="AppGlass">{/* <CustomizedTables /> */}</div>
+      <Sidebar />
+      {/* <div className="AppGlass"><CustomizedTables /></div> */}
     </div>
   );
 };

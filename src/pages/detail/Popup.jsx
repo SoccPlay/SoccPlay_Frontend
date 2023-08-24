@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Scheduler from "../../components/scheduler/Scheduler";
+import Invoice from "../../components/bill/Order";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -47,7 +48,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-export default function Popup({ data }) {
+export function Popups({ data }) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -85,6 +86,47 @@ export default function Popup({ data }) {
         </DialogContent>
       </BootstrapDialog> */}
       <Scheduler data={data} />
+    </div>
+  );
+}
+
+export function Orders({ data }) {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <button
+        className="check-order"
+        // style={{ width: "200px" }}
+        onClick={handleClickOpen}
+      >
+        Thông Tin Đã Đặt
+      </button>
+      <BootstrapDialog
+        maxWidth={"md"}
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <BootstrapDialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+        >
+          Thông Tin Đã Đặt
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            <Invoice data={data} />
+          </Typography>
+        </DialogContent>
+      </BootstrapDialog>
     </div>
   );
 }

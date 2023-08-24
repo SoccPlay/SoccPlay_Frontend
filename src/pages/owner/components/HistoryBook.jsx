@@ -17,6 +17,7 @@ import BookingApi from "../../../components/Axios/BookingApi";
 import { Select } from "@mui/material";
 import { Box } from "@mui/system";
 import axiosApi from "../../../components/Axios/AxiosApi";
+import { Orders } from "../../detail/Popup";
 const makeStyle = (status) => {
   if (status === "Done") {
     return {
@@ -109,32 +110,35 @@ export default function HistoryBooking() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Đặt Sân ID
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Tên Sân Lớn
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Sân Nhỏ ID
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Ngày Đặt
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Bắt Đầu
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Kết Thúc
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Trạng Thái
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Giá Tiền
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              <TableCell align="center" className="bold-text">
                 Customer ID
+              </TableCell>
+              <TableCell align="center" className="bold-text">
+                Hóa Đơn
               </TableCell>
             </TableRow>
           </TableHead>
@@ -143,25 +147,13 @@ export default function HistoryBooking() {
               _Data.map((bookings) => {
                 return (
                   <TableRow key={bookings.bookingId}>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.bookingId}
-                    </TableCell>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.name}
-                    </TableCell>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.pitchName}
-                    </TableCell>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.dateBooking}
-                    </TableCell>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.startTime}
-                    </TableCell>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.endTime}
-                    </TableCell>
-                    <TableCell>
+                    <TableCell align="center">{bookings.bookingId}</TableCell>
+                    <TableCell align="center">{bookings.name}</TableCell>
+                    <TableCell align="center">{bookings.pitchName}</TableCell>
+                    <TableCell align="center">{bookings.dateBooking}</TableCell>
+                    <TableCell align="center">{bookings.startTime}</TableCell>
+                    <TableCell align="center">{bookings.endTime}</TableCell>
+                    <TableCell align="center">
                       <Select
                         value={bookings.status}
                         onChange={(event) => {
@@ -184,11 +176,10 @@ export default function HistoryBooking() {
                         ))}
                       </Select>
                     </TableCell>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.totalPrice}
-                    </TableCell>
-                    <TableCell align="left" className="bold-text">
-                      {bookings.customerId}
+                    <TableCell align="center">{bookings.totalPrice}</TableCell>
+                    <TableCell align="center">{bookings.customerId}</TableCell>
+                    <TableCell align="center">
+                      <Orders />
                     </TableCell>
                   </TableRow>
                 );

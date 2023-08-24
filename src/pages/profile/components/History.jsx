@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import { withSnackbar } from "../../../hook/withSnackbar";
+import { Orders } from "../../detail/Popup";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -92,8 +93,8 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
   useEffect(() => {
     const fetchBooking = async () => {
       const response = await BookingApi.getAllBooking(customer);
+      console.log("GET ALL BOOKING: ", response);
       setData(response);
-      console.log(response);
     };
     fetchBooking();
   }, []);
@@ -115,7 +116,7 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
           marginLeft={2.5}
           marginTop={2.5}
         >
-          Lịch sử đặt sân
+          Lịch Sử Đặt Sân
         </Typography>
         <Table
           sx={{ margin: "20px", width: "170vh" }}
@@ -123,18 +124,21 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
         >
           <TableHead>
             <TableRow>
-              <StyledTableCell>Tên sân</StyledTableCell>
-              <StyledTableCell width={200}>Địa chỉ</StyledTableCell>
-              <StyledTableCell width={200} align="right">
-                Ngày đặt sân
+              <StyledTableCell align="center">Tên Sân</StyledTableCell>
+              <StyledTableCell width={200} align="center">
+                Địa Chỉ
               </StyledTableCell>
-              <StyledTableCell width={200} align="right">
-                Giờ đá
+              <StyledTableCell width={200} align="center">
+                Ngày Đặt Sân
               </StyledTableCell>
-              <StyledTableCell align="right">Loại sân</StyledTableCell>
-              <StyledTableCell align="right">Ghi chú</StyledTableCell>
-              <StyledTableCell align="right">giá tiền</StyledTableCell>
-              <StyledTableCell align="right">Hủy đặt</StyledTableCell>
+              <StyledTableCell width={200} align="center">
+                Giờ Đá
+              </StyledTableCell>
+              <StyledTableCell align="center">Loại Sân</StyledTableCell>
+              <StyledTableCell align="center">Ghi Chú</StyledTableCell>
+              <StyledTableCell align="center">Giá Tiền</StyledTableCell>
+              <StyledTableCell align="center">Hủy Đặt</StyledTableCell>
+              <StyledTableCell align="center">Hóa Đơn</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -155,29 +159,29 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
             {_Data &&
               _Data.map((row) => (
                 <StyledTableRow key={row.bookingId}>
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell component="th" scope="row" align="center">
                     {row.name}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell align="center">
                     {row.location}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell align="center">
                     {dayjs(row.dateBooking).format("DD-MM-YYYY")}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell align="center">
                     {dayjs(row.startTime).format("DD-MM-YYYY")}
                     {":"}
                     {row.startTime.split("T")[1].slice(0, 5)}
                     {"->"}
                     {row.endTime.split("T")[1].slice(0, 5)}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{row.size}</StyledTableCell>
-                  <StyledTableCell align="right">{row.note}</StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell align="center">{row.size}</StyledTableCell>
+                  <StyledTableCell align="center">{row.note}</StyledTableCell>
+                  <StyledTableCell align="center">
                     {/* format VND */}
                     {formatPrice(row.totalPrice)}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell align="center">
                     {row.status === "Waiting" ? (
                       <Button
                         onClick={() => handleDelete(row.bookingId)}
@@ -196,6 +200,9 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
                         Đã hủy
                       </div>
                     )}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <Orders />
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

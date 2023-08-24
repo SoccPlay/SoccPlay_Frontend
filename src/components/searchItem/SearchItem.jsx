@@ -47,7 +47,7 @@ const SearchItem = ({ landId }) => {
         land.map((lands) => {
           return (
             <div className="searchItem" key={lands.landId}>
-              <img src={lands.pitchImages} alt="" className="siImg" />
+              <img src={lands.image} alt="" className="siImg" />
               <div className="siDesc">
                 <div className="siDesc">
                   <h1 className="siTitle">{lands.nameLand}</h1>
