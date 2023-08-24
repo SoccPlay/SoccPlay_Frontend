@@ -9,6 +9,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Scheduler from "../../components/scheduler/Scheduler";
 import Order from "../../components/bill/Order";
+import Invoice from "../../components/bill/Invoice";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
