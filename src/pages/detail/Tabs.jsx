@@ -236,6 +236,34 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
             setLoading(false);
         }
     };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
+        // Calculate the price difference and update the state
+        const start = `${dateBooking}T${time[selectedHours.hourFrom]}:00.000Z`;
+        const end = `${dateBooking}T${time[selectedHours.hourTo]}:00.000Z`;
+        const bookingData = {
+            landId: landId,
+            size: size,
+            starTime: start,
+            endTime: end,
+        };
+        try {
+            const response = await BookingApi.Calculator(bookingData);
+            console.log("Giá Tiền:", response.data);
+            snackbarShowMessage("Xem Giá Thành Công", "success");
+            setPriceText(response.data);
+            setShowBookingButton(true);
+            setCount(count + 1);
+        } catch (error) {
+            console.error("Error creating booking:", error.response.data);
+
+            //   snackbarShowMessage(error.response.data, "error");
+        } finally {
+            setLoading(false);
+        }
+    }, [selectedHours.hourFrom, selectedHours.hourTo, size, dateBooking]);
+
     useEffect(() => {
         console.log("CustomerId: " + customerId);
         setCustomerId(localStorage.getItem("CUSTOMERID"));
@@ -409,7 +437,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                                     </FormControl>
 
                                     <div class="detailtop">
-                                        <Button
+                                        {/* <Button
                                             sx={{
                                                 width: "100px",
                                                 marginTop: "2%",
@@ -418,7 +446,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                                             onClick={handlePriceChange}
                                         >
                                             Xem giá
-                                        </Button>
+                                        </Button> */}
                                         <Typography className="priceText">
                                             {priceText} VND
                                         </Typography>
