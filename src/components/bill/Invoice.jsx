@@ -11,35 +11,50 @@ import {
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import qrcode from "../../assets/qrcode.png";
-import * as invoiceApi from "../../components/Axios/InvoiceApi";
+import arrowBack from "../../assets/arrowBack.png";
+import * as invoiceApi from "../Axios/InvoiceApi";
 import { formatPrice } from "../../pages/profile/components/History";
+import { useParams } from "react-router-dom";
 
-const Order = ({ data }) => {
+const Invoice = () => {
+  const { bookingId } = useParams();
   const [invoice, setInvoice] = useState([]);
-  const [bookingId, setBookingId] = useState("");
+  const [booking, setBooking] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [price, setPrice] = useState("");
   useEffect(() => {
     async function fetchInvoice() {
       try {
-        const res = await invoiceApi.getInvoiceByBookingId(data);
+        const res = await invoiceApi.getInvoiceByBookingId(bookingId);
         setInvoice(res.data);
         let string = res.data.bookingId;
         let result = string.split("-")[0];
         setStartTime(res.data.startTime.split("T")[1].slice(0, 5));
         setEndTime(res.data.endTime.split("T")[1].slice(0, 5));
         setPrice(formatPrice(res.data.totalPrice));
-        setBookingId(result);
+        setBooking(result);
       } catch (error) {
         console.log(error);
       }
     }
     fetchInvoice();
-  }, [data]);
+  }, [bookingId]);
 
   return (
     <Box>
+      <img
+        src={arrowBack}
+        alt="Company logo"
+        style={{
+          width: "100%",
+          maxWidth: 100,
+          padding: 10,
+          cursor: "pointer",
+          transition: "background-color 0.3s ease",
+        }}
+        onClick={() => window.history.back()}
+      />
       <div className="text-center text-black">
         <Typography variant="h3">Hóa đơn chi tiết</Typography>
         <Typography>Cảm ơn bạn đã tin tưởng chúng tôi</Typography>
@@ -70,7 +85,7 @@ const Order = ({ data }) => {
                         />
                       </TableCell>
                       <TableCell sx={{ width: 450 }}>
-                        Hóa đơn #: {bookingId}
+                        Hóa đơn #: {booking}
                         <br />
                         Ngày tạo:{" "}
                         {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
@@ -82,7 +97,6 @@ const Order = ({ data }) => {
                 </TableCell>
               </TableRow>
             </TableHead>
-
             <TableBody>
               <TableRow className="information">
                 <TableCell colSpan={2}>
@@ -153,4 +167,4 @@ const Order = ({ data }) => {
   );
 };
 
-export default Order;
+export default Invoice;

@@ -118,8 +118,6 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
           hourTo: value,
         };
       }
-      //   const startTime = time[prevData.hourFrom];
-      //   const endTime = time[prevData.hourTo];
 
       return prevData;
     });
@@ -128,10 +126,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   const handleSize = (event) => {
     setSize(event.target.value);
   };
-  //   console.log("DateFormat: " + date);
-  //   console.log("Size: " + size);
-  //   console.log("StartTime:", time[selectedHours.hourFrom]);
-  //   console.log("EndTime:", time[selectedHours.hourTo]);
+
   const fetchLands = async () => {
     try {
       const response = await LandApi.GetLandById(landId);
@@ -164,8 +159,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
       customerId: customerId,
       price: priceText,
     };
-    console.log("Start: " + start);
-    console.log("End: " + end);
+
     try {
       if (!customerId) {
         localStorage.setItem("bookingData", JSON.stringify(bookingData));
@@ -173,14 +167,27 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
         navigate("/signin");
         return;
       }
+      // const storedBookingData = localStorage.getItem("bookingData");
+      // if (storedBookingData) {
+      //   const parsedBookingData = JSON.parse(storedBookingData);
+
+      //   // Gán dữ liệu vào các trường tương ứng
+      //   landId = parsedBookingData.landId;
+      //   note = parsedBookingData.Note;
+      //   size = parsedBookingData.Size;
+      //   start = parsedBookingData.starTime;
+      //   end = parsedBookingData.endTime;
+      //   priceText = parsedBookingData.price;
+      //   const response = await BookingApi.CreateBooking(parsedBookingData);
+      //   console.log("Booking response:", response.data);
+      //   snackbarShowMessage("Đặt sân thành công", "success");
+      //   // Xóa dữ liệu đã lưu sau khi đã sử dụng
+      //   localStorage.removeItem("bookingData");
+      // } else {
       const response = await BookingApi.CreateBooking(bookingData);
-      console.log("Booking response:", response.data);
+      console.log("Booking response:", response.data.bookingId);
       snackbarShowMessage("Đặt sân thành công", "success");
-      if (response != null) {
-        console.log("BookingID: ", response.data.bookingId);
-        setShowBill(true);
-        setBookingID(response.data.bookingId);
-      }
+      navigate(`/invoice/${response.data.bookingId}`);
       // }
     } catch (error) {
       console.error("Error creating booking:", error.response.data.Messages);
@@ -211,8 +218,6 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
       setCount(count + 1);
     } catch (error) {
       console.error("Error creating booking:", error.response.data);
-
-      //   snackbarShowMessage(error.response.data, "error");
     } finally {
       setLoading(false);
     }
@@ -450,7 +455,6 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
           </div>
         </div>
       </TabPanel>
-      {/* </SwipeableViews> */}
     </Box>
   );
 }
