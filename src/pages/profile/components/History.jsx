@@ -124,6 +124,7 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
         >
           <TableHead>
             <TableRow>
+              <StyledTableCell align="center">Đặt Sân ID</StyledTableCell>
               <StyledTableCell align="center">Tên Sân</StyledTableCell>
               <StyledTableCell width={200} align="center">
                 Địa Chỉ
@@ -160,8 +161,9 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
               _Data.map((row) => (
                 <StyledTableRow key={row.bookingId}>
                   <StyledTableCell component="th" scope="row" align="center">
-                    {row.name}
+                    {row.bookingId}
                   </StyledTableCell>
+                  <StyledTableCell align="center">{row.name}</StyledTableCell>
                   <StyledTableCell align="center">
                     {row.location}
                   </StyledTableCell>
@@ -202,7 +204,7 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
                     )}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    <Orders />
+                    <Orders data={row.bookingId} />
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

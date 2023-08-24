@@ -179,7 +179,7 @@ export default function HistoryBooking() {
                     <TableCell align="center">{bookings.totalPrice}</TableCell>
                     <TableCell align="center">{bookings.customerId}</TableCell>
                     <TableCell align="center">
-                      <Orders />
+                      <Orders data={bookings.bookingId} />
                     </TableCell>
                   </TableRow>
                 );
