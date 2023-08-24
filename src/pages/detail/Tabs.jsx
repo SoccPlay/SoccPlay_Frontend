@@ -276,68 +276,67 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                     </div>
                     <div className="flex">
                         <div className="left-column">
-                            <LocalizationProvider
-                                dateFormats={"DD/MM/YYYY"}
-                                dateAdapter={AdapterDayjs}
-                            >
-                                <DemoContainer
-                                    style={{ display: "contents" }}
-                                    components={["DatePicker"]}
-                                >
-                                    <p
-                                        style={{
-                                            paddingTop: "12.5px",
-                                        }}
-                                    >
-                                        Ngày đặt:{" "}
-                                    </p>
-                                    <DatePicker
-                                        label="DD-MM-YYYY"
-                                        disablePast
-                                        format="DD-MM-YYYY"
-                                        defaultValue={dayjs()}
-                                        onChange={handleDateChange}
-                                    />
-                                    <Box sx={{ minWidth: 80 }}>
-                                        <FormControl fullWidth>
-                                            <InputLabel id="demo-simple-select-label">
-                                                Size
-                                            </InputLabel>
-                                            <Select
-                                                labelId="demo-simple-select-label"
-                                                id="demo-simple-select"
-                                                value={size}
-                                                label="Size"
-                                                onChange={handleSize}
-                                            >
-                                                <MenuItem value={5}>
-                                                    Sân 5
-                                                </MenuItem>
-                                                <MenuItem value={7}>
-                                                    Sân 7
-                                                </MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                    </Box>
-                                </DemoContainer>
-                                <textarea
-                                    style={{
-                                        margin: "1rem 0px 0px 5rem",
-                                        width: "65%",
-                                        height: "50%",
-                                        border: "1px solid #ccc",
-                                    }}
-                                    placeholder="Ghi chú cho chủ sân"
-                                    minRows={4}
-                                    size="lg"
-                                    onChange={handleNoteChange}
-                                />
-                            </LocalizationProvider>
-
                             <Popup data={data} />
                         </div>
                         <div className="right-column">
                             <div>
+                                <LocalizationProvider
+                                    dateFormats={"DD/MM/YYYY"}
+                                    dateAdapter={AdapterDayjs}
+                                >
+                                    <DemoContainer
+                                        style={{ display: "contents" }}
+                                        components={["DatePicker"]}
+                                    >
+                                        <p
+                                            style={{
+                                                paddingTop: "12.5px",
+                                            }}
+                                        >
+                                            Ngày đặt:{" "}
+                                        </p>
+                                        <DatePicker
+                                            label="DD-MM-YYYY"
+                                            disablePast
+                                            format="DD-MM-YYYY"
+                                            defaultValue={dayjs()}
+                                            onChange={handleDateChange}
+                                        />
+                                        <Box sx={{ minWidth: 80 }}>
+                                            <FormControl fullWidth>
+                                                <InputLabel id="demo-simple-select-label">
+                                                    Size
+                                                </InputLabel>
+                                                <Select
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    value={size}
+                                                    label="Size"
+                                                    onChange={handleSize}
+                                                >
+                                                    <MenuItem value={5}>
+                                                        Sân 5
+                                                    </MenuItem>
+                                                    <MenuItem value={7}>
+                                                        Sân 7
+                                                    </MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </Box>
+                                    </DemoContainer>
+                                    <textarea
+                                        style={{
+                                            margin: "1rem 0px 0px 5rem",
+                                            width: "65%",
+                                            height: "50%",
+                                            border: "1px solid #ccc",
+                                        }}
+                                        placeholder="Ghi chú cho chủ sân"
+                                        minRows={4}
+                                        size="lg"
+                                        onChange={handleNoteChange}
+                                    />
+                                </LocalizationProvider>
                                 <p
                                     style={{
                                         margin: "0.5rem",

@@ -59,14 +59,14 @@ export default function Popup({ data }) {
 
   return (
     <div>
-      <button
+      {/* <button
         className="check-calender"
         style={{ width: "200px" }}
         onClick={handleClickOpen}
       >
         Xem khung giờ trống
-      </button>
-      <BootstrapDialog
+      </button> */}
+      {/* <BootstrapDialog
         maxWidth={"xl"}
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
@@ -83,7 +83,8 @@ export default function Popup({ data }) {
             <Scheduler data={data} />
           </Typography>
         </DialogContent>
-      </BootstrapDialog>
+      </BootstrapDialog> */}
+      <Scheduler data={data} />
     </div>
   );
 }
