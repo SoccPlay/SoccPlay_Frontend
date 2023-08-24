@@ -61,7 +61,7 @@ export default function Scheduler({ data }) {
         </TableHead>
         {TIME.map((time) => (
           <TableRow key={time}>
-            <TableCell>{time}</TableCell>
+            <TableCell>{time.substring(0, 5)}</TableCell>
             {schedules &&
               schedules.map((item) => {
                 let isBooked = false;
