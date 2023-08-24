@@ -12,6 +12,9 @@ const BookingApi = {
   GetAllBookingByOwnerId: async (id) => {
     return axiosApi.get(`Booking/GetAllBookingByOwnerId_v2?id=${id}`);
   },
+  GetBookingById: async (id) => {
+    return axiosApi.get(`Booking/GetBookingById?id=${id}`);
+  },
 };
 
 export const getAllBooking = async (id) => {

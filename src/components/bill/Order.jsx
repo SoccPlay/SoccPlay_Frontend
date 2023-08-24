@@ -82,6 +82,7 @@ const Order = ({ data }) => {
                 </TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               <TableRow className="information">
                 <TableCell colSpan={2}>

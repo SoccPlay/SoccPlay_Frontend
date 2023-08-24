@@ -31,7 +31,7 @@ import Feedback from "../../components/feedback/Feedback";
 import Form from "../../components/feedback/Form";
 import { withSnackbar } from "../../hook/withSnackbar";
 import "../detail/tabs.css";
-import { Popups } from "./Popup";
+import { Bills, Orders, Popups } from "./Popup";
 import { time } from "./TimeConstant";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,6 +68,8 @@ function a11yProps(index) {
 function FullWidthTabs({ landId, snackbarShowMessage }) {
   const theme = useTheme();
   const [value, setValue] = useState(0);
+  const [bookingID, setBookingID] = useState();
+  const [showbill, setShowBill] = useState(false);
   const [customerId, setCustomerId] = useState();
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -212,6 +214,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
       snackbarShowMessage("Xem Giá Thành Công", "success");
       setPriceText(response.data);
       setShowBookingButton(true);
+
       setCount(count + 1);
     } catch (error) {
       console.error("Error creating booking:", error.response.data);
@@ -381,7 +384,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                         width: "100px",
                         marginTop: "2%",
                       }}
-                      className="detailbookingButton"
+                      className="check-button"
                       onClick={handlePriceChange}
                     >
                       Xem giá
@@ -405,6 +408,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                   >
                     Đặt sân
                   </Button>
+                  {showbill && <Bills data={bookingID} />}
                 </div>
               )}
             </div>

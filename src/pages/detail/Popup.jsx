@@ -128,3 +128,44 @@ export function Orders({ data }) {
     </div>
   );
 }
+
+export function Bills({ data }) {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div>
+      <button
+        className="check-order"
+        // style={{ width: "200px" }}
+        onClick={handleClickOpen}
+      >
+        Thông Tin Đã Đặt
+      </button>
+      <BootstrapDialog
+        maxWidth={"md"}
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <BootstrapDialogTitle
+          id="customized-dialog-title"
+          onClose={handleClose}
+        >
+          Thông Tin Đã Đặt
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            <Invoice data={data} />
+          </Typography>
+        </DialogContent>
+      </BootstrapDialog>
+    </div>
+  );
+}
