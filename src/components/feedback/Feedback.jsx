@@ -9,6 +9,7 @@ const Feedback = ({ landId }) => {
     const fetchData = async () => {
       const res = await FeedbackApi.getFeedBackByLandId(landId);
       setData(res.data);
+      fetchData();
     };
     fetchData();
   }, []);

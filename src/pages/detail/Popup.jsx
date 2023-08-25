@@ -163,7 +163,7 @@ export function Bills({ data }) {
         </BootstrapDialogTitle>
         <DialogContent dividers>
           <Typography gutterBottom>
-            <Invoice data={data} />
+            <Order data={data} />
           </Typography>
         </DialogContent>
       </BootstrapDialog>

@@ -10,6 +10,7 @@ import SignUp from "./pages/signup/SignUp";
 
 import "./App.css";
 import Invoice from "./components/bill/Invoice";
+import Feedback from "./components/feedback/Feedback";
 
 export default function App() {
   return (

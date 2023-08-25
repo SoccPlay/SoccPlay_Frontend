@@ -19,7 +19,7 @@ import {
 import dayjs from "dayjs";
 import { withSnackbar } from "../../../hook/withSnackbar";
 import { Orders } from "../../detail/Popup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -64,7 +64,7 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
   };
   const nagative = useNavigate();
   const handleFeedback = async (landId) => {
-    nagative(`/detail/${landId}`);
+    nagative(`detail/${landId}`);
   };
 
   const fetchGetallBooking = async () => {
@@ -207,13 +207,11 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
                       </div>
                     )}
                     {row.status === "Done" && (
-                      <Button
-                        onClick={() => handleFeedback(row.bookingId)}
-                        variant="outlined"
-                        color="warning"
-                      >
-                        Đánh giá
-                      </Button>
+                      <Link to={`/detail/${row.landId}`}>
+                        <Button variant="outlined" color="warning">
+                          Đánh giá
+                        </Button>
+                      </Link>
                     )}
                   </StyledTableCell>
                   <StyledTableCell align="center">

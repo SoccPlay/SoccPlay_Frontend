@@ -24,6 +24,7 @@ const Order = ({ data }) => {
     async function fetchInvoice() {
       try {
         const res = await invoiceApi.getInvoiceByBookingId(data);
+        console.log("Invoice fetched", res.data);
         setInvoice(res.data);
         let string = res.data.bookingId;
         let result = string.split("-")[0];
@@ -70,7 +71,7 @@ const Order = ({ data }) => {
                         />
                       </TableCell>
                       <TableCell sx={{ width: 450 }}>
-                        Hóa đơn #: {bookingId}
+                        Hóa đơn: {invoice.bookingId}
                         <br />
                         Ngày tạo:{" "}
                         {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
