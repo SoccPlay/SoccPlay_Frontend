@@ -63,20 +63,25 @@ const Order = ({ data }) => {
                 <TableCell colSpan={2}>
                   <Table>
                     <TableRow>
-                      <TableCell className="title" sx={{ paddingLeft: 15 }}>
+                      <TableCell className="title">
                         <img
-                          src={qrcode}
-                          alt="Company logo"
-                          style={{ width: "100%", maxWidth: 80 }}
+                          src={invoice.images}
+                          alt="Owner logo"
+                          style={{
+                            width: "80%",
+                            // height: "100%",
+                          }}
                         />
                       </TableCell>
-                      <TableCell sx={{ width: 450 }}>
+                      <TableCell>
                         Hóa đơn: {invoice.bookingId}
                         <br />
                         Ngày tạo:{" "}
                         {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
                         <br />
                         Ghi chú: {invoice.note}
+                        <br />
+                        Địa chỉ: {invoice.location}
                       </TableCell>
                     </TableRow>
                   </Table>
@@ -86,23 +91,25 @@ const Order = ({ data }) => {
 
             <TableBody>
               <TableRow className="information">
-                <TableCell colSpan={2}>
+                <TableCell colSpan={2} sx={{ paddingLeft: 20 }}>
                   <Table>
                     <TableRow>
-                      <TableCell sx={{ paddingLeft: 15 }}>
+                      <TableCell>
                         <Typography variant="subtitle1">Họ tên: </Typography>
-                        <Typography>Tên Sân: </Typography>
-                        <Typography>Địa chỉ: </Typography>
+                        <Typography variant="subtitle1">Tên Sân:</Typography>
+                        <Typography variant="subtitle1">Chủ Sân: </Typography>
                       </TableCell>
-                      <TableCell sx={{}}>
+                      <TableCell>
                         <Typography variant="subtitle1">
                           {invoice.customerName}
                         </Typography>
-                        <Typography>{invoice.landName}</Typography>
-                        <Typography>{invoice.location}</Typography>
+                        <Typography variant="subtitle1">
+                          {invoice.landName}
+                        </Typography>
+                        <Typography>{invoice.nameOwner}</Typography>
                       </TableCell>
                     </TableRow>
-                  </Table>{" "}
+                  </Table>
                 </TableCell>
               </TableRow>
 

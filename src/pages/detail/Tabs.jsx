@@ -188,11 +188,11 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
       console.log("Booking response:", response.data.bookingId);
       snackbarShowMessage("Đặt sân thành công", "success");
       navigate(`/invoice/${response.data.bookingId}`);
+      setShowBill(true);
       // }
     } catch (error) {
-      console.error("Error creating booking:", error.response.data.Messages);
-
-      snackbarShowMessage(error.response.data.Messages, "error");
+      console.error("Error creating booking:", error.response.data.Exception);
+      snackbarShowMessage(error.response.data.Exception, "error");
     } finally {
       setLoading(false);
     }
@@ -214,10 +214,10 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
       snackbarShowMessage("Xem Giá Thành Công", "success");
       setPriceText(response.data);
       setShowBookingButton(true);
-
       setCount(count + 1);
     } catch (error) {
-      console.error("Error creating booking:", error.response.data);
+      console.error("Error creating booking:", error.response.data.Exception);
+      snackbarShowMessage(error.response.data.Exception, "error");
     } finally {
       setLoading(false);
     }
@@ -408,7 +408,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                   >
                     Đặt sân
                   </Button>
-                  {showbill && <Bills data={bookingID} />}
+                  {/* {showbill && <Bills data={bookingID} />} */}
                 </div>
               )}
             </div>

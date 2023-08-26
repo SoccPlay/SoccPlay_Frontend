@@ -19,7 +19,7 @@ import { useParams } from "react-router-dom";
 const Invoice = () => {
   const { bookingId } = useParams();
   const [invoice, setInvoice] = useState([]);
-  const [booking, setBooking] = useState("");
+  const [bookingIdd, setBookingId] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [price, setPrice] = useState("");
@@ -27,13 +27,14 @@ const Invoice = () => {
     async function fetchInvoice() {
       try {
         const res = await invoiceApi.getInvoiceByBookingId(bookingId);
+        console.log("Invoice fetched", res.data);
         setInvoice(res.data);
         let string = res.data.bookingId;
         let result = string.split("-")[0];
         setStartTime(res.data.startTime.split("T")[1].slice(0, 5));
         setEndTime(res.data.endTime.split("T")[1].slice(0, 5));
         setPrice(formatPrice(res.data.totalPrice));
-        setBooking(result);
+        setBookingId(result);
       } catch (error) {
         console.log(error);
       }
@@ -77,45 +78,53 @@ const Invoice = () => {
                 <TableCell colSpan={2}>
                   <Table>
                     <TableRow>
-                      <TableCell className="title" sx={{ paddingLeft: 15 }}>
+                      <TableCell className="title">
                         <img
-                          src={qrcode}
-                          alt="Company logo"
-                          style={{ width: "100%", maxWidth: 80 }}
+                          src={invoice.images}
+                          alt="Owner logo"
+                          style={{
+                            width: "80%",
+                            // height: "100%",
+                          }}
                         />
                       </TableCell>
-                      <TableCell sx={{ width: 450 }}>
-                        Hóa đơn #: {booking}
+                      <TableCell>
+                        Hóa đơn: {invoice.bookingId}
                         <br />
                         Ngày tạo:{" "}
                         {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
                         <br />
                         Ghi chú: {invoice.note}
+                        <br />
+                        Địa chỉ: {invoice.location}
                       </TableCell>
                     </TableRow>
                   </Table>
                 </TableCell>
               </TableRow>
             </TableHead>
+
             <TableBody>
               <TableRow className="information">
-                <TableCell colSpan={2}>
+                <TableCell colSpan={2} sx={{ paddingLeft: 20 }}>
                   <Table>
                     <TableRow>
-                      <TableCell sx={{ paddingLeft: 15 }}>
+                      <TableCell>
                         <Typography variant="subtitle1">Họ tên: </Typography>
-                        <Typography>Tên Sân: </Typography>
-                        <Typography>Địa chỉ: </Typography>
+                        <Typography variant="subtitle1">Tên Sân:</Typography>
+                        <Typography variant="subtitle1">Chủ Sân: </Typography>
                       </TableCell>
-                      <TableCell sx={{}}>
+                      <TableCell>
                         <Typography variant="subtitle1">
                           {invoice.customerName}
                         </Typography>
-                        <Typography>{invoice.landName}</Typography>
-                        <Typography>{invoice.location}</Typography>
+                        <Typography variant="subtitle1">
+                          {invoice.landName}
+                        </Typography>
+                        <Typography>{invoice.nameOwner}</Typography>
                       </TableCell>
                     </TableRow>
-                  </Table>{" "}
+                  </Table>
                 </TableCell>
               </TableRow>
 
@@ -166,5 +175,4 @@ const Invoice = () => {
     </Box>
   );
 };
-
 export default Invoice;
