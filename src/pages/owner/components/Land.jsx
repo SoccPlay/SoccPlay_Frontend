@@ -26,7 +26,7 @@ import { useEffect, useState } from "react";
 import LandApi from "../../../components/Axios/LandApi";
 import "./land.scss";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from your router library
-
+import { withSnackbar } from "../../../hook/withSnackbar";
 import HistoryBooking from "./HistoryBook";
 
 const makeStyle = (status) => {
@@ -54,7 +54,7 @@ const createButtonStyle = () => ({
   borderRadius: "10px",
 });
 
-const Lands = () => {
+function Lands({ snackbarShowMessage }) {
   const [open, setOpen] = useState(false);
   const [lands, setLands] = useState([]);
   const onwerId = localStorage.getItem("OWNERID");
@@ -79,10 +79,15 @@ const Lands = () => {
   const fetchLands = async () => {
     try {
       const response = await LandApi.GetLandByOwner(onwerId);
-      setLands(response.data);
-      console.log(response.data);
+      const sortedLands = response.data.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      console.log("now data: ", sortedLands);
+      setLands(sortedLands);
+      snackbarShowMessage("Show data thành công", "success");
     } catch (error) {
       console.error(error);
+      snackbarShowMessage("Không có api", "error");
     }
   };
   const handleOpenDialog = () => {
@@ -156,8 +161,10 @@ const Lands = () => {
       handleClosePitchDialog();
       fetchLands();
       setLandId(null);
+      snackbarShowMessage("Tạo sân nhỏ thành công", "success");
     } catch (error) {
-      console.error(error.response.data.Messages);
+      console.error(error.response.data.Exception);
+      snackbarShowMessage(error.response.data.Exception, "error");
     }
   };
   //----------------------------------------------------------------
@@ -219,8 +226,10 @@ const Lands = () => {
       handleClosePriceDialog();
       fetchLands();
       setLandId(null);
+      snackbarShowMessage("Tạo giá thành công", "success");
     } catch (error) {
       console.error(error.response);
+      snackbarShowMessage(error.response.data.Exception, "error");
     }
   };
 
@@ -511,5 +520,5 @@ const Lands = () => {
       />
     </div>
   );
-};
-export default Lands;
+}
+export default withSnackbar(Lands);

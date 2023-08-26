@@ -8,6 +8,7 @@ import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import AuthenApi from "../../components/Axios/AuthenApi";
 import Typography from "@mui/material/Typography";
+import { withSnackbar } from "../../hook/withSnackbar";
 function Copyright(props) {
   return (
     <Typography
@@ -36,7 +37,7 @@ const theme = createTheme({
   },
 });
 
-export default function SignIn() {
+function SignIn({ snackbarShowMessage }) {
   const [error, setError] = useState(); // Initialize with null
   const [formData, setFormData] = useState({
     username: "",
@@ -55,19 +56,16 @@ export default function SignIn() {
       navigate(path);
     }, delay);
   };
-  const [success, setSussess] = useState();
-
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     try {
       const token = await AuthenApi.Login(formData);
-
       if (token != null) {
         localStorage.setItem("localtoken", token.data.data.token);
         console.log("Login successful! Token:", token.data.data.token);
-        setSussess("Login successful!");
+        snackbarShowMessage("Login successful!", "success");
         const redirectPath = localStorage.getItem("redirectPath");
         if (redirectPath) {
           navigate(redirectPath);
@@ -81,8 +79,8 @@ export default function SignIn() {
         console.log(token.message);
       }
     } catch (error) {
-      console.error("Login error:", error.response.data.Messages);
-      setError(error.response.data.Messages);
+      console.error("Login error:", error.response.data.Exception);
+      snackbarShowMessage(error.response.data.Exception, "error");
     }
   };
 
@@ -169,18 +167,6 @@ export default function SignIn() {
                 Sign Up
               </Link>
             </div>
-            {success && (
-              <Typography
-                variant="body"
-                color="red" // Change to your success color
-                style={{
-                  marginTop: "10px",
-                  textAlign: "center", // Align the text to the center
-                }}
-              >
-                {success}
-              </Typography>
-            )}
             <Button
               type="submit"
               variant="contained"
@@ -189,21 +175,10 @@ export default function SignIn() {
             >
               Login
             </Button>
-            {error && (
-              <Typography
-                variant="body1"
-                color="red"
-                style={{
-                  marginTop: "10px",
-                  textAlign: "center",
-                }}
-              >
-                {error}
-              </Typography>
-            )}
           </form>
         </div>
       </Container>
     </ThemeProvider>
   );
 }
+export default withSnackbar(SignIn);

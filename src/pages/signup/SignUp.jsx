@@ -12,7 +12,7 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-
+import { withSnackbar } from "../../hook/withSnackbar";
 const theme = createTheme({
   palette: {
     primary: {
@@ -42,7 +42,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+function SignUp({ snackbarShowMessage }) {
   const [error, setError] = useState(); // Initialize with null
   const [formData, setFormData] = useState({
     username: "",
@@ -73,15 +73,15 @@ export default function SignUp() {
       const response = await AuthenApi.Register(formData);
       if (response.status === 200) {
         console.log("Registration successful!");
-        setSussess("Registration successful!");
+        snackbarShowMessage("Registration successful!", "success");
         navigateWithDelay("/signin", 3000);
       } else {
         setError(response.message);
         console.log(response.message);
       }
     } catch (error) {
-      console.error("Registration error:", error.response.data.Messages);
-      setError(error.response.data.Messages);
+      console.error("Registration error:", error.response.data.Exception);
+      snackbarShowMessage(error.response.data.Exception, "error");
     }
   };
 
@@ -205,18 +205,7 @@ export default function SignUp() {
               fullWidth
               required
             />
-            {success && (
-              <Typography
-                variant="body"
-                color="red" // Change to your success color
-                style={{
-                  marginBottom: "10px",
-                  textAlign: "center", // Align the text to the center
-                }}
-              >
-                {success}
-              </Typography>
-            )}
+
             <Button
               type="submit"
               variant="contained"
@@ -225,21 +214,10 @@ export default function SignUp() {
             >
               Register
             </Button>
-            {error && (
-              <Typography
-                variant="body"
-                color="red"
-                style={{
-                  marginTop: "10px",
-                  textAlign: "center",
-                }}
-              >
-                {error}
-              </Typography>
-            )}
           </form>
         </div>
       </Container>
     </ThemeProvider>
   );
 }
+export default withSnackbar(SignUp);

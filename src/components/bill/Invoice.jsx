@@ -15,8 +15,8 @@ import arrowBack from "../../assets/arrowBack.png";
 import * as invoiceApi from "../Axios/InvoiceApi";
 import { formatPrice } from "../../pages/profile/components/History";
 import { useParams } from "react-router-dom";
-
-const Invoice = () => {
+import { withSnackbar } from "../../hook/withSnackbar";
+function Invoice({ snackbarShowMessage }) {
   const { bookingId } = useParams();
   const [invoice, setInvoice] = useState([]);
   const [bookingIdd, setBookingId] = useState("");
@@ -35,8 +35,10 @@ const Invoice = () => {
         setEndTime(res.data.endTime.split("T")[1].slice(0, 5));
         setPrice(formatPrice(res.data.totalPrice));
         setBookingId(result);
+        snackbarShowMessage("Xem hóa đơn thành công", "success");
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data.Exception);
+        snackbarShowMessage(error.response.data.Exception, "error");
       }
     }
     fetchInvoice();
@@ -174,5 +176,5 @@ const Invoice = () => {
       </Box>
     </Box>
   );
-};
-export default Invoice;
+}
+export default withSnackbar(Invoice);

@@ -10,11 +10,10 @@ import {
 } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import qrcode from "../../assets/qrcode.png";
 import * as invoiceApi from "../../components/Axios/InvoiceApi";
 import { formatPrice } from "../../pages/profile/components/History";
-
-const Order = ({ data }) => {
+import { withSnackbar } from "../../hook/withSnackbar";
+function Order({ data, snackbarShowMessage }) {
   const [invoice, setInvoice] = useState([]);
   const [bookingId, setBookingId] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -32,8 +31,10 @@ const Order = ({ data }) => {
         setEndTime(res.data.endTime.split("T")[1].slice(0, 5));
         setPrice(formatPrice(res.data.totalPrice));
         setBookingId(result);
+        snackbarShowMessage("Xem hóa đơn thành công", "success");
       } catch (error) {
-        console.log(error);
+        console.log(error.response.data.Exception);
+        snackbarShowMessage(error.response.data.Exception, "error");
       }
     }
     fetchInvoice();
@@ -159,6 +160,6 @@ const Order = ({ data }) => {
       </Box>
     </Box>
   );
-};
+}
 
-export default Order;
+export default withSnackbar(Order);

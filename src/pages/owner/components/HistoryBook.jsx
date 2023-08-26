@@ -18,6 +18,7 @@ import { Select } from "@mui/material";
 import { Box } from "@mui/system";
 import axiosApi from "../../../components/Axios/AxiosApi";
 import { Orders } from "../../detail/Popup";
+import { withSnackbar } from "../../../hook/withSnackbar";
 const makeStyle = (status) => {
   if (status === "Done") {
     return {
@@ -37,8 +38,7 @@ const makeStyle = (status) => {
   }
 };
 const statusOptions = ["Cancel", "Done", "Waiting"];
-
-export default function HistoryBooking() {
+function HistoryBooking({ snackbarShowMessage }) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [booking, setBooking] = useState([]);
@@ -52,9 +52,11 @@ export default function HistoryBooking() {
       setBooking(response.data);
       console.log("Booking Reponse: ", response.data);
       setIsLoading(false);
+      snackbarShowMessage("Show data thành công", "success");
     } catch (error) {
       setError(error);
       setIsLoading(false);
+      snackbarShowMessage(error.response.data.Exception, "error");
     }
   };
   const PER_PAGE = 5;
@@ -73,9 +75,11 @@ export default function HistoryBooking() {
         `https://localhost:7186/api/Booking/ChangeStatusBooking?id=${bookingId}&status=${newStatus}`
       );
       fetchBooking();
+      snackbarShowMessage("Thay đổi thành công", "success");
       // You might want to update the UI or state accordingly
     } catch (error) {
       console.error("Error updating status:", error);
+      snackbarShowMessage("Không thể thay đổi", "error");
     }
   };
   useEffect(() => {
@@ -200,3 +204,4 @@ export default function HistoryBooking() {
     </Box>
   );
 }
+export default withSnackbar(HistoryBooking);
