@@ -218,8 +218,6 @@ function Lands({ snackbarShowMessage }) {
     event.preventDefault();
     try {
       prices.landLandId = selectLandId;
-      prices.landLandId = selectLandId;
-      prices.landLandId = selectLandId;
 
       const response = await LandApi.CreatePrice(prices);
       console.log(response.data);
@@ -228,13 +226,56 @@ function Lands({ snackbarShowMessage }) {
       setLandId(null);
       snackbarShowMessage("Tạo giá thành công", "success");
     } catch (error) {
-      console.error(error.response);
+      console.error(error.response.Exception);
       snackbarShowMessage(error.response.data.Exception, "error");
     }
   };
 
   //----------------------------------------------------------------
 
+  const [openFile, setOpenFile] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleOpenFileDialog = (landId) => {
+    setOpenFile(true);
+    setLandId(landId);
+  };
+
+  const handleCloseFileDialog = () => {
+    setOpenFile(false);
+    resetFile();
+  };
+
+  const resetFile = () => {
+    setSelectedFile(null);
+  };
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
+
+  const fetchFile = async (event) => {
+    event.preventDefault();
+    try {
+      if (!selectedFile) {
+        console.log("Vui lòng chọn một tệp hình ảnh.");
+        return;
+      }
+      const formData = new FormData();
+      formData.append("LandId", selectLandId);
+      formData.append("ImageLogo", selectedFile);
+      console.log("landID", selectLandId);
+      console.log("selectedFile", selectedFile);
+      const response = await LandApi.UploadImage(formData);
+      console.log(response.data);
+      handleCloseFileDialog();
+      snackbarShowMessage("Thêm Ảnh Thành Công", "success");
+    } catch (error) {
+      console.error(error.response.Exception);
+      snackbarShowMessage(error.response.data.Exception, "error");
+    }
+  };
+  //----------------------------------------------------------------
   const PER_PAGE = 4;
   let [page, setPage] = useState(1);
   const count = Math.ceil(lands.length / PER_PAGE);
@@ -314,6 +355,9 @@ function Lands({ snackbarShowMessage }) {
               <TableCell align="left" className="bold-text">
                 Thêm Giá Tiền
               </TableCell>
+              <TableCell align="left" className="bold-text">
+                Thêm Hình Ảnh Sân
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody style={{ color: "white" }}>
@@ -353,11 +397,49 @@ function Lands({ snackbarShowMessage }) {
                       Giá Tiền
                     </Button>
                   </TableCell>
+                  <TableCell align="left" className="Details" key={row.landId}>
+                    <Button
+                      className="butonManager"
+                      name="file"
+                      onClick={() => handleOpenFileDialog(row.landId)}
+                    >
+                      Upload
+                    </Button>
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
         </Table>
       </TableContainer>
+
+      <Dialog open={openFile} onClose={handleCloseFileDialog}>
+        <DialogTitle>Thêm Ảnh</DialogTitle>
+        <DialogContent>
+          <DialogContentText>Thêm Ảnh</DialogContentText>
+          <form onSubmit={fetchFile} style={{ marginTop: "10px" }}>
+            <TextField
+              name="ImageLogo"
+              onChange={handleFileChange}
+              required
+              type="file"
+              accept=".jpg, .jpeg, .png"
+              multiple={false}
+            />
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            className="uploadfile"
+            onClick={handleCloseFileDialog}
+            color="primary"
+          >
+            Hủy
+          </Button>
+          <Button onClick={fetchFile} color="primary">
+            Thêm Ảnh
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       <Dialog open={openPrice} onClose={handleClosePriceDialog}>
         <DialogTitle>Tạo Price Cho Sân</DialogTitle>

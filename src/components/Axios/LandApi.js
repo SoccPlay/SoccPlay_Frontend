@@ -33,5 +33,9 @@ const LandApi = {
     const url = `Price/CreatePrice`;
     return axiosApi.post(url, form);
   },
+  UploadImage: async (form) => {
+    const url = `File/Add`;
+    return axiosApi.post(url, form);
+  },
 };
 export default LandApi;
