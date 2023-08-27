@@ -34,7 +34,7 @@ const List = () => {
   const [size, setSize] = useState();
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(300000);
-  const [rating, setRating] = useState(5);
+  const [rating, setRating] = useState();
 
   const handleLocation = useCallback((event) => {
     console.log(event.target.value);
