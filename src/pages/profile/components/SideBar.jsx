@@ -1,18 +1,18 @@
 import { UilSignOutAlt } from "@iconscout/react-unicons";
-import { SidebarDataAdmin } from "../../../Pagination/Data";
-import { SidebarDataCompany } from "../../../Pagination/Data";
+import { SidebarDataAdmin, SidebarDataCompany } from "../../../Pagination/Data";
 // import { motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
-import "../components/sideBar.css";
-import jwt_decode from "jwt-decode";
 import { Box } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom"; // Import useHistory and useLocation
+import HistoryBooking from "../../owner/components/HistoryBook";
+import Lands from "../../owner/components/Land";
+import Prices from "../../owner/components/Price";
+import "../components/sideBar.css";
 import EditProfile from "./EditProfile";
 import CustomizedTables from "./History";
-import Lands from "../../owner/components/Land";
-import Pitch from "../../owner/components/Pitch";
-import Prices from "../../owner/components/Price";
-import HistoryBooking from "../../owner/components/HistoryBook";
-import { useHistory, useLocation, useNavigate } from "react-router-dom"; // Import useHistory and useLocation
+import Dashboard from "../../owner/components/Dashboard";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../../../assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
 
 const Sidebar = () => {
   const [selected, setSelected] = useState(0);
@@ -31,16 +31,15 @@ const Sidebar = () => {
       left: "-60%",
     },
   };
-  console.log(userRole);
-  const [id, setId] = useState("");
   const currentSidebarData =
     userRole === "CUSTOMER" ? SidebarDataAdmin : SidebarDataCompany;
-  const sidebarComponentsAdmin = [
-    // <CustomizedTable />,
-    <CustomizedTables />,
-    <EditProfile />,
+  const sidebarComponentsAdmin = [<CustomizedTables />, <EditProfile />];
+  const sidebarComponentsCompany = [
+    <Lands />,
+    <Prices />,
+    <HistoryBooking />,
+    <Dashboard />,
   ];
-  const sidebarComponentsCompany = [<Lands />, <Prices />, <HistoryBooking />];
   const renderRightSide = () => {
     if (userRole === "CUSTOMER") {
       return selected < 3;

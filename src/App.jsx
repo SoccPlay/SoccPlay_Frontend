@@ -12,6 +12,7 @@ import "./App.css";
 import Invoice from "./components/bill/Invoice";
 import Feedback from "./components/feedback/Feedback";
 import Order from "./components/bill/Order";
+import Dashboard from "./pages/owner/components/Dashboard";
 
 export default function App() {
   return (
