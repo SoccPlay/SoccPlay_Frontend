@@ -96,7 +96,7 @@ function Dashboard() {
           </Col>
         </Row>
         <Row>
-          <Col md="7">
+          <Col md="8">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Đơn đặt theo giờ</Card.Title>
@@ -175,13 +175,13 @@ function Dashboard() {
               </Card.Footer>
             </Card>
           </Col>
-          <Col md="3">
+          <Col md="4">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Cỡ sân đang có</Card.Title>
                 <p className="card-category">sân 5 người và sân 7 người</p>
               </Card.Header>
-              <Card.Body>
+              <Card.Body style={{ height: "391px" }}>
                 <div
                   className="ct-chart ct-perfect-fourth"
                   id="chartPreferences"
@@ -207,7 +207,7 @@ function Dashboard() {
                 <hr></hr>
                 <div className="stats">
                   <p className="flex">
-                    <AiFillClockCircle className="mr-1 mt-1" />
+                    <AiFillClockCircle className="mr-1" />
                     Hiện tại
                   </p>
                 </div>
@@ -216,7 +216,7 @@ function Dashboard() {
           </Col>
         </Row>
         <Row>
-          <Col md="7">
+          <Col md="12">
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Doanh thu trong năm</Card.Title>
