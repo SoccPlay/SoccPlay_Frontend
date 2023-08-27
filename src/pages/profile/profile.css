@@ -14,15 +14,14 @@
 .App {
   /* padding: 0.5rem 3.5rem; */
   color: var(--black);
-  background: #0077b6;
-  height: 122vh; /* Chiều cao 100% của viewport */
+  background: #1976d2;
+  height: 100vh; /* Chiều cao 100% của viewport */
   width: 100%;
   display: flex;
   /* padding-bottom: 20%; */
   font-family: "Inter", sans-serif;
   /* padding-bottom: 0; Xóa dòng này hoặc đặt giá trị padding-bottom thành 0 */
 }
-
 
 @media screen and (max-width: 1200px) {
   .AppGlass {

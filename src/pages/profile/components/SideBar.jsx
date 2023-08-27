@@ -10,10 +10,8 @@ import Prices from "../../owner/components/Price";
 import "../components/sideBar.css";
 import EditProfile from "./EditProfile";
 import CustomizedTables from "./History";
-import Dashboard from "../../owner/components/Dashboard";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../../../assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
 import Pitch from "pages/owner/components/Pitch";
+import Dashboard from "pages/owner/components/Dashboard";
 
 const Sidebar = () => {
   const [selected, setSelected] = useState(0);

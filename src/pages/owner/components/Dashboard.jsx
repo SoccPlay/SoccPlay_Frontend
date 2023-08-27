@@ -1,108 +1,63 @@
-import ChartistGraph from "react-chartist";
-// react-bootstrap components
-import { Card, Col, Container, Row } from "react-bootstrap";
+import React from "react";
+import { Card, CardContent, Container, Grid, Typography } from "@mui/material";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
 import { SlGraph } from "react-icons/sl";
-import "./Dashboard.scss";
+import ChartistGraph from "react-chartist";
+import "./Dashboard.scss"; // You can keep your own styling here
+
 function Dashboard() {
   return (
-    <>
-      <Container fluid className="ml-12 p-4 main-color ">
-        <Row>
-          <Col lg="4" sm="8">
+    <div
+      className="Table"
+      style={{
+        height: "100vw",
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: "white",
+      }}
+    >
+      <Container fluid className="ml-12 p-4 main-color">
+        <Grid container spacing={3}>
+          <Grid item lg={4} sm={8}>
             <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
+              <CardContent>
+                <Grid container alignItems="center">
+                  <Grid item xs={5}>
                     <div className="icon-big text-center icon-warning">
                       <i className="nc-icon nc-chart text-warning"></i>
                     </div>
-                  </Col>
-                  <Col xs="7">
+                  </Grid>
+                  <Grid item xs={7}>
                     <div className="numbers">
-                      <p className="card-category">Tổng số đơn đặt sân</p>
-                      <Card.Title as="h4">17 đơn</Card.Title>
+                      <Typography variant="subtitle1" className="card-category">
+                        Tổng số đơn đặt sân
+                      </Typography>
+                      <Typography variant="h4">17 đơn</Typography>
                     </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
+                  </Grid>
+                </Grid>
+                <hr />
                 <div className="stats">
-                  <p className="flex">
+                  <Typography className="flex" variant="body2">
                     <AiFillClockCircle className="mr-1 mt-1" />
                     Hiện tại
-                  </p>
+                  </Typography>
                 </div>
-              </Card.Footer>
+              </CardContent>
             </Card>
-          </Col>
-          <Col lg="4" sm="8">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-light-3 text-success"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Tổng doanh thu</p>
-                      <Card.Title as="h4">15.000.000 VND</Card.Title>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <p className="flex">
-                    <AiFillClockCircle className="mr-1 mt-1" />
-                    Hiện tại
-                  </p>
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-          <Col lg="4" sm="8">
-            <Card className="card-stats">
-              <Card.Body>
-                <Row>
-                  <Col xs="5">
-                    <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-vector text-danger"></i>
-                    </div>
-                  </Col>
-                  <Col xs="7">
-                    <div className="numbers">
-                      <p className="card-category">Tổng số sân</p>
-                      <Card.Title as="h4">12</Card.Title>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-              <Card.Footer>
-                <hr></hr>
-                <div className="stats">
-                  <p className="flex">
-                    <AiFillClockCircle className="mr-1 mt-1" />
-                    Hiện tại
-                  </p>
-                </div>
-              </Card.Footer>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col md="8">
+          </Grid>
+          {/* Repeat the pattern for the other columns */}
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item md={8}>
             <Card>
-              <Card.Header>
-                <Card.Title as="h4">Đơn đặt theo giờ</Card.Title>
-                <p className="card-category">phân tích tỉ lệ theo giờ</p>
-              </Card.Header>
-              <Card.Body>
+              <CardContent>
+                <Typography variant="h6">Đơn đặt theo giờ</Typography>
+                <Typography variant="subtitle1" className="card-category">
+                  phân tích tỉ lệ theo giờ
+                </Typography>
                 <div className="ct-chart" id="chartHours">
                   <ChartistGraph
                     data={{
@@ -156,32 +111,36 @@ function Dashboard() {
                     ]}
                   />
                 </div>
-              </Card.Body>
-              <Card.Footer>
                 <div className="legend flex">
                   <div className="color mr-8">
                     <SlGraph className="text-red-500 w-8" />
-                    <p className="text-center text-lg">Cancel</p>
+                    <Typography className="text-center text-lg">
+                      Cancel
+                    </Typography>
                   </div>
                   <div className="color mr-8">
                     <SlGraph className="text-cyan-500 w-8" />
-                    <p className="text-center text-lg">Done</p>
+                    <Typography className="text-center text-lg">
+                      Done
+                    </Typography>
                   </div>
                   <div className="color">
                     <SlGraph className="text-orange-500 w-8" />
-                    <p className="text-center text-lg">Waiting</p>
+                    <Typography className="text-center text-lg">
+                      Waiting
+                    </Typography>
                   </div>
                 </div>
-              </Card.Footer>
+              </CardContent>
             </Card>
-          </Col>
-          <Col md="4">
+          </Grid>
+          <Grid item md={4}>
             <Card>
-              <Card.Header>
-                <Card.Title as="h4">Cỡ sân đang có</Card.Title>
-                <p className="card-category">sân 5 người và sân 7 người</p>
-              </Card.Header>
-              <Card.Body style={{ height: "391px" }}>
+              <CardContent>
+                <Typography variant="h6">Cỡ sân đang có</Typography>
+                <Typography variant="subtitle1" className="card-category">
+                  sân 5 người và sân 7 người
+                </Typography>
                 <div
                   className="ct-chart ct-perfect-fourth"
                   id="chartPreferences"
@@ -197,32 +156,36 @@ function Dashboard() {
                 <div className="legend flex">
                   <div className="color mr-4">
                     <BsCircleFill className="text-red-500 w-8" />
-                    <p className="text-center text-xl">sân 5</p>
+                    <Typography className="text-center text-xl">
+                      sân 5
+                    </Typography>
                   </div>
                   <div className="color">
                     <BsCircleFill className="text-cyan-500 w-8" />
-                    <p className="text-center text-xl">sân 7</p>
+                    <Typography className="text-center text-xl">
+                      sân 7
+                    </Typography>
                   </div>
                 </div>
-                <hr></hr>
+                <hr />
                 <div className="stats">
-                  <p className="flex">
+                  <Typography className="flex" variant="body2">
                     <AiFillClockCircle className="mr-1" />
                     Hiện tại
-                  </p>
+                  </Typography>
                 </div>
-              </Card.Body>
+              </CardContent>
             </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col md="12">
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item md={12}>
             <Card>
-              <Card.Header>
-                <Card.Title as="h4">Doanh thu trong năm</Card.Title>
-                <p className="card-category">Chưa hao trừ tri phí</p>
-              </Card.Header>
-              <Card.Body>
+              <CardContent>
+                <Typography variant="h6">Doanh thu trong năm</Typography>
+                <Typography variant="subtitle1" className="card-category">
+                  Chưa hao trừ tri phí
+                </Typography>
                 <div className="ct-chart" id="chartActivity">
                   <ChartistGraph
                     data={{
@@ -271,12 +234,12 @@ function Dashboard() {
                     ]}
                   />
                 </div>
-              </Card.Body>
+              </CardContent>
             </Card>
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
       </Container>
-    </>
+    </div>
   );
 }
 
