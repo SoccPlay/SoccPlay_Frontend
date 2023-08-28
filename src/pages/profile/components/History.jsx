@@ -106,10 +106,13 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
   return (
     <div
       style={{
-        height: "100vh",
         width: "100vw",
         display: "flex",
         flexDirection: "column",
+        backgroundColor: "white",
+        paddingLeft: "20px",
+        marginLeft: "50px",
+        paddingRight: "50px",
       }}
     >
       <TableContainer style={{ flex: 1 }} component={Paper}>
