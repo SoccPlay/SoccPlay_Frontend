@@ -30,7 +30,7 @@ import { withSnackbar } from "../../../hook/withSnackbar";
 import HistoryBooking from "./HistoryBook";
 
 const makeStyle = (status) => {
-  if (status === "Approved") {
+  if (status === "Active") {
     return {
       background: "rgb(145 254 159 / 47%)",
       color: "green",
@@ -360,9 +360,9 @@ function Lands({ snackbarShowMessage }) {
               <TableCell align="left" className="bold-text">
                 Tổng Số Sân Nhỏ
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              {/* <TableCell align="left" className="bold-text">
                 Trạng Thái
-              </TableCell>
+              </TableCell> */}
               <TableCell align="left" className="bold-text">
                 Thêm Sân Nhỏ
               </TableCell>
@@ -387,11 +387,20 @@ function Lands({ snackbarShowMessage }) {
                   <TableCell align="left">{row.title}</TableCell>
                   <TableCell align="left">{row.totalPitch}</TableCell>
 
-                  <TableCell align="left">
-                    <span className="status" style={makeStyle(row.status)}>
+                  {/* <TableCell align="left">
+                    <span
+                      className="status"
+                      style={{
+                        ...makeStyle(row.status),
+                        borderRadius: "10px", // Độ cong viền tròn
+                        width: "121px", // Độ rộng thu nhỏ
+                        fontSize: "12px", // Cỡ chữ nhỏ
+                        height: "50px",
+                      }}
+                    >
                       {row.status}
                     </span>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell align="left" className="Details">
                     <Button
                       className="butonManager"
@@ -417,7 +426,7 @@ function Lands({ snackbarShowMessage }) {
                       name="file"
                       onClick={() => handleOpenFileDialog(row.landId)}
                     >
-                      Thêm Ảnh
+                      Upload
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -564,43 +573,35 @@ function Lands({ snackbarShowMessage }) {
         <DialogTitle>Tạo Sân Lớn</DialogTitle>
         <DialogContent>
           <DialogContentText>Nhập thông tin sân bóng:</DialogContentText>
-          <form style={{ width: "400px", marginTop: "5px" }} onSubmit={handleSubmit}>
-          <Grid mt={"20px"}>
+          <form style={{ marginTop: "5px" }} onSubmit={handleSubmit}>
             <TextField
               name="nameLand"
               label="Tên Sân"
               value={formData.nameLand}
               onChange={handleInputChange}
-              fullWidth
               required
-            /></Grid>
-            <Grid mt={"20px"}>
+            />
             <TextField
               name="title"
               label="Thông Tin"
               value={formData.title}
               onChange={handleInputChange}
-              fullWidth
               required
-            /></Grid>
-            <Grid mt={"20px"}>
+            />
             <TextField
               name="location"
               label="Địa Điểm"
               value={formData.location}
               onChange={handleInputChange}
-              fullWidth
               required
-            /></Grid>
-            <Grid mt={"20px"}> 
+            />
             <TextField
               name="description"
               label="Mô Tả Chi Tiết"
               value={formData.description}
               onChange={handleInputChange}
-              fullWidth
               required
-            /></Grid>
+            />
           </form>
         </DialogContent>
         <DialogActions>
