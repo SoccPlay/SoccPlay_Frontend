@@ -71,6 +71,7 @@ function Invoice({ snackbarShowMessage }) {
           marginTop: 5,
           borderRadius: 5,
           border: "1px solid #000",
+          margin: "40px"
         }}
       >
         <TableContainer>
@@ -85,7 +86,7 @@ function Invoice({ snackbarShowMessage }) {
                           src={invoice.images}
                           alt="Owner logo"
                           style={{
-                            width: "80%",
+                            width: "30%",
                             // height: "100%",
                           }}
                         />
@@ -108,7 +109,7 @@ function Invoice({ snackbarShowMessage }) {
 
             <TableBody>
               <TableRow className="information">
-                <TableCell colSpan={2} sx={{ paddingLeft: 20 }}>
+                <TableCell colSpan={2} sx={{ paddingLeft: 20, }}>
                   <Table>
                     <TableRow>
                       <TableCell>
