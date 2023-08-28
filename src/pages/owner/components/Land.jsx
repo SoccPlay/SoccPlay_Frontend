@@ -320,13 +320,10 @@ function Lands({ snackbarShowMessage }) {
     <div
       className="Table"
       style={{
-        //   height: "100vh",
         width: "100vw",
         display: "flex",
         flexDirection: "column",
         backgroundColor: "white",
-        //   justifyContent: "center",
-        //   alignItems: "center",
         paddingTop: "100px",
         paddingLeft: "20px",
         marginLeft: "50px",
