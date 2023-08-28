@@ -88,12 +88,9 @@ function Lands({ snackbarShowMessage }) {
       );
       console.log("now data: ", sortedLands);
       setLands(sortedLands);
-      snackbarShowMessage("Show data thành công", "success");
     } catch (error) {
       console.error(error);
-      snackbarShowMessage("Không có api", "error");
-    } finally {
-      setLoading(false);
+      snackbarShowMessage("Lỗi khi gọi data", "error");
     }
   };
   const handleOpenDialog = () => {
@@ -117,13 +114,11 @@ function Lands({ snackbarShowMessage }) {
     try {
       formData.policy = formData.nameLand;
       const response = await LandApi.CreateLands(formData);
-      console.log(response.data);
+      snackbarShowMessage("Tạo sân thành công", "success");
       handleCloseDialog();
       fetchLands();
     } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+      snackbarShowMessage("Tạo sân lỗi", "error");
     }
   };
   //----------------------------------------------------------------
