@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
 import {
-  Button,
-  InputLabel,
   MenuItem,
   Pagination,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -13,15 +11,13 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import BookingApi from "../../../components/Axios/BookingApi";
-import { Select } from "@mui/material";
 import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
 import axiosApi from "../../../components/Axios/AxiosApi";
-import { Orders } from "../../detail/Popup";
-import { withSnackbar } from "../../../hook/withSnackbar";
 import LandApi from "../../../components/Axios/LandApi";
 import PitchApi from "../../../components/Axios/PitchApi";
-import axios from "axios";
+import { withSnackbar } from "../../../hook/withSnackbar";
+import dayjs from "dayjs";
 const makeStyle = (status) => {
   if (status === "Active") {
     return {
@@ -52,7 +48,6 @@ function Pitch({ snackbarShowMessage }) {
       setLand(response.data);
       console.log("Land Reponse: ", response.data);
       setLoading(true);
-      snackbarShowMessage("Show data thành công", "success");
     } catch (error) {
       snackbarShowMessage(error.response.data.Exception, "error");
     } finally {
@@ -77,6 +72,7 @@ function Pitch({ snackbarShowMessage }) {
   const [pitch, selectedPitch] = useState([]);
   const handleLandChange = (newLand) => {
     setSelectedLand(newLand);
+    snackbarShowMessage("Tổng hợp danh sách sân", "success");
     console.log(newLand);
   };
 
@@ -91,14 +87,12 @@ function Pitch({ snackbarShowMessage }) {
       );
       selectedPitch(response.data);
       console.log("Pitch: ", response.data);
-      snackbarShowMessage("Show data thành công", "success");
     } catch (error) {
-      snackbarShowMessage(error.response.data.Exception, "error");
+      // snackbarShowMessage(error.response.data.Exception, "error");
     } finally {
       setLoading(false);
     }
   };
-  console.log("Pitch ne: ", pitch);
 
   //----------------------------------------------------------------
 
@@ -170,19 +164,19 @@ function Pitch({ snackbarShowMessage }) {
           <TableHead>
             <TableRow>
               <TableCell align="left" className="bold-text">
-                Sân Nhỏ ID
+                Sân nhỏ ID
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Tên Sân
+                Tên sân
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Loại Sân
+                Loại sân
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Ngày Tạo
+                Ngày giờ tạo
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Trạng Thái
+                Trạng thái
               </TableCell>
             </TableRow>
           </TableHead>
@@ -194,7 +188,9 @@ function Pitch({ snackbarShowMessage }) {
                     <TableCell align="left">{pitchs.pitchId}</TableCell>
                     <TableCell align="center">{pitchs.name}</TableCell>
                     <TableCell align="center">{pitchs.size}</TableCell>
-                    <TableCell align="center">{pitchs.date}</TableCell>
+                    <TableCell align="center">
+                      {dayjs(pitchs.date).format("DD/MM/YYYY HH:mm")}
+                    </TableCell>
                     <TableCell align="center">
                       <Select
                         value={pitchs.status}

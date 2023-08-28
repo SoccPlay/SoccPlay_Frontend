@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // import SwipeableViews from "react-swipeable-views";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
@@ -71,6 +71,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   const [bookingID, setBookingID] = useState();
   const [showbill, setShowBill] = useState(false);
   const [customerId, setCustomerId] = useState();
+  const selectFromRef = useRef();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -103,11 +104,13 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
     console.log("Element: " + element);
   };
 
+  const [hasChangedFrom, setHasChangedFrom] = useState(false);
+
   const handleHourChange = (event) => {
     const { name, value } = event.target;
-
     setSelectedHours((prevData) => {
-      if (name === "from") {
+      if (name === "from" && Number(value) < Number(prevData.hourTo)) {
+        setHasChangedFrom(true);
         return {
           ...prevData,
           hourFrom: value,
@@ -117,8 +120,13 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
           ...prevData,
           hourTo: value,
         };
+      } else if (name === "from" && !hasChangedFrom) {
+        setHasChangedFrom(true);
+        return {
+          ...prevData,
+          hourFrom: value,
+        };
       }
-
       return prevData;
     });
   };
@@ -324,7 +332,7 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
                     >
                       {Object.keys(time).map((item, pos) => {
                         return (
-                          <MenuItem key={pos} value={item}>
+                          <MenuItem ref={selectFromRef} key={pos} value={item}>
                             {time[item]}
                           </MenuItem>
                         );
