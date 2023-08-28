@@ -568,43 +568,51 @@ function Lands({ snackbarShowMessage }) {
           </Button>
         </DialogActions>
       </Dialog>
-
+      
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogTitle>Tạo Sân Lớn</DialogTitle>
         <DialogContent>
           <DialogContentText>Nhập thông tin sân bóng:</DialogContentText>
-          <form style={{ marginTop: "5px" }} onSubmit={handleSubmit}>
+          <form style={{ marginTop: "5px", width: "500px" }} onSubmit={handleSubmit}>
+            <Grid mt={"15px"}>
             <TextField
               name="nameLand"
               label="Tên Sân"
               value={formData.nameLand}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"15px"}>
             <TextField
               name="title"
               label="Thông Tin"
               value={formData.title}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"15px"}>
             <TextField
               name="location"
               label="Địa Điểm"
               value={formData.location}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"15px"}>
             <TextField
               name="description"
               label="Mô Tả Chi Tiết"
               value={formData.description}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ margin: "10px"}}>
           <Button onClick={handleCloseDialog} color="primary">
             Hủy
           </Button>
