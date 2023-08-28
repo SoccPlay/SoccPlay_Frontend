@@ -79,8 +79,6 @@ function Lands({ snackbarShowMessage }) {
     });
   };
   const fetchLands = async () => {
-    setLoading(true);
-
     try {
       const response = await LandApi.GetLandByOwner(onwerId);
       const sortedLands = response.data.sort(
@@ -107,18 +105,21 @@ function Lands({ snackbarShowMessage }) {
       [name]: value,
     }));
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-
     try {
       formData.policy = formData.nameLand;
       const response = await LandApi.CreateLands(formData);
+      setLoading(true);
       snackbarShowMessage("Tạo sân thành công", "success");
       handleCloseDialog();
       fetchLands();
     } catch (error) {
       snackbarShowMessage("Tạo sân lỗi", "error");
+    } finally {
+      setLoading(false);
     }
   };
   //----------------------------------------------------------------
@@ -159,7 +160,6 @@ function Lands({ snackbarShowMessage }) {
   const fetchPitch = async (event) => {
     event.preventDefault();
     setLoading(true);
-
     try {
       pitch.ownerId = onwerId;
       pitch.landId = selectLandId;
