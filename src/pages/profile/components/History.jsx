@@ -191,23 +191,29 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
                     {formatPrice(row.totalPrice)}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {row.status === "Waiting" ? (
-                      <Button
-                        onClick={() => handleDelete(row.bookingId)}
-                        variant="outlined"
-                        color="error"
-                      >
-                        Hủy
-                      </Button>
+                    {row.status === "Done" ? (
+                      <></>
                     ) : (
-                      <div
-                        style={{
-                          color: "red",
-                          fontWeight: "600",
-                        }}
-                      >
-                        Đã hủy
-                      </div>
+                      <>
+                        {row.status === "Waiting" ? (
+                          <Button
+                            onClick={() => handleDelete(row.bookingId)}
+                            variant="outlined"
+                            color="error"
+                          >
+                            Hủy
+                          </Button>
+                        ) : (
+                          <div
+                            style={{
+                              color: "red",
+                              fontWeight: "600",
+                            }}
+                          >
+                            Đã hủy
+                          </div>
+                        )}
+                      </>
                     )}
                     {row.status === "Done" && (
                       <Link to={`/detail/${row.landId}`}>

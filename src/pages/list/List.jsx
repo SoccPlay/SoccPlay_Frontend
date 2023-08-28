@@ -50,7 +50,7 @@ const List = () => {
   }, []);
 
   const formatPrice = (price) => {
-    price = price * 3000;
+    price = price * 30000;
     return price.toLocaleString("it-IT", {
       style: "currency",
       currency: "VND",
@@ -59,7 +59,7 @@ const List = () => {
   function handleChanges(event, newValue) {
     setRange(newValue);
     setMinPrice(newValue[0] * 3000);
-    setMaxPrice(newValue[1] * 3000);
+    setMaxPrice(newValue[1] * 30000);
   }
 
   const handleCheckboxChange = (event) => {
