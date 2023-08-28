@@ -30,7 +30,7 @@ import { withSnackbar } from "../../../hook/withSnackbar";
 import HistoryBooking from "./HistoryBook";
 
 const makeStyle = (status) => {
-  if (status === "Approved") {
+  if (status === "Active") {
     return {
       background: "rgb(145 254 159 / 47%)",
       color: "green",
@@ -360,9 +360,9 @@ function Lands({ snackbarShowMessage }) {
               <TableCell align="left" className="bold-text">
                 Tổng Số Sân Nhỏ
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              {/* <TableCell align="left" className="bold-text">
                 Trạng Thái
-              </TableCell>
+              </TableCell> */}
               <TableCell align="left" className="bold-text">
                 Thêm Sân Nhỏ
               </TableCell>
@@ -387,11 +387,20 @@ function Lands({ snackbarShowMessage }) {
                   <TableCell align="left">{row.title}</TableCell>
                   <TableCell align="left">{row.totalPitch}</TableCell>
 
-                  <TableCell align="left">
-                    <span className="status" style={makeStyle(row.status)}>
+                  {/* <TableCell align="left">
+                    <span
+                      className="status"
+                      style={{
+                        ...makeStyle(row.status),
+                        borderRadius: "10px", // Độ cong viền tròn
+                        width: "121px", // Độ rộng thu nhỏ
+                        fontSize: "12px", // Cỡ chữ nhỏ
+                        height: "50px",
+                      }}
+                    >
                       {row.status}
                     </span>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell align="left" className="Details">
                     <Button
                       className="butonManager"
