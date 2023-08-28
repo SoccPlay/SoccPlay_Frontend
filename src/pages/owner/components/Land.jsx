@@ -420,7 +420,7 @@ function Lands({ snackbarShowMessage }) {
                       name="file"
                       onClick={() => handleOpenFileDialog(row.landId)}
                     >
-                      Upload
+                      Thêm Ảnh
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -567,35 +567,43 @@ function Lands({ snackbarShowMessage }) {
         <DialogTitle>Tạo Sân Lớn</DialogTitle>
         <DialogContent>
           <DialogContentText>Nhập thông tin sân bóng:</DialogContentText>
-          <form style={{ marginTop: "5px" }} onSubmit={handleSubmit}>
+          <form style={{ width: "400px", marginTop: "5px" }} onSubmit={handleSubmit}>
+          <Grid mt={"20px"}>
             <TextField
               name="nameLand"
               label="Tên Sân"
               value={formData.nameLand}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"20px"}>
             <TextField
               name="title"
               label="Thông Tin"
               value={formData.title}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"20px"}>
             <TextField
               name="location"
               label="Địa Điểm"
               value={formData.location}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"20px"}> 
             <TextField
               name="description"
               label="Mô Tả Chi Tiết"
               value={formData.description}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
           </form>
         </DialogContent>
         <DialogActions>
