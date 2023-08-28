@@ -58,6 +58,8 @@ function Lands({ snackbarShowMessage }) {
   const [open, setOpen] = useState(false);
   const [lands, setLands] = useState([]);
   const onwerId = localStorage.getItem("OWNERID");
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     nameLand: "",
     title: "",
@@ -77,6 +79,8 @@ function Lands({ snackbarShowMessage }) {
     });
   };
   const fetchLands = async () => {
+    setLoading(true);
+
     try {
       const response = await LandApi.GetLandByOwner(onwerId);
       const sortedLands = response.data.sort(
@@ -105,6 +109,8 @@ function Lands({ snackbarShowMessage }) {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
     try {
       formData.policy = formData.nameLand;
       const response = await LandApi.CreateLands(formData);
@@ -152,6 +158,8 @@ function Lands({ snackbarShowMessage }) {
 
   const fetchPitch = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
     try {
       pitch.ownerId = onwerId;
       pitch.landId = selectLandId;
@@ -164,6 +172,8 @@ function Lands({ snackbarShowMessage }) {
     } catch (error) {
       console.error(error.response.data.Exception);
       snackbarShowMessage(error.response.data.Exception, "error");
+    } finally {
+      setLoading(false);
     }
   };
   //----------------------------------------------------------------
@@ -215,6 +225,8 @@ function Lands({ snackbarShowMessage }) {
 
   const fetchPrices = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
     try {
       prices.landLandId = selectLandId;
 
@@ -227,6 +239,8 @@ function Lands({ snackbarShowMessage }) {
     } catch (error) {
       console.error(error.response.Exception);
       snackbarShowMessage(error.response.data.Exception, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -255,6 +269,8 @@ function Lands({ snackbarShowMessage }) {
 
   const fetchFile = async (event) => {
     event.preventDefault();
+    setLoading(true);
+
     try {
       if (!selectedFile) {
         console.log("Vui lòng chọn một tệp hình ảnh.");
@@ -272,6 +288,8 @@ function Lands({ snackbarShowMessage }) {
     } catch (error) {
       console.error(error.response.Exception);
       snackbarShowMessage(error.response.data.Exception, "error");
+    } finally {
+      setLoading(false);
     }
   };
   //----------------------------------------------------------------
@@ -434,7 +452,7 @@ function Lands({ snackbarShowMessage }) {
           >
             Hủy
           </Button>
-          <Button onClick={fetchFile} color="primary">
+          <Button onClick={fetchFile} color="primary" disabled={loading}>
             Thêm Ảnh
           </Button>
         </DialogActions>
@@ -492,7 +510,7 @@ function Lands({ snackbarShowMessage }) {
           >
             Hủy
           </Button>
-          <Button onClick={fetchPrices} color="primary">
+          <Button onClick={fetchPrices} color="primary" disabled={loading}>
             Thêm Tiền
           </Button>
         </DialogActions>
@@ -539,7 +557,7 @@ function Lands({ snackbarShowMessage }) {
           >
             Hủy
           </Button>
-          <Button onClick={fetchPitch} color="primary">
+          <Button onClick={fetchPitch} color="primary" disabled={loading}>
             Tạo Sân
           </Button>
         </DialogActions>
@@ -584,7 +602,7 @@ function Lands({ snackbarShowMessage }) {
           <Button onClick={handleCloseDialog} color="primary">
             Hủy
           </Button>
-          <Button onClick={handleSubmit} color="primary">
+          <Button onClick={handleSubmit} color="primary" disabled={loading}>
             Tạo Sân
           </Button>
         </DialogActions>

@@ -42,20 +42,21 @@ const makeStyle = (status) => {
 };
 const statusOptions = ["Active", "Inactive"];
 function Pitch({ snackbarShowMessage }) {
-  const [isLoading, setIsLoading] = useState(true);
   const [land, setLand] = useState([]);
   const onwerId = localStorage.getItem("OWNERID");
+  const [loading, setLoading] = useState(false);
 
   const fetchLand = async () => {
     try {
       const response = await LandApi.GetLandByOwner(onwerId);
       setLand(response.data);
       console.log("Land Reponse: ", response.data);
-      setIsLoading(false);
+      setLoading(true);
       snackbarShowMessage("Show data thành công", "success");
     } catch (error) {
-      setIsLoading(false);
       snackbarShowMessage(error.response.data.Exception, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,6 +83,7 @@ function Pitch({ snackbarShowMessage }) {
   console.log("Land ID: ", selectedLand);
   console.log("Owner: ", onwerId);
   const fetchPitch = async (selectedLandd, onwerIdd) => {
+    setLoading(true);
     try {
       const response = await PitchApi.GetPitchByOwnerAndNameLand(
         onwerIdd,
@@ -89,11 +91,11 @@ function Pitch({ snackbarShowMessage }) {
       );
       selectedPitch(response.data);
       console.log("Pitch: ", response.data);
-      setIsLoading(false);
       snackbarShowMessage("Show data thành công", "success");
     } catch (error) {
-      setIsLoading(false);
       snackbarShowMessage(error.response.data.Exception, "error");
+    } finally {
+      setLoading(false);
     }
   };
   console.log("Pitch ne: ", pitch);
@@ -150,6 +152,7 @@ function Pitch({ snackbarShowMessage }) {
             width: "250px", // Độ rộng thu nhỏ
             height: "50px",
           }}
+          disabled={loading}
         >
           {land.map((lands) => (
             <MenuItem key={lands.landId} value={lands.landId}>
