@@ -15,7 +15,7 @@
   /* padding: 0.5rem 3.5rem; */
   color: var(--black);
   background: #1976d2;
-  height: 140vh; /* Chiều cao 100% của viewport */
+  height: 100vh; /* Chiều cao 100% của viewport */
   width: 100%;
   display: flex;
   /* padding-bottom: 20%; */
