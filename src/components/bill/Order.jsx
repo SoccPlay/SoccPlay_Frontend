@@ -7,6 +7,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Grid,
 } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -59,7 +60,7 @@ function Order({ data, snackbarShowMessage }) {
       >
         <TableContainer>
           <Table>
-            <TableHead>
+            {/* <TableHead>
               <TableRow className="top">
                 <TableCell colSpan={2}>
                   <Table>
@@ -69,12 +70,12 @@ function Order({ data, snackbarShowMessage }) {
                           src={invoice.images}
                           alt="Owner logo"
                           style={{
-                            width: "80%",
+                            width: "50%",
                             // height: "100%",
                           }}
                         />
                       </TableCell>
-                      <TableCell>
+                      <TableCell sx={{fontSize: "20px"}}>
                         Hóa đơn: {invoice.bookingId}
                         <br />
                         Ngày tạo:{" "}
@@ -88,7 +89,29 @@ function Order({ data, snackbarShowMessage }) {
                   </Table>
                 </TableCell>
               </TableRow>
-            </TableHead>
+            </TableHead> */}
+
+            <Grid container spacing={2}>
+              <Grid item xs={4}>
+                <img
+                  src={invoice.images}
+                  alt="Owner logo"
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "20px",
+                  }}
+                />
+              </Grid>
+              <Grid item xs={8}>
+                <Grid>Hóa đơn: {invoice.bookingId}</Grid>
+                <Grid>
+                  Ngày tạo: {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
+                </Grid>
+                <Grid>Ghi chú: {invoice.note}</Grid>
+                <Grid>Địa chỉ: {invoice.location}</Grid>
+              </Grid>
+            </Grid>
 
             <TableBody>
               <TableRow className="information">
