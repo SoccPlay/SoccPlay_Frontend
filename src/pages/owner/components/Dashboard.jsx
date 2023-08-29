@@ -1,11 +1,92 @@
-import ChartistGraph from "react-chartist";
 // react-bootstrap components
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { AiFillClockCircle } from "react-icons/ai";
 import { BsCircleFill } from "react-icons/bs";
 import { SlGraph } from "react-icons/sl";
 import "./Dashboard.scss";
+import { useEffect, useState } from "react";
+import DashboardApi from "components/Axios/DashboardApi";
+import { formatPrice } from "pages/profile/components/History";
+import { BarChart } from "./BarChart";
+import { PieChart } from "./PieChart";
 function Dashboard() {
+  const onwerId = localStorage.getItem("OWNERID");
+  const [bookingNumber, setBookingNumber] = useState(0);
+  const [revenue, setRevenue] = useState(0);
+  const [pitchNumber, setPitchNumber] = useState([]);
+  const [summaryByMonth, setSummaryByMonth] = useState([]);
+  const [totalPitch, setTotalPitch] = useState(0);
+  const monthArr = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+  ];
+
+  const resultMonthPrice = monthArr.map((month) => {
+    const result = summaryByMonth.find((item) => item.bookingMonth == month);
+    return result?.totalPriceSum ?? 0;
+  });
+
+  const barPriceData = {
+    labels: monthArr.map((month) => `Tháng ${month}`),
+    datasets: [
+      {
+        label: "Tổng tiền thu được (triệu đồng)",
+        data: resultMonthPrice.map((item) => item),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+
+  console.log("result price month", resultMonthPrice);
+  const fetchSummary = async () => {
+    try {
+      const bookingNumberResponse = await DashboardApi.GetSummaryBooking(
+        onwerId
+      );
+      const revenueResponse = await DashboardApi.GetSummaryProfit(onwerId);
+      const pitchNumberResponse = await DashboardApi.GetSummarypitch(onwerId);
+      const summaryByMonthResponse = await DashboardApi.GetSummaryByMonth(
+        new Date().getFullYear(),
+        onwerId
+      );
+      setBookingNumber(bookingNumberResponse.data);
+      setRevenue(revenueResponse.data);
+      setPitchNumber(pitchNumberResponse.data);
+      setSummaryByMonth(summaryByMonthResponse.data);
+      setTotalPitch(pitchNumberResponse.data[0] + pitchNumberResponse.data[1]);
+      console.log("month", summaryByMonthResponse.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchSummary();
+  }, []);
+
+  const pieData = {
+    labels: ["Sân 5", "Sân 7"],
+    datasets: [
+      {
+        label: "Tổng số sân",
+        data: [pitchNumber[0], pitchNumber[1]],
+        backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
+        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
   return (
     <>
       <Container fluid className="ml-12 p-4 main-color ">
@@ -22,7 +103,7 @@ function Dashboard() {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Tổng số đơn đặt sân</p>
-                      <Card.Title as="h4">17 đơn</Card.Title>
+                      <Card.Title as="h4">{bookingNumber} đơn</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -50,7 +131,7 @@ function Dashboard() {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Tổng doanh thu</p>
-                      <Card.Title as="h4">15.000.000 VND</Card.Title>
+                      <Card.Title as="h4">{formatPrice(revenue)}</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -78,7 +159,7 @@ function Dashboard() {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Tổng số sân</p>
-                      <Card.Title as="h4">12</Card.Title>
+                      <Card.Title as="h4">{totalPitch} sân</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -99,80 +180,14 @@ function Dashboard() {
           <Col md="8">
             <Card>
               <Card.Header>
-                <Card.Title as="h4">Đơn đặt theo giờ</Card.Title>
-                <p className="card-category">phân tích tỉ lệ theo giờ</p>
+                <Card.Title as="h4">Doanh thu trong năm</Card.Title>
+                <p className="card-category">Chưa hao trừ tri phí</p>
               </Card.Header>
               <Card.Body>
-                <div className="ct-chart" id="chartHours">
-                  <ChartistGraph
-                    data={{
-                      labels: [
-                        "7:00",
-                        "8:00",
-                        "9:00",
-                        "10:00",
-                        "14:00",
-                        "15:00",
-                        "16:00",
-                        "17:00",
-                        "18:00",
-                        "19:00",
-                        "20:00",
-                      ],
-                      series: [
-                        [287, 385, 490, 492, 554, 586, 698, 695, 752, 788, 846],
-                        [67, 152, 143, 240, 287, 335, 435, 437, 435, 545, 582],
-                        [23, 113, 67, 108, 190, 239, 307, 308, 439, 450, 499],
-                      ],
-                    }}
-                    type="Line"
-                    options={{
-                      low: 0,
-                      high: 800,
-                      showArea: false,
-                      height: "245px",
-                      axisX: {
-                        showGrid: false,
-                      },
-                      lineSmooth: true,
-                      showLine: true,
-                      showPoint: true,
-                      fullWidth: true,
-                      chartPadding: {
-                        right: 50,
-                      },
-                    }}
-                    responsiveOptions={[
-                      [
-                        "screen and (max-width: 640px)",
-                        {
-                          axisX: {
-                            labelInterpolationFnc: function (value) {
-                              return value[0];
-                            },
-                          },
-                        },
-                      ],
-                    ]}
-                  />
+                <div style={{ width: "780px" }}>
+                  <BarChart barPriceData={barPriceData} />
                 </div>
               </Card.Body>
-              <Card.Footer>
-                <div className="legend flex">
-                  <div className="color mr-8">
-                    <SlGraph className="text-red-500 w-8" />
-                    <p className="text-center text-lg">Cancel</p>
-                  </div>
-                  <div className="color mr-8">
-                    <SlGraph className="text-cyan-500 w-8" />
-                    <p className="text-center text-lg">Done</p>
-                  </div>
-                  <div className="color">
-                    <SlGraph className="text-orange-500 w-8" />
-                    <p className="text-center text-lg">Waiting</p>
-                  </div>
-                </div>
-              </Card.Footer>
             </Card>
           </Col>
           <Col md="4">
@@ -181,95 +196,24 @@ function Dashboard() {
                 <Card.Title as="h4">Cỡ sân đang có</Card.Title>
                 <p className="card-category">sân 5 người và sân 7 người</p>
               </Card.Header>
-              <Card.Body style={{ height: "391px" }}>
+              <Card.Body>
                 <div
-                  className="ct-chart ct-perfect-fourth"
-                  id="chartPreferences"
+                  style={{
+                    height: "300px",
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingBottom: "20px",
+                  }}
                 >
-                  <ChartistGraph
-                    data={{
-                      labels: ["3", "7"],
-                      series: [3, 7],
-                    }}
-                    type="Pie"
-                  />
+                  <PieChart pitchNumber={pieData} />
                 </div>
-                <div className="legend flex">
-                  <div className="color mr-4">
-                    <BsCircleFill className="text-red-500 w-8" />
-                    <p className="text-center text-xl">sân 5</p>
-                  </div>
-                  <div className="color">
-                    <BsCircleFill className="text-cyan-500 w-8" />
-                    <p className="text-center text-xl">sân 7</p>
-                  </div>
-                </div>
-                <hr></hr>
+
+                <hr />
                 <div className="stats">
                   <p className="flex">
                     <AiFillClockCircle className="mr-1 mt-1" />
                     Hiện tại
                   </p>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
-          <Col md="12">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Doanh thu trong năm</Card.Title>
-                <p className="card-category">Chưa hao trừ tri phí</p>
-              </Card.Header>
-              <Card.Body>
-                <div className="ct-chart" id="chartActivity">
-                  <ChartistGraph
-                    data={{
-                      labels: [
-                        "Tháng 1",
-                        "Tháng 2",
-                        "Tháng 3",
-                        "Tháng 4",
-                        "Tháng 5",
-                        "Tháng 6",
-                        "Tháng 7",
-                        "Tháng 8",
-                        "Tháng 9",
-                        "Tháng 10",
-                        "Tháng 11",
-                        "Tháng 12",
-                      ],
-                      series: [
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [
-                          412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636,
-                          920,
-                        ],
-                      ],
-                    }}
-                    type="Bar"
-                    options={{
-                      seriesBarDistance: 10,
-                      axisX: {
-                        showGrid: false,
-                      },
-                      height: "270px",
-                    }}
-                    responsiveOptions={[
-                      [
-                        "screen and (max-width: 640px)",
-                        {
-                          seriesBarDistance: 5,
-                          axisX: {
-                            labelInterpolationFnc: function (value) {
-                              return value[0];
-                            },
-                          },
-                        },
-                      ],
-                    ]}
-                  />
                 </div>
               </Card.Body>
             </Card>

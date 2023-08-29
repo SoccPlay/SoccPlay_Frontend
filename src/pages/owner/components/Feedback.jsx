@@ -73,8 +73,6 @@ function Feedback({ snackbarShowMessage }) {
   const [pitch, selectedPitch] = useState([]);
   const handleLandChange = (newLand) => {
     setSelectedLand(newLand);
-    snackbarShowMessage("Tổng danh sách đánh giá tại sân này", "success");
-    console.log(newLand);
   };
 
   console.log("Land ID: ", selectedLand);
@@ -86,7 +84,6 @@ function Feedback({ snackbarShowMessage }) {
       selectedPitch(response.data);
       console.log("Pitch: ", response.data);
     } catch (error) {
-      snackbarShowMessage(error.response.data.Exception, "error");
     } finally {
       setLoading(false);
     }
