@@ -360,9 +360,6 @@ function Lands({ snackbarShowMessage }) {
               <TableCell align="left" className="bold-text">
                 Tổng Số Sân Nhỏ
               </TableCell>
-              {/* <TableCell align="left" className="bold-text">
-                Trạng Thái
-              </TableCell> */}
               <TableCell align="left" className="bold-text">
                 Thêm Sân Nhỏ
               </TableCell>
@@ -387,20 +384,6 @@ function Lands({ snackbarShowMessage }) {
                   <TableCell align="left">{row.title}</TableCell>
                   <TableCell align="left">{row.totalPitch}</TableCell>
 
-                  {/* <TableCell align="left">
-                    <span
-                      className="status"
-                      style={{
-                        ...makeStyle(row.status),
-                        borderRadius: "10px", // Độ cong viền tròn
-                        width: "121px", // Độ rộng thu nhỏ
-                        fontSize: "12px", // Cỡ chữ nhỏ
-                        height: "50px",
-                      }}
-                    >
-                      {row.status}
-                    </span>
-                  </TableCell> */}
                   <TableCell align="left" className="Details">
                     <Button
                       className="butonManager"
@@ -426,7 +409,7 @@ function Lands({ snackbarShowMessage }) {
                       name="file"
                       onClick={() => handleOpenFileDialog(row.landId)}
                     >
-                      Upload
+                      Thêm Ảnh
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -435,6 +418,7 @@ function Lands({ snackbarShowMessage }) {
         </Table>
       </TableContainer>
 
+  {/* ------------------ Upload images -------------------------------------------- */}
       <Dialog open={openFile} onClose={handleCloseFileDialog}>
         <DialogTitle>Thêm Ảnh</DialogTitle>
         <DialogContent>
@@ -450,7 +434,7 @@ function Lands({ snackbarShowMessage }) {
             />
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ margin: "10px"}}>
           <Button
             className="uploadfile"
             onClick={handleCloseFileDialog}
@@ -463,6 +447,8 @@ function Lands({ snackbarShowMessage }) {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {/* -----------------------CREATE PRICE ------------------------------------- */}
 
       <Dialog open={openPrice} onClose={handleClosePriceDialog}>
         <DialogTitle>Tạo Price Cho Sân</DialogTitle>
@@ -508,7 +494,7 @@ function Lands({ snackbarShowMessage }) {
             </Grid>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ margin: "10px"}}>
           <Button
             className="pitch"
             onClick={handleClosePriceDialog}
@@ -522,7 +508,7 @@ function Lands({ snackbarShowMessage }) {
         </DialogActions>
       </Dialog>
 
-      {/* ---------------------------------------------------------------- */}
+      {/* -----------------CREATE PITCH----------------------------------------------------- */}
 
       <Dialog open={openPitch} onClose={handleClosePitchDialog}>
         <DialogTitle>Tạo Sân Nhỏ</DialogTitle>
@@ -555,7 +541,7 @@ function Lands({ snackbarShowMessage }) {
             </Grid>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ margin: "10px"}}>
           <Button
             className="pitch"
             onClick={handleClosePitchDialog}
@@ -569,42 +555,52 @@ function Lands({ snackbarShowMessage }) {
         </DialogActions>
       </Dialog>
 
+      {/* -----------------CREATE LAND----------------------------------------------------- */}
+      
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogTitle>Tạo Sân Lớn</DialogTitle>
         <DialogContent>
           <DialogContentText>Nhập thông tin sân bóng:</DialogContentText>
-          <form style={{ marginTop: "5px" }} onSubmit={handleSubmit}>
+          <form style={{ marginTop: "5px", width: "500px" }} onSubmit={handleSubmit}>
+            <Grid mt={"15px"}>
             <TextField
               name="nameLand"
               label="Tên Sân"
               value={formData.nameLand}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"15px"}>
             <TextField
               name="title"
               label="Thông Tin"
               value={formData.title}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"15px"}>
             <TextField
               name="location"
               label="Địa Điểm"
               value={formData.location}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
+            <Grid mt={"15px"}>
             <TextField
               name="description"
               label="Mô Tả Chi Tiết"
               value={formData.description}
               onChange={handleInputChange}
+              fullWidth
               required
-            />
+            /></Grid>
           </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions style={{ margin: "10px"}}>
           <Button onClick={handleCloseDialog} color="primary">
             Hủy
           </Button>

@@ -1,13 +1,8 @@
 import {
   Box,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Typography,
   Grid,
+  Container,
 } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -58,128 +53,105 @@ function Order({ data, snackbarShowMessage }) {
           border: "1px solid #000",
         }}
       >
-        <TableContainer>
-          <Table>
-            {/* <TableHead>
-              <TableRow className="top">
-                <TableCell colSpan={2}>
-                  <Table>
-                    <TableRow>
-                      <TableCell className="title">
-                        <img
-                          src={invoice.images}
-                          alt="Owner logo"
-                          style={{
-                            width: "50%",
-                            // height: "100%",
-                          }}
-                        />
-                      </TableCell>
-                      <TableCell sx={{fontSize: "20px"}}>
-                        Hóa đơn: {invoice.bookingId}
-                        <br />
-                        Ngày tạo:{" "}
-                        {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
-                        <br />
-                        Ghi chú: {invoice.note}
-                        <br />
-                        Địa chỉ: {invoice.location}
-                      </TableCell>
-                    </TableRow>
-                  </Table>
-                </TableCell>
-              </TableRow>
-            </TableHead> */}
+        <Container>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography fontSize={"20px"} fontWeight={"bold"} color={"black"}>
+                Thông tin Sân bóng
+              </Typography>
+            </Grid>
+            <Grid item xs={8}>
+              <Grid>Tên Sân bóng: {invoice.landName}</Grid>
+              <Grid>Tên Chủ sân: {invoice.nameOwner}</Grid>
+              <Grid>Địa chỉ: {invoice.location}</Grid>
+            </Grid>
+            <Grid item xs={4}>
+              <img
+                src={invoice.images}
+                alt="Owner logo"
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  borderRadius: "20px",
+                }}
+              />
+            </Grid>
+          </Grid>
 
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <img
-                  src={invoice.images}
-                  alt="Owner logo"
-                  style={{
-                    width: "100%",
-                    padding: "10px",
-                    borderRadius: "20px",
-                  }}
-                />
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography fontSize={"20px"} fontWeight={"bold"} color={"black"}>
+                Thông tin đặt sân
+              </Typography>
+              <Grid>Hóa đơn: {invoice.bookingId}</Grid>
+              <Grid>
+                Ngày tạo: {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
               </Grid>
-              <Grid item xs={8}>
-                <Grid>Hóa đơn: {invoice.bookingId}</Grid>
-                <Grid>
-                  Ngày tạo: {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
-                </Grid>
-                <Grid>Ghi chú: {invoice.note}</Grid>
-                <Grid>Địa chỉ: {invoice.location}</Grid>
+              <Grid>Họ tên người đặt: {invoice.customerName}</Grid>
+              <Grid>Ghi chú: {invoice.note}</Grid>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={3}
+          mt={"10px"}
+          >
+            <Grid item xs={4}
+            sx={{ textAlign: "center" }}>
+              <Grid>
+                <Typography
+                  fontSize={"20px"}
+                  fontWeight={"bold"}
+                  color={"black"}
+                >
+                  Tên sân
+                </Typography>
+                <Grid>{invoice.pitchName}</Grid>
               </Grid>
             </Grid>
-
-            <TableBody>
-              <TableRow className="information">
-                <TableCell colSpan={2} sx={{ paddingLeft: 20 }}>
-                  <Table>
-                    <TableRow>
-                      <TableCell>
-                        <Typography variant="subtitle1">Họ tên: </Typography>
-                        <Typography variant="subtitle1">Tên Sân:</Typography>
-                        <Typography variant="subtitle1">Chủ Sân: </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="subtitle1">
-                          {invoice.customerName}
-                        </Typography>
-                        <Typography variant="subtitle1">
-                          {invoice.landName}
-                        </Typography>
-                        <Typography>{invoice.nameOwner}</Typography>
-                      </TableCell>
-                    </TableRow>
-                  </Table>
-                </TableCell>
-              </TableRow>
-
-              <TableRow className="heading"></TableRow>
-
-              <TableRow className="heading">
-                <TableCell sx={{ textAlign: "center" }}>
-                  <b>Loại Sân</b>
-                </TableCell>
-                <TableCell sx={{ textAlign: "center" }}>
-                  <b>Giá Tiền</b>
-                </TableCell>
-              </TableRow>
-              <TableRow className="item">
-                <TableCell sx={{ textAlign: "center" }}>
-                  <p>
-                    {invoice.pitchName},{" "}
-                    <b
-                      style={{ borderBottom: "4px solid #4682b4   " }}
-                      className="border-b-4"
-                    >
-                      Từ {startTime} đến {endTime}
-                    </b>
-                  </p>
-                </TableCell>
-                <TableCell sx={{ textAlign: "center" }}>{price}</TableCell>
-              </TableRow>
-              <hr />
-              <TableRow className="total">
-                <TableCell />
-                <TableCell sx={{ textAlign: "center" }}>
-                  Trạng thái:
-                  {invoice.status === "Waiting" && (
-                    <b className="text-yellow-600 ml-1">Đang chờ thanh toán</b>
-                  )}
-                  {invoice.status === "Done" && (
-                    <b className="text-green-600 ml-1">Đã thanh toán</b>
-                  )}
-                  {invoice.status === "Cancel" && (
-                    <b className="text-red-600 ml-1">Đã hủy</b>
-                  )}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+            <Grid item xs={4}
+            sx={{ textAlign: "center" }}>
+            <Grid>
+                <Typography
+                  fontSize={"20px"}
+                  fontWeight={"bold"}
+                  color={"black"}
+                >
+                  Thời gian
+                </Typography>
+                <Grid>Từ {startTime} đến {endTime}</Grid>
+              </Grid>
+            </Grid>
+            <Grid item xs={4}
+            sx={{ textAlign: "center" }}>
+            <Grid>
+                <Typography
+                  fontSize={"20px"}
+                  fontWeight={"bold"}
+                  color={"black"}
+                >
+                  Giá tiền
+                </Typography>
+                <Grid>{price}</Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+        <hr />
+        <Grid className="total">
+          <Grid sx={{ textAlign: "center" }}
+          mt={"10px"}>
+            Trạng thái:
+            {invoice.status === "Waiting" && (
+              <b className="text-yellow-600 ml-1">Đang chờ thanh toán</b>
+            )}
+            {invoice.status === "Done" && (
+              <b className="text-green-600 ml-1">Đã thanh toán</b>
+            )}
+            {invoice.status === "Cancel" && (
+              <b className="text-red-600 ml-1">Đã hủy</b>
+            )}
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
