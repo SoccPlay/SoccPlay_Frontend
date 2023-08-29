@@ -1,7 +1,6 @@
 import { Box, Grid, Container, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import qrcode from "../../assets/qrcode.png";
 import arrowBack from "../../assets/arrowBack.png";
 import * as invoiceApi from "../Axios/InvoiceApi";
 import { formatPrice } from "../../pages/profile/components/History";
@@ -78,11 +77,11 @@ function Invoice({ snackbarShowMessage }) {
                 </Typography>
               </Grid>
               <Grid fontSize={"18px"}>
-                <Grid>Tên Sân bóng: {invoice.landName}</Grid>
-                <Grid>Tên Chủ sân: {invoice.nameOwner}</Grid>
-                <Grid>
-                  Ngày Đá: {dayjs(invoice.startTime).format("DD/MM/YYYY")}
-                </Grid>
+                <Grid>Tên sân bóng: {invoice.landName}</Grid>
+                <Grid>Tên chủ sân: {invoice.nameOwner}</Grid>
+                <Grid>Loại sân: {invoice.size}</Grid>
+                <Grid>Sdt: {invoice.phoneOwner}</Grid>
+                <Grid>Mail: {invoice.mailOwner}</Grid>
                 <Grid>Địa chỉ: {invoice.location}</Grid>
               </Grid>
               <Grid item xs={12}>
@@ -97,9 +96,16 @@ function Invoice({ snackbarShowMessage }) {
                 <Grid fontSize={"18px"}>
                   <Grid>Hóa đơn: {invoice.bookingId}</Grid>
                   <Grid>
-                    Ngày tạo: {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
+                    Ngày đặt:{" "}
+                    {dayjs(invoice.dateBooking).format("DD/MM/YYYY HH:mm")}
+                  </Grid>
+                  <Grid>
+                    Ngày đá:{" "}
+                    {dayjs(invoice.startTime).format("DD/MM/YYYY HH:mm")}
                   </Grid>
                   <Grid>Họ tên người đặt: {invoice.customerName}</Grid>
+                  <Grid>Sdt người đặt: {invoice.phoneCustomer}</Grid>
+                  <Grid>Mail: {invoice.mailCustomer}</Grid>
                   <Grid>Ghi chú: {invoice.note}</Grid>
                 </Grid>
               </Grid>
