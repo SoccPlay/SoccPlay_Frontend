@@ -14,6 +14,7 @@ import Pitch from "pages/owner/components/Pitch";
 import Dashboard from "pages/owner/components/Dashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../../assets/scss/light-bootstrap-dashboard-react.scss?v=2.0.0";
+import Feedback from "pages/owner/components/Feedback";
 
 const Sidebar = () => {
   const [selected, setSelected] = useState(0);
@@ -40,6 +41,7 @@ const Sidebar = () => {
     <Pitch />,
     <HistoryBooking />,
     <Dashboard />,
+    <Feedback />,
   ];
   const renderRightSide = () => {
     if (userRole === "CUSTOMER") {

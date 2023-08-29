@@ -121,7 +121,7 @@ function HistoryBooking({ snackbarShowMessage }) {
                 Tên Sân Lớn
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Sân Nhỏ ID
+                Sân Nhỏ
               </TableCell>
               <TableCell align="center" className="bold-text">
                 Ngày Đặt

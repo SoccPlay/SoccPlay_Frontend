@@ -17,6 +17,7 @@ import axiosApi from "../../../components/Axios/AxiosApi";
 import LandApi from "../../../components/Axios/LandApi";
 import PitchApi from "../../../components/Axios/PitchApi";
 import { withSnackbar } from "../../../hook/withSnackbar";
+import * as FeedbackApi from "../../../components/Axios/FeedBackApi";
 import dayjs from "dayjs";
 const makeStyle = (status) => {
   if (status === "Active") {
@@ -37,7 +38,7 @@ const makeStyle = (status) => {
   }
 };
 const statusOptions = ["Active", "Inactive"];
-function Pitch({ snackbarShowMessage }) {
+function Feedback({ snackbarShowMessage }) {
   const [land, setLand] = useState([]);
   const onwerId = localStorage.getItem("OWNERID");
   const [loading, setLoading] = useState(false);
@@ -72,7 +73,7 @@ function Pitch({ snackbarShowMessage }) {
   const [pitch, selectedPitch] = useState([]);
   const handleLandChange = (newLand) => {
     setSelectedLand(newLand);
-    snackbarShowMessage("Tổng hợp danh sách sân", "success");
+    snackbarShowMessage("Tổng danh sách đánh giá tại sân này", "success");
     console.log(newLand);
   };
 
@@ -81,14 +82,11 @@ function Pitch({ snackbarShowMessage }) {
   const fetchPitch = async (selectedLandd, onwerIdd) => {
     setLoading(true);
     try {
-      const response = await PitchApi.GetPitchByOwnerAndNameLand(
-        onwerIdd,
-        selectedLandd
-      );
+      const response = await FeedbackApi.getFeedBackByLandId(selectedLandd);
       selectedPitch(response.data);
       console.log("Pitch: ", response.data);
     } catch (error) {
-      // snackbarShowMessage(error.response.data.Exception, "error");
+      snackbarShowMessage(error.response.data.Exception, "error");
     } finally {
       setLoading(false);
     }
@@ -96,7 +94,7 @@ function Pitch({ snackbarShowMessage }) {
 
   //----------------------------------------------------------------
 
-  const PER_PAGE = 7;
+  const PER_PAGE = 5;
   let [page, setPage] = useState(1);
   const count = Math.ceil(pitch.length / PER_PAGE);
   const sortfilterDataHistory = [...pitch].sort(
@@ -164,25 +162,19 @@ function Pitch({ snackbarShowMessage }) {
           <TableHead>
             <TableRow>
               <TableCell align="left" className="bold-text">
-                Sân nhỏ ID
+                Feed Back ID
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Tên sân
+                Đánh Giá
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Loại sân
+                Nội Dung
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Giá Giờ Sáng 7h-10h
+                Ngày Đánh Giá
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Giá Giờ Chiều 14h-22h
-              </TableCell>
-              <TableCell align="center" className="bold-text">
-                Ngày giờ tạo
-              </TableCell>
-              <TableCell align="center" className="bold-text">
-                Trạng thái
+                Customer ID
               </TableCell>
             </TableRow>
           </TableHead>
@@ -190,41 +182,14 @@ function Pitch({ snackbarShowMessage }) {
             {_Data &&
               _Data.map((pitchs) => {
                 return (
-                  <TableRow key={pitchs.pitchId}>
-                    <TableCell align="left">{pitchs.pitchId}</TableCell>
-                    <TableCell align="center">{pitchs.name}</TableCell>
-                    <TableCell align="center">{pitchs.size}</TableCell>
-                    <TableCell align="center">{pitchs.priceMin}</TableCell>
-                    <TableCell align="center">{pitchs.priceMax}</TableCell>
+                  <TableRow key={pitchs.feedbackId}>
+                    <TableCell align="left">{pitchs.feedbackId}</TableCell>
+                    <TableCell align="center">{pitchs.rate}</TableCell>
+                    <TableCell align="center">{pitchs.description}</TableCell>
                     <TableCell align="center">
                       {dayjs(pitchs.date).format("DD/MM/YYYY HH:mm")}
                     </TableCell>
-                    <TableCell align="center">
-                      <Select
-                        value={pitchs.status}
-                        onChange={(event) => {
-                          const newStatus = event.target.value;
-                          handleStatusChange(pitchs.bookingId, newStatus);
-                        }}
-                        className="status"
-                        style={{
-                          ...makeStyle(pitchs.status),
-                          borderRadius: "10px", // Độ cong viền tròn
-                          width: "121px", // Độ rộng thu nhỏ
-                          fontSize: "12px", // Cỡ chữ nhỏ
-                          height: "50px",
-                        }}
-                      >
-                        {statusOptions.map((status) => (
-                          <MenuItem key={status} value={status}>
-                            {status}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </TableCell>
-                    {/* <TableCell align="center">
-                      <Orders data={pitchs.bookingId} />
-                    </TableCell> */}
+                    <TableCell align="center">{pitchs.customerId}</TableCell>
                   </TableRow>
                 );
               })}
@@ -244,4 +209,4 @@ function Pitch({ snackbarShowMessage }) {
     </Box>
   );
 }
-export default withSnackbar(Pitch);
+export default withSnackbar(Feedback);

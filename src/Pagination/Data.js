@@ -14,7 +14,7 @@ import {
   UilSchedule,
   UilLocationPoint,
 } from "@iconscout/react-unicons";
-
+import MessageIcon from "@mui/icons-material/Message";
 // Sidebar Data
 export const SidebarDataAdmin = [
   {
@@ -46,6 +46,10 @@ export const SidebarDataCompany = [
   {
     icon: UilChart,
     heading: "Thống Kê",
+  },
+  {
+    icon: MessageIcon,
+    heading: "Nhận Xét",
   },
 ];
 export const TableStaff = [
