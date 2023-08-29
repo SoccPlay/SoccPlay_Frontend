@@ -41,7 +41,8 @@ function Pitch({ snackbarShowMessage }) {
   const [land, setLand] = useState([]);
   const onwerId = localStorage.getItem("OWNERID");
   const [loading, setLoading] = useState(false);
-
+  const [selectedLand, setSelectedLand] = useState("");
+  const [pitch, selectedPitch] = useState([]);
   const fetchLand = async () => {
     try {
       const response = await LandApi.GetLandByOwner(onwerId);
@@ -61,15 +62,17 @@ function Pitch({ snackbarShowMessage }) {
         `https://localhost:7186/api/Pitch/InActivePitch?id=${pitchId}&status=${newStatus}`
       );
       snackbarShowMessage("Thay đổi thành công", "success");
-      // You might want to update the UI or state accordingly
+      selectedPitch((prevPitchs) =>
+        prevPitchs.map((pitchs) =>
+          pitchs.pitchId === pitchId ? { ...pitchs, status: newStatus } : pitchs
+        )
+      );
     } catch (error) {
       console.error("Error updating status:", error);
       snackbarShowMessage("Không thể thay đổi", "error");
     }
   };
 
-  const [selectedLand, setSelectedLand] = useState("");
-  const [pitch, selectedPitch] = useState([]);
   const handleLandChange = (newLand) => {
     setSelectedLand(newLand);
     snackbarShowMessage("Tổng hợp danh sách sân", "success");
