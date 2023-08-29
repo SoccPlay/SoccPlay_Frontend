@@ -289,9 +289,8 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
             flexDirection: "column",
           }}
         >
-          <DialogTitle>Tạo Form FeedBack</DialogTitle>
+          <DialogTitle>Form FeedBack</DialogTitle>
           <DialogContent style={{ flex: "1", overflowY: "auto" }}>
-            <DialogContentText>Form FeedBack</DialogContentText>
             <Form
               landId={selectLandId}
               customerId={customer}

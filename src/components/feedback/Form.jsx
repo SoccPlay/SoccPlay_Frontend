@@ -34,7 +34,7 @@ const Form = ({
   };
   return (
     <div>
-      <h2 className="underlined" style={{ margin: "30px 0px 0px 0px" }}>
+      <h2 className="underlined">
         Gửi <span class="underlined underline-clip">Đánh giá</span> của bạn:
       </h2>
       <Stack
@@ -42,6 +42,7 @@ const Form = ({
         spacing={1}
       >
         <Rating
+          style={{ marginTop: "10px" }}
           sx={{}}
           name="rate"
           defaultValue={0}

@@ -302,7 +302,7 @@ function Lands({ snackbarShowMessage }) {
   console.log("Land Id: ", selectLandId);
   console.log("Start Date Price: ", prices.starTime);
   console.log("End Date Price: ", prices.endTime);
-
+  console.log("Price: ", prices.price1);
   function handlePageChanges(event, newValue) {
     setPage(newValue);
     console.log(_Data);
@@ -461,7 +461,7 @@ function Lands({ snackbarShowMessage }) {
             <TextField
               name="price1"
               label="Giá Tiền Mỗi Giờ"
-              value={prices.price1}
+              value={formatPrice(prices.price1)}
               onChange={handleInputPricesChange}
               required
             />
