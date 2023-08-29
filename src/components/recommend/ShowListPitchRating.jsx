@@ -3,6 +3,7 @@ import "./style.scss";
 import LandApi from "../Axios/LandApi";
 import { Rating, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { formatPrice } from "pages/profile/components/History";
 
 export default function ShowListPitchRating() {
   const [value, setValue] = useState(5);
@@ -64,7 +65,8 @@ export default function ShowListPitchRating() {
                 <div className="info">
                   <p>Giá</p>
                   <b>
-                    {lands.minPrice} VND - {lands.maxPrice} VND / Trận
+                    {formatPrice(lands.minPrice)} -{" "}
+                    {formatPrice(lands.maxPrice)} / Trận
                   </b>
                 </div>
                 <div className="distance">

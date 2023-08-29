@@ -13,6 +13,7 @@ import "./style.scss";
 import LandApi from "../Axios/LandApi";
 import { Button, Rating, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
+import { formatPrice } from "pages/profile/components/History";
 
 export default function ShowListPitchNear() {
   const data = [
@@ -127,7 +128,8 @@ export default function ShowListPitchNear() {
                   <div className="info">
                     <p>Price</p>
                     <b>
-                      {lands.minPrice} VND - {lands.maxPrice} VND / Trận
+                      {formatPrice(lands.minPrice)} -{" "}
+                      {formatPrice(lands.maxPrice)} / Trận
                     </b>
                   </div>
                   <div className="distance">
