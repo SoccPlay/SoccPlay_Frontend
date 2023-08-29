@@ -54,11 +54,10 @@ function HistoryBooking({ snackbarShowMessage }) {
       setBooking(response.data);
       console.log("Booking Reponse: ", response.data);
       setIsLoading(false);
-      snackbarShowMessage("Hiện thành công", "success");
     } catch (error) {
       setError(error);
       setIsLoading(false);
-      snackbarShowMessage(error.response.data.Exception, "error");
+      console.log("Error: ", error);
     }
   };
   const PER_PAGE = 5;
@@ -77,11 +76,10 @@ function HistoryBooking({ snackbarShowMessage }) {
         `https://localhost:7186/api/Booking/ChangeStatusBooking?id=${bookingId}&status=${newStatus}`
       );
       fetchBooking();
-      snackbarShowMessage("Thay đổi thành công", "success");
-      // You might want to update the UI or state accordingly
+      snackbarShowMessage("Cập nhật trạng thái thành công", "success");
     } catch (error) {
       console.error("Error updating status:", error);
-      snackbarShowMessage("Không thể thay đổi", "error");
+      snackbarShowMessage("Không thể thay đổi trạng thái", "error");
     }
   };
   useEffect(() => {
@@ -105,7 +103,7 @@ function HistoryBooking({ snackbarShowMessage }) {
         paddingRight: "50px",
       }}
     >
-      <div className="topManager">
+      <div style={{ marginBottom: "12px" }} className="topManager">
         <Typography className="bold-and-large">Thông Tin Đặt Sân</Typography>
       </div>
 
@@ -114,7 +112,7 @@ function HistoryBooking({ snackbarShowMessage }) {
         style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
       >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+          <TableHead sx={{ backgroundColor: "#1976d2" }}>
             <TableRow>
               <TableCell align="center" className="bold-text">
                 Đặt Sân ID

@@ -168,7 +168,7 @@ function Pitch({ snackbarShowMessage }) {
         <Typography className="bold-and-large">Quản Lý Sân Nhỏ</Typography>
       </div>
 
-      <div>
+      <div style={{ marginBottom: "12px" }}>
         <Select
           value={selectedLand}
           onChange={(event) => {
@@ -215,7 +215,7 @@ function Pitch({ snackbarShowMessage }) {
         style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
       >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+          <TableHead sx={{ backgroundColor: "#1976d2" }}>
             <TableRow>
               <TableCell align="left" className="bold-text">
                 Sân nhỏ ID

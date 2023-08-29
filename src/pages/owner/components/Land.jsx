@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate from your 
 import { withSnackbar } from "../../../hook/withSnackbar";
 import HistoryBooking from "./HistoryBook";
 import { formatPrice } from "pages/profile/components/History";
+import { styled } from "styled-components";
 
 const makeStyle = (status) => {
   if (status === "Active") {
@@ -339,6 +340,7 @@ function Lands({ snackbarShowMessage }) {
         <Typography className="bold-and-large">Quản Lý Sân</Typography>
         <Button
           className="butonManager"
+          style={{ marginBottom: "12px" }}
           onClick={() => handleOpenDialog(setOpen)}
         >
           Thêm Sân Lớn
@@ -350,7 +352,7 @@ function Lands({ snackbarShowMessage }) {
         style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
       >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
+          <TableHead sx={{ backgroundColor: "#1976d2" }}>
             <TableRow>
               <TableCell align="left" className="bold-text">
                 ID Sân Lớn

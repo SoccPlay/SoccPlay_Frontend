@@ -14,7 +14,7 @@
 .App {
   /* padding: 0.5rem 3.5rem; */
   color: var(--black);
-  background: #1976d2;
+  background: #1976d1;
   height: 120vh; /* Chiều cao 100% của viewport */
   width: 100%;
   display: flex;
