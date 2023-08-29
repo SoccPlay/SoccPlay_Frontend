@@ -294,6 +294,8 @@ function Lands({ snackbarShowMessage }) {
     }
   };
   //----------------------------------------------------------------
+
+  //----------------------------------------------------------------
   const PER_PAGE = 4;
   let [page, setPage] = useState(1);
   const count = Math.ceil(lands.length / PER_PAGE);
@@ -370,6 +372,9 @@ function Lands({ snackbarShowMessage }) {
               <TableCell align="left" className="bold-text">
                 Thêm Hình Ảnh Sân
               </TableCell>
+              <TableCell align="left" className="bold-text">
+                Chỉnh Sửa
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody style={{ color: "white" }}>
@@ -379,10 +384,18 @@ function Lands({ snackbarShowMessage }) {
                   <TableCell component="th" scope="row">
                     {row.landId}
                   </TableCell>
-                  <TableCell align="left">{row.nameLand}</TableCell>
-                  <TableCell align="left">{row.title}</TableCell>
-                  <TableCell align="left">{row.location}</TableCell>
-                  <TableCell align="left">{row.title}</TableCell>
+                  <TableCell align="left">
+                    <TextField value={row.nameLand} />
+                  </TableCell>
+                  <TableCell align="left">
+                    <TextField value={row.description} />
+                  </TableCell>
+                  <TableCell align="left">
+                    <TextField value={row.location} />
+                  </TableCell>
+                  <TableCell align="left">
+                    <TextField value={row.title} />
+                  </TableCell>
                   <TableCell align="left">{row.totalPitch}</TableCell>
 
                   <TableCell align="left" className="Details">
@@ -413,11 +426,16 @@ function Lands({ snackbarShowMessage }) {
                       Thêm Ảnh
                     </Button>
                   </TableCell>
+                  {/* <TableCell align="left" className="Details" key={row.landId}>
+                    <Button>Update</Button>
+                  </TableCell> */}
                 </TableRow>
               ))}
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* ----------------------------  EDIT --------------------------------------------------------- */}
 
       {/* ------------------ Upload images -------------------------------------------- */}
       <Dialog open={openFile} onClose={handleCloseFileDialog}>

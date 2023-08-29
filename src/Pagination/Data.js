@@ -32,6 +32,10 @@ export const SidebarDataAdmin = [
 ];
 export const SidebarDataCompany = [
   {
+    icon: UilChart,
+    heading: "Thống Kê",
+  },
+  {
     icon: UilReceipt,
     heading: "Sân Lớn",
   },
@@ -43,10 +47,7 @@ export const SidebarDataCompany = [
     icon: UilPackage,
     heading: "Lịch Sử Đặt",
   },
-  {
-    icon: UilChart,
-    heading: "Thống Kê",
-  },
+
   {
     icon: MessageIcon,
     heading: "Nhận Xét",

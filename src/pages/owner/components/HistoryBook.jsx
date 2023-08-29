@@ -54,7 +54,7 @@ function HistoryBooking({ snackbarShowMessage }) {
       setBooking(response.data);
       console.log("Booking Reponse: ", response.data);
       setIsLoading(false);
-      snackbarShowMessage("Show data thành công", "success");
+      snackbarShowMessage("Hiện thành công", "success");
     } catch (error) {
       setError(error);
       setIsLoading(false);
@@ -141,7 +141,7 @@ function HistoryBooking({ snackbarShowMessage }) {
                 Giá Tiền
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Customer ID
+                Khách Hàng ID
               </TableCell>
               <TableCell align="center" className="bold-text">
                 Hóa Đơn
