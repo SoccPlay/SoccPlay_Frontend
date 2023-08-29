@@ -19,6 +19,7 @@ import { Box } from "@mui/system";
 import axiosApi from "../../../components/Axios/AxiosApi";
 import { Orders } from "../../detail/Popup";
 import { withSnackbar } from "../../../hook/withSnackbar";
+import dayjs from "dayjs";
 const makeStyle = (status) => {
   if (status === "Done") {
     return {
@@ -154,9 +155,16 @@ function HistoryBooking({ snackbarShowMessage }) {
                     <TableCell align="center">{bookings.bookingId}</TableCell>
                     <TableCell align="center">{bookings.name}</TableCell>
                     <TableCell align="center">{bookings.pitchName}</TableCell>
-                    <TableCell align="center">{bookings.dateBooking}</TableCell>
-                    <TableCell align="center">{bookings.startTime}</TableCell>
-                    <TableCell align="center">{bookings.endTime}</TableCell>
+                    <TableCell align="center">
+                      {dayjs(bookings.dateBooking).format("DD/MM/YYYY HH:mm")}
+                    </TableCell>
+                    <TableCell align="center">
+                      {dayjs(bookings.startTime).format("DD/MM/YYYY HH:mm")}
+                    </TableCell>
+                    <TableCell align="center">
+                      {dayjs(bookings.endTime).format("DD/MM/YYYY HH:mm")}
+                    </TableCell>
+
                     <TableCell align="center">
                       <Select
                         value={bookings.status}
