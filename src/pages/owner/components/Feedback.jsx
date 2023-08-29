@@ -159,7 +159,7 @@ function Feedback({ snackbarShowMessage }) {
           <TableHead>
             <TableRow>
               <TableCell align="left" className="bold-text">
-                Feed Back ID
+                Nhận Xét ID
               </TableCell>
               <TableCell align="center" className="bold-text">
                 Đánh Giá
@@ -171,7 +171,7 @@ function Feedback({ snackbarShowMessage }) {
                 Ngày Đánh Giá
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Customer ID
+                Khách Hàng
               </TableCell>
             </TableRow>
           </TableHead>
@@ -186,7 +186,7 @@ function Feedback({ snackbarShowMessage }) {
                     <TableCell align="center">
                       {dayjs(pitchs.date).format("DD/MM/YYYY HH:mm")}
                     </TableCell>
-                    <TableCell align="center">{pitchs.customerId}</TableCell>
+                    <TableCell align="center">{pitchs.nameCustomer}</TableCell>
                   </TableRow>
                 );
               })}
