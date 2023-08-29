@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import SwipeableViews from "react-swipeable-views";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
@@ -31,7 +31,7 @@ import Feedback from "../../components/feedback/Feedback";
 import Form from "../../components/feedback/Form";
 import { withSnackbar } from "../../hook/withSnackbar";
 import "../detail/tabs.css";
-import { Bills, Orders, Popups } from "./Popup";
+import { Popups } from "./Popup";
 import { time } from "./TimeConstant";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -208,7 +208,9 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
       setCount(count + 1);
     } catch (error) {
       console.error("Error creating booking:", error.response.data.Exception);
-      snackbarShowMessage(error.response.data.Exception, "error");
+      snackbarShowMessage("Sân này chưa được tạo", "error");
+      setPriceText(0);
+      setShowBookingButton(false);
     } finally {
       setLoading(false);
     }
