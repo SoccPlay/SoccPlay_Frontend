@@ -78,10 +78,13 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [dateBooking, setDateBooking] = useState(() => {
-    return dayjs().toISOString().split("T")[0];
+    const vnDate = new Date(Date.now() + 7 * 60 * 60 * 1000); // Thêm 7 giờ để chuyển sang múi giờ Việt Nam
+    return vnDate.toISOString().split("T")[0];
   });
+
   const [date, setDate] = useState(() => {
-    return dayjs().format("DD-MM-YYYY");
+    const vnDate = new Date(Date.now() + 7 * 60 * 60 * 1000); // Thêm 7 giờ để chuyển sang múi giờ Việt Nam
+    return dayjs(vnDate).format("DD-MM-YYYY");
   });
   const [size, setSize] = useState(5);
   const [selectedHours, setSelectedHours] = useState({
@@ -96,12 +99,13 @@ function FullWidthTabs({ landId, snackbarShowMessage }) {
   };
 
   const handleDateChange = (date) => {
-    const element = date.toISOString().split("T")[0];
-    const dateFormat = dayjs(element).format("DD-MM-YYYY");
+    const vnDate = dayjs(date).add(7, "hour"); // Thêm 7 giờ để chuyển sang múi giờ Việt Nam
+    const element = vnDate.format("YYYY-MM-DD");
+    const dateFormat = vnDate.format("DD-MM-YYYY");
     setDate(dateFormat);
     setDateBooking(element);
 
-    console.log("Element: " + element);
+    console.log("Phần tử: " + element);
   };
 
   const [hasChangedFrom, setHasChangedFrom] = useState(false);

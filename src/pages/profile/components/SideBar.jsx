@@ -37,10 +37,10 @@ const Sidebar = () => {
     userRole === "CUSTOMER" ? SidebarDataAdmin : SidebarDataCompany;
   const sidebarComponentsAdmin = [<CustomizedTables />, <EditProfile />];
   const sidebarComponentsCompany = [
+    <Dashboard />,
     <Lands />,
     <Pitch />,
     <HistoryBooking />,
-    <Dashboard />,
     <Feedback />,
   ];
   const renderRightSide = () => {

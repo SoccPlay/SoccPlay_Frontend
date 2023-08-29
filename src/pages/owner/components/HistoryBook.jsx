@@ -139,7 +139,7 @@ function HistoryBooking({ snackbarShowMessage }) {
                 Giá Tiền
               </TableCell>
               <TableCell align="center" className="bold-text">
-                Customer ID
+                Khách Hàng ID
               </TableCell>
               <TableCell align="center" className="bold-text">
                 Hóa Đơn
