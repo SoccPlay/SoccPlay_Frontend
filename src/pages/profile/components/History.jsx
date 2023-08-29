@@ -90,33 +90,33 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
     setLandId(landId);
     setCloseForm(true);
   }
-  const [pitch, setPitch] = useState({
-    name: "",
-    size: "",
-    landId: "",
-    ownerId: selectLandId,
-  });
-  const resetPitch = () => {
-    setPitch({
-      name: "",
-      size: "",
-      landId: "",
-      ownerId: selectLandId,
-    });
-  };
+  // const [pitch, setPitch] = useState({
+  //   name: "",
+  //   size: "",
+  //   landId: "",
+  //   ownerId: selectLandId,
+  // });
+  // const resetPitch = () => {
+  //   setPitch({
+  //     name: "",
+  //     size: "",
+  //     landId: "",
+  //     ownerId: selectLandId,
+  //   });
+  // };
 
   function handleCloseFormFeedBackDialog() {
-    resetPitch();
+    // resetPitch();
     setCloseForm(false);
     setLandId(null);
   }
-  function handleInputFormChange(event) {
-    const { name, value } = event.target;
-    setPitch((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
+  // function handleInputFormChange(event) {
+  //   const { name, value } = event.target;
+  //   setPitch((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // }
 
   //-------------------------------------------------------------------------------------------
   const updateData = (newData) => {
@@ -281,17 +281,25 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
           open={openForm}
           onClose={handleCloseFormFeedBackDialog}
           fullWidth={true}
-          maxWidth="lg"
-          style={{ height: "1000px" }}
+          maxWidth="xs"
+          style={{
+            maxHeight: "90%",
+            minHeight: "70%",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
           <DialogTitle>Tạo Form FeedBack</DialogTitle>
-          <DialogContent>
+          <DialogContent style={{ flex: "1", overflowY: "auto" }}>
             <DialogContentText>Form FeedBack</DialogContentText>
-            <Form />
+            <Form
+              landId={selectLandId}
+              customerId={customer}
+              handleCloseFormFeedBackDialog={handleCloseFormFeedBackDialog}
+            />
           </DialogContent>
           <DialogActions></DialogActions>
         </Dialog>
-
         <Pagination
           variant="outlined"
           color="primary"

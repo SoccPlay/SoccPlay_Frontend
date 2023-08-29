@@ -44,10 +44,9 @@ const List = () => {
     setPage(newValue);
     console.log(_Data);
   }
-  const handleRating = useCallback((event) => {
-    console.log(event.target.value);
-    setRating(event.target.value);
-  }, []);
+  const handleRating = (event, newValue) => {
+    setRating(newValue);
+  };
 
   const formatPrice = (price) => {
     price = price * 30000;
@@ -58,7 +57,7 @@ const List = () => {
   };
   function handleChanges(event, newValue) {
     setRange(newValue);
-    setMinPrice(newValue[0] * 3000);
+    setMinPrice(newValue[0] * 30000);
     setMaxPrice(newValue[1] * 30000);
   }
 
@@ -199,7 +198,7 @@ const List = () => {
           <Stack spacing={1}>
             <Rating
               name="half-rating"
-              defaultValue={5}
+              value={rating}
               precision={1}
               onChange={handleRating}
             />

@@ -4,7 +4,12 @@ import "./Form.scss";
 import { withSnackbar } from "../../hook/withSnackbar";
 import * as FeedbackApi from "../Axios/FeedBackApi";
 
-const Form = ({ landId, customerId, snackbarShowMessage }) => {
+const Form = ({
+  landId,
+  customerId,
+  handleCloseFormFeedBackDialog,
+  snackbarShowMessage,
+}) => {
   const [form, setFrom] = useState({});
   const handleChangeForm = (e) => {
     const { name, value } = e.target;
@@ -21,8 +26,10 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
     try {
       await FeedbackApi.createFeedBack(formData);
       snackbarShowMessage("Cảm ơn bạn đã đánh giá", "success");
+      handleCloseFormFeedBackDialog();
     } catch (error) {
       snackbarShowMessage("Gửi đánh giá thất bại", "error");
+      handleCloseFormFeedBackDialog();
     }
   };
   return (
@@ -30,16 +37,12 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
       <h2 className="underlined" style={{ margin: "30px 0px 0px 0px" }}>
         Gửi <span class="underlined underline-clip">Đánh giá</span> của bạn:
       </h2>
-      <Stack sx={{ margin: "0px 0px 1% 12%", width: "100%" }} spacing={1}>
+      <Stack
+        // sx={{ margin: "0px 0px 1% 12%", width: "100%" }}
+        spacing={1}
+      >
         <Rating
-          sx={{
-            width: "20%",
-            height: "10%",
-            position: "absolute",
-            bottom: "-19%",
-            left: "50.5%",
-            margin: "20px",
-          }}
+          sx={{}}
           name="rate"
           defaultValue={0}
           precision={1}
@@ -47,12 +50,10 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
         />
         <textarea
           style={{
-            position: "absolute",
-            bottom: "-22%",
-            left: "50.5%",
-            width: "20%",
-            height: "10%",
+            height: "150px", // Điều chỉnh chiều cao của textarea
             border: "1px solid #ccc",
+            borderRadius: "5px",
+            padding: "8px",
           }}
           placeholder="Gửi đánh giá của bạn"
           minRows={4}
@@ -61,12 +62,7 @@ const Form = ({ landId, customerId, snackbarShowMessage }) => {
           onChange={handleChangeForm}
         />
         <Button
-          sx={{
-            position: "absolute",
-            bottom: "-27%",
-            left: "57.5%",
-            border: "1px solid #ccc",
-          }}
+          sx={{ alignSelf: "flex-end" }} // Đưa nút Gửi lên cuối form
           onClick={handleSubmitForm}
         >
           Gửi

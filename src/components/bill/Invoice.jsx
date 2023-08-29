@@ -80,6 +80,9 @@ function Invoice({ snackbarShowMessage }) {
               <Grid fontSize={"18px"}>
                 <Grid>Tên Sân bóng: {invoice.landName}</Grid>
                 <Grid>Tên Chủ sân: {invoice.nameOwner}</Grid>
+                <Grid>
+                  Ngày Đá: {dayjs(invoice.startTime).format("DD/MM/YYYY")}
+                </Grid>
                 <Grid>Địa chỉ: {invoice.location}</Grid>
               </Grid>
               <Grid item xs={12}>
@@ -114,10 +117,20 @@ function Invoice({ snackbarShowMessage }) {
             </Grid>
           </Grid>
 
-          <Grid container spacing={3} mt={"10px"} fontSize={"22px"} margin={"10px"}>
+          <Grid
+            container
+            spacing={3}
+            mt={"10px"}
+            fontSize={"22px"}
+            margin={"10px"}
+          >
             <Grid item xs={4} sx={{ textAlign: "center" }}>
               <Grid>
-                <Typography fontWeight={"bold"} color={"black"} fontSize={"22px"}>
+                <Typography
+                  fontWeight={"bold"}
+                  color={"black"}
+                  fontSize={"22px"}
+                >
                   Tên sân
                 </Typography>
                 <Grid>{invoice.pitchName}</Grid>
@@ -125,7 +138,11 @@ function Invoice({ snackbarShowMessage }) {
             </Grid>
             <Grid item xs={4} sx={{ textAlign: "center" }}>
               <Grid>
-                <Typography fontWeight={"bold"} color={"black"} fontSize={"22px"}>
+                <Typography
+                  fontWeight={"bold"}
+                  color={"black"}
+                  fontSize={"22px"}
+                >
                   Thời gian
                 </Typography>
                 <Grid>
@@ -135,7 +152,11 @@ function Invoice({ snackbarShowMessage }) {
             </Grid>
             <Grid item xs={4} sx={{ textAlign: "center" }}>
               <Grid>
-                <Typography fontWeight={"bold"} color={"black"} fontSize={"22px"}>
+                <Typography
+                  fontWeight={"bold"}
+                  color={"black"}
+                  fontSize={"22px"}
+                >
                   Giá tiền
                 </Typography>
                 <Grid>{price}</Grid>
