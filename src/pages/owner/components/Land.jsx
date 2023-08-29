@@ -211,6 +211,9 @@ function Lands({ snackbarShowMessage }) {
   };
   function handleInputPricesChange(event) {
     const { name, value } = event.target;
+    if (name === "price1" && parseFloat(value) >= 3000000) {
+      return; // Don't update the state if the price is too high
+    }
     setPrices((prevData) => ({
       ...prevData,
       [name]: value,
@@ -381,9 +384,9 @@ function Lands({ snackbarShowMessage }) {
               <TableCell align="left" className="bold-text">
                 Thêm Hình Ảnh Sân
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              {/* <TableCell align="left" className="bold-text">
                 Chỉnh Sửa
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody style={{ color: "white" }}>
@@ -440,9 +443,9 @@ function Lands({ snackbarShowMessage }) {
                       Thêm Ảnh
                     </Button>
                   </TableCell>
-                  <TableCell align="left" className="Details" key={row.landId}>
+                  {/* <TableCell align="left" className="Details" key={row.landId}>
                     <Button>Update</Button>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
           </TableBody>
