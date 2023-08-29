@@ -9,6 +9,7 @@ import DashboardApi from "components/Axios/DashboardApi";
 import { formatPrice } from "pages/profile/components/History";
 import { BarChart } from "./BarChart";
 import { PieChart } from "./PieChart";
+import "./Top3Card.scss";
 function Dashboard() {
   const onwerId = localStorage.getItem("OWNERID");
   const [bookingNumber, setBookingNumber] = useState(0);
@@ -16,6 +17,7 @@ function Dashboard() {
   const [pitchNumber, setPitchNumber] = useState([]);
   const [summaryByMonth, setSummaryByMonth] = useState([]);
   const [totalPitch, setTotalPitch] = useState(0);
+  const [top3Revenue, setTop3Revenue] = useState([]);
   const monthArr = [
     "1",
     "2",
@@ -59,11 +61,13 @@ function Dashboard() {
         new Date().getFullYear(),
         onwerId
       );
+      const top3RevenueResponse = await DashboardApi.GetTop3Revenue(onwerId);
       setBookingNumber(bookingNumberResponse.data);
       setRevenue(revenueResponse.data);
       setPitchNumber(pitchNumberResponse.data);
       setSummaryByMonth(summaryByMonthResponse.data);
       setTotalPitch(pitchNumberResponse.data[0] + pitchNumberResponse.data[1]);
+      setTop3Revenue(top3RevenueResponse.data);
       console.log("month", summaryByMonthResponse.data);
     } catch (error) {
       console.log(error);
@@ -215,6 +219,41 @@ function Dashboard() {
                     Hiện tại
                   </p>
                 </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="12">
+            <Card className="top-courts-card">
+              <Card.Header
+                style={{
+                  background: "rgba(255, 7, 7, 0.1)",
+                }}
+              >
+                <Card.Title as="h2" className="top-title">
+                  Top 3 Sân có doanh thu tốt nhất
+                </Card.Title>
+              </Card.Header>
+              <Card.Body>
+                {top3Revenue.map((court, index) => (
+                  <div className="court-info" key={index}>
+                    <div className="court-left">
+                      <h3 className="court-name">{court.nameLand}</h3>
+                      <p className="revenue">
+                        Doanh thu: {formatPrice(court.summaryIncome)}
+                      </p>
+                      <p className="address">Địa chỉ: {court.location}</p>
+                    </div>
+                    <div className="court-right">
+                      <img
+                        className="court-image"
+                        src={court.image}
+                        alt={`Hình ảnh sân ${court.nameLand}`}
+                      />
+                    </div>
+                  </div>
+                ))}
               </Card.Body>
             </Card>
           </Col>

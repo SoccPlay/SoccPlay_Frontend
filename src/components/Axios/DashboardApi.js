@@ -40,6 +40,10 @@ const DashboardApi = {
     const url = `Booking/GetSummryInYearByLand?year=${year}&landId=${landId}`;
     return axiosApi.get(url, year, landId);
   },
+  GetTop3Revenue: async (ownerId) => {
+    const url = `Land/GetTop3IncomeLandOfOwner?id=${ownerId}`;
+    return axiosApi.get(url, ownerId);
+  },
 };
 
 export default DashboardApi;
