@@ -21,6 +21,23 @@ const LandApi = {
     const url = `Land/SearchLandByLocation?location=${location}`;
     return axiosApi.get(url, location);
   },
+  GetLand(location, landName) {
+    let url = `Land/SearchLand?`;
+
+    if (location) {
+      url += `location=${location}`;
+    }
+
+    if (landName) {
+      if (url.endsWith("?")) {
+        url += `landName=${landName}`;
+      } else {
+        url += `&landName=${landName}`;
+      }
+    }
+
+    return axiosApi.get(url);
+  },
   CreateLands: async (form) => {
     const url = `Land/CreateLand`;
     return axiosApi.post(url, form);

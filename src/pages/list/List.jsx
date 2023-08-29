@@ -14,6 +14,7 @@ import {
   Rating,
   Slider,
   Stack,
+  TextField,
 } from "@mui/material";
 import * as FilterApi from "../../components/Axios/FilterApi";
 import LandApi from "../../components/Axios/LandApi";
@@ -34,6 +35,7 @@ const List = () => {
   const [size, setSize] = useState();
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(300000);
+  const [otherPrice, setOtherPrice] = useState("0 VND");
   const [rating, setRating] = useState();
 
   const handleLocation = useCallback((event) => {
@@ -49,16 +51,31 @@ const List = () => {
   };
 
   const formatPrice = (price) => {
-    price = price * 30000;
+    price = price * 3000;
     return price.toLocaleString("it-IT", {
       style: "currency",
       currency: "VND",
     });
   };
+
+  const formatPriceV2 = (price) => {
+    price = price * 1;
+    return price.toLocaleString("it-IT", {
+      style: "currency",
+      currency: "VND",
+    });
+  };
+
   function handleChanges(event, newValue) {
-    setRange(newValue);
-    setMinPrice(newValue[0] * 30000);
-    setMaxPrice(newValue[1] * 30000);
+    if (event.target.name === "otherPrice") {
+      setOtherPrice(event.target.value);
+      setMaxPrice(event.target.value);
+    } else if (event.target.name === "range") {
+      setRange(newValue);
+      setMinPrice(newValue[0] * 3000);
+      setMaxPrice(newValue[1] * 3000);
+      return;
+    }
   }
 
   const handleCheckboxChange = (event) => {
@@ -97,9 +114,9 @@ const List = () => {
     }
   };
 
-  const fetchLands = async ([]) => {
+  const fetchLands = async () => {
     try {
-      if (selectedStreet === undefined || groundName === undefined) {
+      if (selectedStreet === undefined && groundName === undefined) {
         const response = await LandApi.GetAllLand();
         if (response == null) {
           setApiDataAvailable(false);
@@ -110,10 +127,7 @@ const List = () => {
         return;
       } else {
         console.log(`LIST SEARCH: ${selectedStreet} - ${groundName}`);
-        const response = await LandApi.GetLandByLocationandNameGround(
-          selectedStreet,
-          groundName
-        );
+        const response = await LandApi.GetLand(selectedStreet, groundName);
         if (response == null) {
           setApiDataAvailable(false);
         }
@@ -127,7 +141,7 @@ const List = () => {
   };
 
   useEffect(() => {
-    fetchLands([]);
+    fetchLands();
   }, []);
 
   return (
@@ -181,9 +195,27 @@ const List = () => {
 
             <Slider
               size="small"
+              name="range"
               value={range}
               onChange={handleChanges}
               sx={{ width: "85%" }}
+            />
+            <h1 className="coll text">Giá tiền khác bạn muốn tìm</h1>
+            <TextField
+              id="otherPrice"
+              name="otherPrice"
+              label="giá tối đa"
+              variant="outlined"
+              value={otherPrice}
+              onFocus={(e) => setOtherPrice("")}
+              onBlur={() => {
+                if (otherPrice !== "") {
+                  const formattedValue = formatPriceV2(otherPrice);
+                  setOtherPrice(formattedValue);
+                }
+              }}
+              onChange={handleChanges}
+              sx={{ width: "20rem" }}
             />
             <h1 className="coll text">Cỡ sân</h1>
             {[5, 7].map((size) => {

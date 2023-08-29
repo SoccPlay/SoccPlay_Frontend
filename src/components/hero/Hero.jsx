@@ -7,10 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Hero() {
   const street = [
     { value: "Thủ Đức", label: "Thủ Đức" },
-    {
-      value: "Quận 2",
-      label: "Quận 2",
-    },
+    { value: "Quận 2", label: "Quận 2" },
     { value: "Quận 3", label: "Quận 3" },
     { value: "Quận 4", label: "Quận 4" },
     { value: "Quận 5", label: "Quận 5" },
@@ -24,14 +21,16 @@ export default function Hero() {
     { value: "Tân Bình", label: "Tân Bình" },
     { value: "Gò Vấp", label: "Gò Vấp" },
   ];
-  const [selectedStreet, setSelectedStreet] = useState("Quận");
-  const [groundName, setGroundName] = useState("Sân Bóng");
+  const [selectedStreet, setSelectedStreet] = useState();
+  const [groundName, setGroundName] = useState();
   const nagative = useNavigate();
 
   const handleSearch = async () => {
-    if (selectedStreet) {
-      nagative(`/list/${selectedStreet}/${groundName}`);
-    }
+    if (selectedStreet === undefined) {
+      nagative(`/ground/${groundName}`);
+    } else if (groundName === undefined) {
+      nagative(`/street/${selectedStreet}`);
+    } else nagative(`/list/${selectedStreet}/${groundName}`);
   };
   return (
     <div className="Section" id="hero">
@@ -85,7 +84,6 @@ export default function Hero() {
             <input
               type="text"
               placeholder="Tìm Sân Bóng"
-              //value={groundName}
               onChange={(e) => setGroundName(e.target.value)}
             />
           </div>
