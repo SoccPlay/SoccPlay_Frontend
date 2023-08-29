@@ -26,7 +26,7 @@ export const options = {
 
   responsive: true,
   maintainAspectRatio: true,
-  aspectRatio: 2.4,
+  aspectRatio: 2.1,
   plugins: {
     legend: {
       position: "top",
@@ -36,10 +36,6 @@ export const options = {
 
 export function BarChart({ barPriceData }) {
   return (
-    <Bar
-      style={{ marginLeft: "100px" }}
-      options={options}
-      data={barPriceData}
-    />
+    <Bar style={{ marginLeft: "50px" }} options={options} data={barPriceData} />
   );
 }
