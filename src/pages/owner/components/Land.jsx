@@ -211,6 +211,9 @@ function Lands({ snackbarShowMessage }) {
   };
   function handleInputPricesChange(event) {
     const { name, value } = event.target;
+    if (name === "price1" && parseFloat(value) >= 3000000) {
+      return; // Don't update the state if the price is too high
+    }
     setPrices((prevData) => ({
       ...prevData,
       [name]: value,
@@ -296,6 +299,13 @@ function Lands({ snackbarShowMessage }) {
   };
   //----------------------------------------------------------------
 
+  const [editedData, setEditedData] = useState(lands);
+
+  const handleFieldChange = (index, field, value) => {
+    const newData = [...editedData];
+    newData[index][field] = value;
+    setEditedData(newData);
+  };
   //----------------------------------------------------------------
   const PER_PAGE = 4;
   let [page, setPage] = useState(1);
@@ -374,20 +384,25 @@ function Lands({ snackbarShowMessage }) {
               <TableCell align="left" className="bold-text">
                 Thêm Hình Ảnh Sân
               </TableCell>
-              <TableCell align="left" className="bold-text">
+              {/* <TableCell align="left" className="bold-text">
                 Chỉnh Sửa
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody style={{ color: "white" }}>
             {_Data &&
-              _Data.map((row) => (
+              _Data.map((row, index) => (
                 <TableRow key={row.landId}>
                   <TableCell component="th" scope="row">
                     {row.landId}
                   </TableCell>
                   <TableCell align="left">
-                    <TextField value={row.nameLand} />
+                    <TextField
+                      value={row.nameLand}
+                      onChange={(e) =>
+                        handleFieldChange(index, "nameLand", e.target.value)
+                      }
+                    />
                   </TableCell>
                   <TableCell align="left">
                     <TextField value={row.description} />
