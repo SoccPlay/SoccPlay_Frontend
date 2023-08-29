@@ -20,6 +20,7 @@ import axiosApi from "../../../components/Axios/AxiosApi";
 import { Orders } from "../../detail/Popup";
 import { withSnackbar } from "../../../hook/withSnackbar";
 import dayjs from "dayjs";
+import { formatPrice } from "pages/profile/components/History";
 const makeStyle = (status) => {
   if (status === "Done") {
     return {
@@ -188,7 +189,9 @@ function HistoryBooking({ snackbarShowMessage }) {
                         ))}
                       </Select>
                     </TableCell>
-                    <TableCell align="center">{bookings.totalPrice}</TableCell>
+                    <TableCell align="center">
+                      {formatPrice(bookings.totalPrice)}
+                    </TableCell>
                     <TableCell align="center">{bookings.customerId}</TableCell>
                     <TableCell align="center">
                       <Orders data={bookings.bookingId} />
