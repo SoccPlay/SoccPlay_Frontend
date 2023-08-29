@@ -162,8 +162,9 @@ function HistoryBooking({ snackbarShowMessage }) {
                       {dayjs(bookings.startTime).format("DD/MM/YYYY HH:mm")}
                     </TableCell>
                     <TableCell align="center">
-                      {dayjs(bookings.endtime).format("DD/MM/YYYY HH:mm")}
+                      {dayjs(bookings.endTime).format("DD/MM/YYYY HH:mm")}
                     </TableCell>
+
                     <TableCell align="center">
                       <Select
                         value={bookings.status}
