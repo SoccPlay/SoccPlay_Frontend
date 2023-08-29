@@ -28,6 +28,7 @@ import "./land.scss";
 import { useNavigate } from "react-router-dom"; // Import useNavigate from your router library
 import { withSnackbar } from "../../../hook/withSnackbar";
 import HistoryBooking from "./HistoryBook";
+import { formatPrice } from "pages/profile/components/History";
 
 const makeStyle = (status) => {
   if (status === "Active") {
@@ -301,7 +302,7 @@ function Lands({ snackbarShowMessage }) {
   console.log("Land Id: ", selectLandId);
   console.log("Start Date Price: ", prices.starTime);
   console.log("End Date Price: ", prices.endTime);
-
+  console.log("Price: ", prices.price1);
   function handlePageChanges(event, newValue) {
     setPage(newValue);
     console.log(_Data);
@@ -418,7 +419,7 @@ function Lands({ snackbarShowMessage }) {
         </Table>
       </TableContainer>
 
-  {/* ------------------ Upload images -------------------------------------------- */}
+      {/* ------------------ Upload images -------------------------------------------- */}
       <Dialog open={openFile} onClose={handleCloseFileDialog}>
         <DialogTitle>Thêm Ảnh</DialogTitle>
         <DialogContent>
@@ -434,7 +435,7 @@ function Lands({ snackbarShowMessage }) {
             />
           </form>
         </DialogContent>
-        <DialogActions style={{ margin: "10px"}}>
+        <DialogActions style={{ margin: "10px" }}>
           <Button
             className="uploadfile"
             onClick={handleCloseFileDialog}
@@ -460,7 +461,7 @@ function Lands({ snackbarShowMessage }) {
             <TextField
               name="price1"
               label="Giá Tiền Mỗi Giờ"
-              value={prices.price1}
+              value={formatPrice(prices.price1)}
               onChange={handleInputPricesChange}
               required
             />
@@ -494,7 +495,7 @@ function Lands({ snackbarShowMessage }) {
             </Grid>
           </form>
         </DialogContent>
-        <DialogActions style={{ margin: "10px"}}>
+        <DialogActions style={{ margin: "10px" }}>
           <Button
             className="pitch"
             onClick={handleClosePriceDialog}
@@ -541,7 +542,7 @@ function Lands({ snackbarShowMessage }) {
             </Grid>
           </form>
         </DialogContent>
-        <DialogActions style={{ margin: "10px"}}>
+        <DialogActions style={{ margin: "10px" }}>
           <Button
             className="pitch"
             onClick={handleClosePitchDialog}
@@ -556,51 +557,58 @@ function Lands({ snackbarShowMessage }) {
       </Dialog>
 
       {/* -----------------CREATE LAND----------------------------------------------------- */}
-      
+
       <Dialog open={open} onClose={handleCloseDialog}>
         <DialogTitle>Tạo Sân Lớn</DialogTitle>
         <DialogContent>
           <DialogContentText>Nhập thông tin sân bóng:</DialogContentText>
-          <form style={{ marginTop: "5px", width: "500px" }} onSubmit={handleSubmit}>
+          <form
+            style={{ marginTop: "5px", width: "500px" }}
+            onSubmit={handleSubmit}
+          >
             <Grid mt={"15px"}>
-            <TextField
-              name="nameLand"
-              label="Tên Sân"
-              value={formData.nameLand}
-              onChange={handleInputChange}
-              fullWidth
-              required
-            /></Grid>
+              <TextField
+                name="nameLand"
+                label="Tên Sân"
+                value={formData.nameLand}
+                onChange={handleInputChange}
+                fullWidth
+                required
+              />
+            </Grid>
             <Grid mt={"15px"}>
-            <TextField
-              name="title"
-              label="Thông Tin"
-              value={formData.title}
-              onChange={handleInputChange}
-              fullWidth
-              required
-            /></Grid>
+              <TextField
+                name="title"
+                label="Thông Tin"
+                value={formData.title}
+                onChange={handleInputChange}
+                fullWidth
+                required
+              />
+            </Grid>
             <Grid mt={"15px"}>
-            <TextField
-              name="location"
-              label="Địa Điểm"
-              value={formData.location}
-              onChange={handleInputChange}
-              fullWidth
-              required
-            /></Grid>
+              <TextField
+                name="location"
+                label="Địa Điểm"
+                value={formData.location}
+                onChange={handleInputChange}
+                fullWidth
+                required
+              />
+            </Grid>
             <Grid mt={"15px"}>
-            <TextField
-              name="description"
-              label="Mô Tả Chi Tiết"
-              value={formData.description}
-              onChange={handleInputChange}
-              fullWidth
-              required
-            /></Grid>
+              <TextField
+                name="description"
+                label="Mô Tả Chi Tiết"
+                value={formData.description}
+                onChange={handleInputChange}
+                fullWidth
+                required
+              />
+            </Grid>
           </form>
         </DialogContent>
-        <DialogActions style={{ margin: "10px"}}>
+        <DialogActions style={{ margin: "10px" }}>
           <Button onClick={handleCloseDialog} color="primary">
             Hủy
           </Button>
