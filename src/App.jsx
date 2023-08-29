@@ -19,6 +19,8 @@ export default function App() {
         <Route exact path="signin" element={<SignIn />} />
         <Route exact path="signup" element={<SignUp />} />
         <Route path="/list/:selectedStreet/:groundName" element={<List />} />
+        <Route path="/ground/:groundName" element={<List />} />
+        <Route path="/street/:selectedStreet" element={<List />} />
         <Route path="/list" element={<List />} />
         <Route path="/detail/:landId" element={<Detail />} />
         <Route path="/profile" element={<Profile />} />

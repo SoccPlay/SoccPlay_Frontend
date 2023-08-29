@@ -116,7 +116,7 @@ const List = () => {
 
   const fetchLands = async () => {
     try {
-      if (selectedStreet === undefined || groundName === undefined) {
+      if (selectedStreet === undefined && groundName === undefined) {
         const response = await LandApi.GetAllLand();
         if (response == null) {
           setApiDataAvailable(false);
@@ -127,10 +127,7 @@ const List = () => {
         return;
       } else {
         console.log(`LIST SEARCH: ${selectedStreet} - ${groundName}`);
-        const response = await LandApi.GetLandByLocationandNameGround(
-          selectedStreet,
-          groundName
-        );
+        const response = await LandApi.GetLand(selectedStreet, groundName);
         if (response == null) {
           setApiDataAvailable(false);
         }
