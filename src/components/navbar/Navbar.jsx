@@ -66,7 +66,7 @@ export default function Navbar() {
           </a>
         </li>
         <li>
-          <Link to={`/list/Quận/Sân Bóng`} className="largeText">
+          <Link to={`/list`} className="largeText">
             Sân
           </Link>
         </li>

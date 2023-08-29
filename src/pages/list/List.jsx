@@ -99,17 +99,28 @@ const List = () => {
 
   const fetchLands = async ([]) => {
     try {
-      console.log(`LIST SEARCH: ${selectedStreet} - ${groundName}`);
-      const response = await LandApi.GetLandByLocationandNameGround(
-        selectedStreet,
-        groundName
-      );
-      if (response == null) {
-        setApiDataAvailable(false);
+      if (selectedStreet === undefined || groundName === undefined) {
+        const response = await LandApi.GetAllLand();
+        if (response == null) {
+          setApiDataAvailable(false);
+        }
+        console.log("Land List:", response.data);
+        setLand(response.data);
+        setApiDataAvailable(true);
+        return;
+      } else {
+        console.log(`LIST SEARCH: ${selectedStreet} - ${groundName}`);
+        const response = await LandApi.GetLandByLocationandNameGround(
+          selectedStreet,
+          groundName
+        );
+        if (response == null) {
+          setApiDataAvailable(false);
+        }
+        console.log("Land List:", response.data);
+        setLand(response.data);
+        setApiDataAvailable(true);
       }
-      console.log("Land List:", response.data);
-      setLand(response.data);
-      setApiDataAvailable(true);
     } catch (error) {
       console.error("API Error:", error);
     }
