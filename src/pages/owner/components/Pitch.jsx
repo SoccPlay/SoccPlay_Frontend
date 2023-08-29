@@ -1,4 +1,9 @@
 import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  IconButton,
   MenuItem,
   Pagination,
   Paper,
@@ -11,6 +16,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import axiosApi from "../../../components/Axios/AxiosApi";
@@ -18,6 +24,9 @@ import LandApi from "../../../components/Axios/LandApi";
 import PitchApi from "../../../components/Axios/PitchApi";
 import { withSnackbar } from "../../../hook/withSnackbar";
 import dayjs from "dayjs";
+import { formatPrice } from "pages/profile/components/History";
+import DetailPitch from "./DetailPitch";
+import { styled } from "styled-components";
 const makeStyle = (status) => {
   if (status === "Active") {
     return {
@@ -43,6 +52,8 @@ function Pitch({ snackbarShowMessage }) {
   const [loading, setLoading] = useState(false);
   const [selectedLand, setSelectedLand] = useState("");
   const [pitch, selectedPitch] = useState([]);
+  const [closeForm, setCloseForm] = useState(false);
+  const [landId, setLandId] = useState("");
   const fetchLand = async () => {
     try {
       const response = await LandApi.GetLandByOwner(onwerId);
@@ -91,7 +102,7 @@ function Pitch({ snackbarShowMessage }) {
       selectedPitch(response.data);
       console.log("Pitch: ", response.data);
     } catch (error) {
-      // snackbarShowMessage(error.response.data.Exception, "error");
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -117,6 +128,25 @@ function Pitch({ snackbarShowMessage }) {
     fetchPitch(selectedLand, onwerId);
   }, [onwerId, selectedLand]);
 
+  const handleDashboardDetailPitch = () => {
+    setCloseForm(true);
+  };
+
+  const handleDashboardDetailPitchClose = () => {
+    setCloseForm(false);
+  };
+
+  const StyledDialog = styled(Dialog)`
+    .MuiDialog-paper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-y: visible;
+      padding: 10%;
+      height: 100%;
+    }
+  `;
+
   return (
     <Box
       className="Table"
@@ -137,11 +167,13 @@ function Pitch({ snackbarShowMessage }) {
       <div className="topManager">
         <Typography className="bold-and-large">Quản Lý Sân Nhỏ</Typography>
       </div>
+
       <div>
         <Select
           value={selectedLand}
           onChange={(event) => {
             const selectedLandId = event.target.value;
+            setLandId(selectedLandId);
             handleLandChange(selectedLandId);
           }}
           style={{
@@ -157,6 +189,25 @@ function Pitch({ snackbarShowMessage }) {
             </MenuItem>
           ))}
         </Select>
+        {/* if landId !== "" then we shot button  */}
+        {landId !== "" && (
+          <Button
+            key={landId}
+            style={{
+              borderRadius: "10px", // Độ cong viền tròn
+              width: "121px", // Độ rộng thu nhỏ
+              fontSize: "12px", // Cỡ chữ nhỏ
+              height: "50px",
+              marginLeft: "25px",
+              color: "#0f0f0f",
+            }}
+            variant="outlined"
+            color="primary"
+            onClick={() => handleDashboardDetailPitch()}
+          >
+            Thống kê chi tiết
+          </Button>
+        )}
       </div>
 
       <TableContainer
@@ -197,8 +248,12 @@ function Pitch({ snackbarShowMessage }) {
                     <TableCell align="left">{pitchs.pitchId}</TableCell>
                     <TableCell align="center">{pitchs.name}</TableCell>
                     <TableCell align="center">{pitchs.size}</TableCell>
-                    <TableCell align="center">{pitchs.priceMin}</TableCell>
-                    <TableCell align="center">{pitchs.priceMax}</TableCell>
+                    <TableCell align="center">
+                      {formatPrice(pitchs.priceMin)}
+                    </TableCell>
+                    <TableCell align="center">
+                      {formatPrice(pitchs.priceMax)}
+                    </TableCell>
                     <TableCell align="center">
                       {dayjs(pitchs.date).format("DD/MM/YYYY HH:mm")}
                     </TableCell>
@@ -225,15 +280,33 @@ function Pitch({ snackbarShowMessage }) {
                         ))}
                       </Select>
                     </TableCell>
-                    {/* <TableCell align="center">
-                      <Orders data={pitchs.bookingId} />
-                    </TableCell> */}
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
       </TableContainer>
+      <StyledDialog
+        open={closeForm}
+        onClose={handleDashboardDetailPitchClose}
+        fullWidth={true}
+        maxWidth="500px"
+      >
+        <DialogTitle>Thông kê của sân</DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleDashboardDetailPitchClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <DetailPitch landId={landId} />
+      </StyledDialog>
       <Pagination
         variant="outlined"
         color="primary"
