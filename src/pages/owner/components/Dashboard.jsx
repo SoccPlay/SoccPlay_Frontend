@@ -40,7 +40,7 @@ function Dashboard() {
     labels: monthArr.map((month) => `Tháng ${month}`),
     datasets: [
       {
-        label: "Tổng tiền thu được (triệu đồng)",
+        label: "Tổng tiền thu được (nghìn đồng)",
         data: resultMonthPrice.map((item) => item),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
