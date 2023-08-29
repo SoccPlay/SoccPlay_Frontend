@@ -1,4 +1,3 @@
-import ChartistGraph from "react-chartist";
 // react-bootstrap components
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { AiFillClockCircle } from "react-icons/ai";
@@ -8,6 +7,8 @@ import "./Dashboard.scss";
 import { useEffect, useState } from "react";
 import DashboardApi from "components/Axios/DashboardApi";
 import { formatPrice } from "pages/profile/components/History";
+import { BarChart } from "./BarChart";
+import { PieChart } from "./PieChart";
 function Dashboard() {
   const onwerId = localStorage.getItem("OWNERID");
   const [bookingNumber, setBookingNumber] = useState(0);
@@ -16,19 +17,37 @@ function Dashboard() {
   const [summaryByMonth, setSummaryByMonth] = useState([]);
   const [totalPitch, setTotalPitch] = useState(0);
   const monthArr = [
-    "Tháng 1",
-    "Tháng 2",
-    "Tháng 3",
-    "Tháng 4",
-    "Tháng 5",
-    "Tháng 6",
-    "Tháng 7",
-    "Tháng 8",
-    "Tháng 9",
-    "Tháng 10",
-    "Tháng 11",
-    "Tháng 12",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
   ];
+
+  const resultMonthPrice = monthArr.map((month) => {
+    const result = summaryByMonth.find((item) => item.bookingMonth == month);
+    return result?.totalPriceSum ?? 0;
+  });
+
+  const barPriceData = {
+    labels: monthArr.map((month) => `Tháng ${month}`),
+    datasets: [
+      {
+        label: "Tổng tiền thu được (triệu đồng)",
+        data: resultMonthPrice.map((item) => item),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+    ],
+  };
+
+  console.log("result price month", resultMonthPrice);
   const fetchSummary = async () => {
     try {
       const bookingNumberResponse = await DashboardApi.GetSummaryBooking(
@@ -54,6 +73,19 @@ function Dashboard() {
   useEffect(() => {
     fetchSummary();
   }, []);
+
+  const pieData = {
+    labels: ["Sân 5", "Sân 7"],
+    datasets: [
+      {
+        label: "Tổng số sân",
+        data: [pitchNumber[0], pitchNumber[1]],
+        backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)"],
+        borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   return (
     <>
@@ -152,53 +184,8 @@ function Dashboard() {
                 <p className="card-category">Chưa hao trừ tri phí</p>
               </Card.Header>
               <Card.Body>
-                <div className="ct-chart" id="chartActivity">
-                  <ChartistGraph
-                    data={{
-                      labels: [
-                        "Tháng 1",
-                        "Tháng 2",
-                        "Tháng 3",
-                        "Tháng 4",
-                        "Tháng 5",
-                        "Tháng 6",
-                        "Tháng 7",
-                        "Tháng 8",
-                        "Tháng 9",
-                        "Tháng 10",
-                        "Tháng 11",
-                        "Tháng 12",
-                      ],
-                      series: [
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [
-                          412, 243, 280, 580, 453, 353, 300, 364, 368, 410, 636,
-                          920,
-                        ],
-                      ],
-                    }}
-                    type="Bar"
-                    options={{
-                      seriesBarDistance: 10,
-                      axisX: {
-                        showGrid: false,
-                      },
-                      height: "270px",
-                    }}
-                    responsiveOptions={[
-                      [
-                        "screen and (max-width: 640px)",
-                        {
-                          seriesBarDistance: 5,
-                          axisX: {
-                            labelInterpolationFnc: function (value) {
-                              return value[0];
-                            },
-                          },
-                        },
-                      ],
-                    ]}
-                  />
+                <div style={{ width: "780px" }}>
+                  <BarChart barPriceData={barPriceData} />
                 </div>
               </Card.Body>
             </Card>
@@ -209,33 +196,19 @@ function Dashboard() {
                 <Card.Title as="h4">Cỡ sân đang có</Card.Title>
                 <p className="card-category">sân 5 người và sân 7 người</p>
               </Card.Header>
-              <Card.Body style={{ height: "391px" }}>
+              <Card.Body>
                 <div
-                  className="ct-chart ct-perfect-fourth"
-                  id="chartPreferences"
+                  style={{
+                    height: "300px",
+                    display: "flex",
+                    justifyContent: "center",
+                    paddingBottom: "20px",
+                  }}
                 >
-                  <ChartistGraph
-                    data={{
-                      labels: pitchNumber.map((value, index) => `${value}`),
-                      series: pitchNumber.map((value, index) => `${value}`),
-                    }}
-                    options={{
-                      donutWidth: 60,
-                    }}
-                    type="Pie"
-                  />
+                  <PieChart pitchNumber={pieData} />
                 </div>
-                <div className="legend flex">
-                  <div className="color mr-4">
-                    <BsCircleFill className="text-cyan-500 w-8" />
-                    <p className="text-center text-xl">sân 5</p>
-                  </div>
-                  <div className="color">
-                    <BsCircleFill className="text-red-500 w-8" />
-                    <p className="text-center text-xl">sân 7</p>
-                  </div>
-                </div>
-                <hr></hr>
+
+                <hr />
                 <div className="stats">
                   <p className="flex">
                     <AiFillClockCircle className="mr-1 mt-1" />
