@@ -295,6 +295,13 @@ function Lands({ snackbarShowMessage }) {
   };
   //----------------------------------------------------------------
 
+  const [editedData, setEditedData] = useState(lands);
+
+  const handleFieldChange = (index, field, value) => {
+    const newData = [...editedData];
+    newData[index][field] = value;
+    setEditedData(newData);
+  };
   //----------------------------------------------------------------
   const PER_PAGE = 4;
   let [page, setPage] = useState(1);
@@ -379,13 +386,18 @@ function Lands({ snackbarShowMessage }) {
           </TableHead>
           <TableBody style={{ color: "white" }}>
             {_Data &&
-              _Data.map((row) => (
+              _Data.map((row, index) => (
                 <TableRow key={row.landId}>
                   <TableCell component="th" scope="row">
                     {row.landId}
                   </TableCell>
                   <TableCell align="left">
-                    <TextField value={row.nameLand} />
+                    <TextField
+                      value={row.nameLand}
+                      onChange={(e) =>
+                        handleFieldChange(index, "nameLand", e.target.value)
+                      }
+                    />
                   </TableCell>
                   <TableCell align="left">
                     <TextField value={row.description} />
@@ -426,9 +438,9 @@ function Lands({ snackbarShowMessage }) {
                       Thêm Ảnh
                     </Button>
                   </TableCell>
-                  {/* <TableCell align="left" className="Details" key={row.landId}>
+                  <TableCell align="left" className="Details" key={row.landId}>
                     <Button>Update</Button>
-                  </TableCell> */}
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>
