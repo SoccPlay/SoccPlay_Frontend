@@ -11,6 +11,11 @@ import * as BookingApi from "../../../components/Axios/BookingApi";
 import {
   Alert,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Pagination,
   Snackbar,
   Stack,
@@ -20,6 +25,7 @@ import dayjs from "dayjs";
 import { withSnackbar } from "../../../hook/withSnackbar";
 import { Orders } from "../../detail/Popup";
 import { Link, useNavigate } from "react-router-dom";
+import Form from "components/feedback/Form";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -76,6 +82,43 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
     }
   };
 
+  //------------------------------------------------------------------------------------------
+
+  const [openForm, setCloseForm] = useState(false);
+  const [selectLandId, setLandId] = useState("");
+  function handleOpenFormFeedBackDialog(landId) {
+    setLandId(landId);
+    setCloseForm(true);
+  }
+  const [pitch, setPitch] = useState({
+    name: "",
+    size: "",
+    landId: "",
+    ownerId: selectLandId,
+  });
+  const resetPitch = () => {
+    setPitch({
+      name: "",
+      size: "",
+      landId: "",
+      ownerId: selectLandId,
+    });
+  };
+
+  function handleCloseFormFeedBackDialog() {
+    resetPitch();
+    setCloseForm(false);
+    setLandId(null);
+  }
+  function handleInputFormChange(event) {
+    const { name, value } = event.target;
+    setPitch((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  }
+
+  //-------------------------------------------------------------------------------------------
   const updateData = (newData) => {
     setData(newData);
   };
@@ -216,11 +259,15 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
                       </>
                     )}
                     {row.status === "Done" && (
-                      <Link to={`/detail/${row.landId}`}>
-                        <Button variant="outlined" color="warning">
-                          Đánh giá
-                        </Button>
-                      </Link>
+                      // <Link to={`/detail/${row.landId}`}>
+                      <Button
+                        variant="outlined"
+                        color="warning"
+                        onClick={() => handleOpenFormFeedBackDialog(row.landId)}
+                      >
+                        Đánh giá
+                      </Button>
+                      // </Link>
                     )}
                   </StyledTableCell>
                   <StyledTableCell align="center">
@@ -230,6 +277,21 @@ const CustomizedTables = ({ snackbarShowMessage }) => {
               ))}
           </TableBody>
         </Table>
+        <Dialog
+          open={openForm}
+          onClose={handleCloseFormFeedBackDialog}
+          fullWidth={true}
+          maxWidth="lg"
+          style={{ height: "1000px" }}
+        >
+          <DialogTitle>Tạo Form FeedBack</DialogTitle>
+          <DialogContent>
+            <DialogContentText>Form FeedBack</DialogContentText>
+            <Form />
+          </DialogContent>
+          <DialogActions></DialogActions>
+        </Dialog>
+
         <Pagination
           variant="outlined"
           color="primary"
