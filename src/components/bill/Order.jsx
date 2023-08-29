@@ -1,9 +1,4 @@
-import {
-  Box,
-  Typography,
-  Grid,
-  Container,
-} from "@mui/material";
+import { Box, Typography, Grid, Container } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import * as invoiceApi from "../../components/Axios/InvoiceApi";
@@ -61,8 +56,11 @@ function Order({ data, snackbarShowMessage }) {
               </Typography>
             </Grid>
             <Grid item xs={8}>
-              <Grid>Tên Sân bóng: {invoice.landName}</Grid>
-              <Grid>Tên Chủ sân: {invoice.nameOwner}</Grid>
+              <Grid>Tên sân bóng: {invoice.landName}</Grid>
+              <Grid>Tên chủ sân: {invoice.nameOwner}</Grid>
+              <Grid>Loại sân: {invoice.size}</Grid>
+              <Grid>Sdt: {invoice.phoneOwner}</Grid>
+              <Grid>Mail: {invoice.mailOwner}</Grid>
               <Grid>Địa chỉ: {invoice.location}</Grid>
             </Grid>
             <Grid item xs={4}>
@@ -85,18 +83,21 @@ function Order({ data, snackbarShowMessage }) {
               </Typography>
               <Grid>Hóa đơn: {invoice.bookingId}</Grid>
               <Grid>
-                Ngày tạo: {dayjs(invoice.dateBooking).format("DD/MM/YYYY")}
+                Ngày đặt:{" "}
+                {dayjs(invoice.dateBooking).format("DD/MM/YYYY HH:mm")}
+              </Grid>
+              <Grid>
+                Ngày đá: {dayjs(invoice.startTime).format("DD/MM/YYYY HH:mm")}
               </Grid>
               <Grid>Họ tên người đặt: {invoice.customerName}</Grid>
+              <Grid>Sdt người đặt: {invoice.phoneCustomer}</Grid>
+              <Grid>Mail: {invoice.mailCustomer}</Grid>
               <Grid>Ghi chú: {invoice.note}</Grid>
             </Grid>
           </Grid>
 
-          <Grid container spacing={3}
-          mt={"10px"}
-          >
-            <Grid item xs={4}
-            sx={{ textAlign: "center" }}>
+          <Grid container spacing={3} mt={"10px"}>
+            <Grid item xs={4} sx={{ textAlign: "center" }}>
               <Grid>
                 <Typography
                   fontSize={"20px"}
@@ -108,9 +109,8 @@ function Order({ data, snackbarShowMessage }) {
                 <Grid>{invoice.pitchName}</Grid>
               </Grid>
             </Grid>
-            <Grid item xs={4}
-            sx={{ textAlign: "center" }}>
-            <Grid>
+            <Grid item xs={4} sx={{ textAlign: "center" }}>
+              <Grid>
                 <Typography
                   fontSize={"20px"}
                   fontWeight={"bold"}
@@ -118,12 +118,13 @@ function Order({ data, snackbarShowMessage }) {
                 >
                   Thời gian
                 </Typography>
-                <Grid>Từ {startTime} đến {endTime}</Grid>
+                <Grid>
+                  Từ {startTime} đến {endTime}
+                </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={4}
-            sx={{ textAlign: "center" }}>
-            <Grid>
+            <Grid item xs={4} sx={{ textAlign: "center" }}>
+              <Grid>
                 <Typography
                   fontSize={"20px"}
                   fontWeight={"bold"}
@@ -138,8 +139,7 @@ function Order({ data, snackbarShowMessage }) {
         </Container>
         <hr />
         <Grid className="total">
-          <Grid sx={{ textAlign: "center" }}
-          mt={"10px"}>
+          <Grid sx={{ textAlign: "center" }} mt={"10px"}>
             Trạng thái:
             {invoice.status === "Waiting" && (
               <b className="text-yellow-600 ml-1">Đang chờ thanh toán</b>

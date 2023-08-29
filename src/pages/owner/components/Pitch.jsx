@@ -55,10 +55,10 @@ function Pitch({ snackbarShowMessage }) {
     }
   };
 
-  const handleStatusChange = async (bookingId, newStatus) => {
+  const handleStatusChange = async (pitchId, newStatus) => {
     try {
-      await axiosApi.delete(
-        `https://localhost:7186/api/Booking/ChangeStatusBooking?id=${bookingId}&status=${newStatus}`
+      await axiosApi.put(
+        `https://localhost:7186/api/Pitch/InActivePitch?id=${pitchId}&status=${newStatus}`
       );
       snackbarShowMessage("Thay đổi thành công", "success");
       // You might want to update the UI or state accordingly
@@ -204,7 +204,7 @@ function Pitch({ snackbarShowMessage }) {
                         value={pitchs.status}
                         onChange={(event) => {
                           const newStatus = event.target.value;
-                          handleStatusChange(pitchs.bookingId, newStatus);
+                          handleStatusChange(pitchs.pitchId, newStatus);
                         }}
                         className="status"
                         style={{
