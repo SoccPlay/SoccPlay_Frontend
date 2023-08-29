@@ -97,7 +97,7 @@ const List = () => {
     }
   };
 
-  const fetchLands = async ([]) => {
+  const fetchLands = async () => {
     try {
       if (selectedStreet === undefined || groundName === undefined) {
         const response = await LandApi.GetAllLand();
@@ -127,7 +127,7 @@ const List = () => {
   };
 
   useEffect(() => {
-    fetchLands([]);
+    fetchLands();
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import jwt_decode from "jwt-decode";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Destination1 from "../../assets/Destination1.png";
 import logo from "../../assets/logo.png";
 import AuthenApi from "../Axios/AuthenApi";
@@ -66,7 +66,11 @@ export default function Navbar() {
           </a>
         </li>
         <li>
-          <Link to={`/list`} className="largeText">
+          <Link
+            onClick={() => Navigate("/list")}
+            to={`/list`}
+            className="largeText"
+          >
             Sân
           </Link>
         </li>
